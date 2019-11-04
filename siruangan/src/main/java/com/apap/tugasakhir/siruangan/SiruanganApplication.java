@@ -1,4 +1,4 @@
-package apap.tugasakhir.siruangan;
+package com.apap.tugasakhir.siruangan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
