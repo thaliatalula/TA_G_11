@@ -9,6 +9,7 @@
 ---
 
 **Kontrak Tahap 1 Tugas Akhir**
+
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
 | 1706044061 | Ali Yusuf | 1 |
@@ -17,6 +18,7 @@
 | 1706984796 | Yudha Ananda Rahayu Putra | 9 |
 ---
 **Kontrak Tahap 2 Tugas Akhir**
+
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
 | 1706044061 | Ali Yusuf | 2, 3, 17 |
@@ -25,6 +27,7 @@
 | 1706984796 | Yudha Ananda Rahayu Putra | 15 |
 ---
 **Kontrak Tahap 3 Tugas Akhir**
+
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
 | 1706044061 | Ali Yusuf | 4 |
