@@ -1,18 +1,13 @@
 package com.apap.tugasakhir.siruangan.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "role")
-public class RoleModel {
+@Table(name = "ruangan")
+public class RuanganModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,10 +16,12 @@ public class RoleModel {
     @Column(name = "nama", nullable = false)
     private String nama;
 
-    @OneToOne(mappedBy = "role", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private UserModel user;
+    @NotNull
+    @Column(name = "kapasitas", nullable = false)
+    private int kapasitas;
+
+    @ManyToMany
+    List<FasilitasModel> fasilitasList;
 
     public int getId() {
         return id;
@@ -42,11 +39,19 @@ public class RoleModel {
         this.nama = nama;
     }
 
-    public UserModel getUser() {
-        return user;
+    public int getKapasitas() {
+        return kapasitas;
     }
 
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setKapasitas(int kapasitas) {
+        this.kapasitas = kapasitas;
+    }
+
+    public List<FasilitasModel> getFasilitasList() {
+        return fasilitasList;
+    }
+
+    public void setFasilitasList(List<FasilitasModel> fasilitasList) {
+        this.fasilitasList = fasilitasList;
     }
 }
