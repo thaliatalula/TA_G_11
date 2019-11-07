@@ -32,5 +32,5 @@
 | ----------| --- | ---------- | 
 | 1706044061 | Ali Yusuf | 4 |
 | 1706023681 | Rafika Putri Balqis | 6, 7 |
-| 1706984751 | Thalia Talula Kesuma Putri | 8, 10 |
-| 1706984796 | Yudha Ananda Rahayu Putra | 13 |
+| 1706984751 | Thalia Talula Kesuma Putri | 13 |
+| 1706984796 | Yudha Ananda Rahayu Putra | 8, 10 |
