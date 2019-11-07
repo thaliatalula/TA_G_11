@@ -56,9 +56,14 @@ public class PeminjamanRuanganModel {
     private RuanganModel ruangan;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_user_peminjam", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserModel user;
+    private UserModel userPeminjam;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_user_penyetuju", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserModel userPenyetuju;
 
     public int getId() {
         return id;
@@ -141,10 +146,18 @@ public class PeminjamanRuanganModel {
     }
 
     public UserModel getUserPenyetuju() {
-        return user;
+        return userPenyetuju;
     }
 
     public void setUserPenyetuju(UserModel userPenyetuju) {
-        this.user = userPenyetuju;
+        this.userPenyetuju = userPenyetuju;
+    }
+
+    public UserModel getUserPeminjam() {
+        return userPeminjam;
+    }
+
+    public void setUserPeminjam(UserModel userPeminjam) {
+        this.userPeminjam = userPeminjam;
     }
 }
