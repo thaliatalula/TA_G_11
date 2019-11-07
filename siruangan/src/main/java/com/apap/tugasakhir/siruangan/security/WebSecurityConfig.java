@@ -23,28 +23,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
     }
 
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
-//  ============Dummy Auth============
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication()
-                .passwordEncoder(encoder())
-                .withUser("tayo").password(encoder().encode("tayo"))
-                .roles("USER");
-    }
 
-//    ========Next Development========
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//    @Autowired
-//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-//    }
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+    }
 
 }
