@@ -12,7 +12,7 @@
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
-| 1706044061 | Ali Yusuf | 1 |
+| 1706044061 | Ali Yusuf | 2, 3 |
 | 1706023681 | Rafika Putri Balqis | 5 |
 | 1706984751 | Thalia Talula Kesuma Putri | 12 |
 | 1706984796 | Yudha Ananda Rahayu Putra | 9 |
@@ -21,7 +21,7 @@
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
-| 1706044061 | Ali Yusuf | 2, 3, 17 |
+| 1706044061 | Ali Yusuf | 1, 17 |
 | 1706023681 | Rafika Putri Balqis | 16 |
 | 1706984751 | Thalia Talula Kesuma Putri | 11, 14 |
 | 1706984796 | Yudha Ananda Rahayu Putra | 15 |
