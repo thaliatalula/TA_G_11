@@ -99,4 +99,6 @@ public class UserModel implements Serializable {
     public void setListPeminjamanRuanganPenyetuju(List<PeminjamanRuanganModel> listPeminjamanRuanganPenyetuju) {
         this.listPeminjamanRuanganPenyetuju = listPeminjamanRuanganPenyetuju;
     }
+
+
 }
