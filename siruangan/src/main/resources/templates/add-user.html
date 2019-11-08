@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelaf.org">
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title>Add User</title>
+</head>
+<body>
+
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="row">
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            Tambah User Baru
+        </div>
+        <h5 th:text="${notif}" style="color: red"></h5>
+        <div class="card-body">
+            <form th:action="@{/add-user}" method="POST">
+                <label>User Name</label>
+                <input type="text" name="username" class="form-control"/>
+                <label>Password</label>
+                <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum eight characters, at least one letter and one number" type="password" name="password" class="form-control">
+                <label>Role</label>
+                <select name="role" class="form-control">
+                    <option selected value="">-- Pilih Role --</option>
+                    <option th:each="role :${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

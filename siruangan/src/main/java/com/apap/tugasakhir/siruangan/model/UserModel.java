@@ -20,7 +20,7 @@ public class UserModel implements Serializable {
     private String id;
 
     @NotNull
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotNull
@@ -28,7 +28,7 @@ public class UserModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

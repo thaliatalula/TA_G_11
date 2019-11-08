@@ -20,7 +20,7 @@ public class RuanganModel {
     @Column(name = "kapasitas", nullable = false)
     private int kapasitas;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "ruanganList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     List<FasilitasModel> fasilitasList;
 
     public Integer getId() {
