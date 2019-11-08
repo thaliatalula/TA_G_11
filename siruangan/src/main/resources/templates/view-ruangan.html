@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelaf.org">
+<head>
+    <title>SiRuangan</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="css/home.css"/>
+    <script src="js/home.js"></script>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="detail mx-auto">
+    <table class="table">
+
+        <thead class="thead-dark">
+        <tr>
+            <th colspan="2">Detail Data Ruangan</th>
+        </tr>
+        </thead>
+        <tr>
+            <th colspan="2">
+                <a th:href="@{/}">Kembali ke beranda</a>
+            </th>
+        </tr>
+        <tr>
+            <td>Nama</td>
+            <td th:text="${ruangan.nama}"></td>
+        </tr>
+        <tr>
+            <td>Kapasitas</td>
+            <td th:text="${ruangan.kapasitas}"></td>
+        </tr>
+
+    </table>
+</div>
+<div class="asuransi mx-auto">
+    <table class="table">
+
+        <thead class="thead-dark">
+        <tr>
+            <th colspan="2">Fasilitas Milik Ruangan</th>
+        </tr>
+        </thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        <tr th:each="fasilitas, rowStat : ${listFasilitas}">
+            <td th:text="${rowStat.count}"></td>
+            <td th:text="${fasilitas.nama}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
