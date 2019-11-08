@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDB  extends JpaRepository<UserModel, Long>{
+public interface UserDB  extends JpaRepository<UserModel, Integer>{
     UserModel findByUsername(String username);
     boolean existsUserModelByUsernameIsLike(String  username);
 }
