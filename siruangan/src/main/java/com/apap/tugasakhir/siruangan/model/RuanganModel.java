@@ -10,7 +10,7 @@ import java.util.List;
 public class RuanganModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "nama", nullable = false)
@@ -20,14 +20,14 @@ public class RuanganModel {
     @Column(name = "kapasitas", nullable = false)
     private int kapasitas;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "ruanganList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     List<FasilitasModel> fasilitasList;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

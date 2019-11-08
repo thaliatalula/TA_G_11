@@ -20,7 +20,7 @@ public class UserModel implements Serializable {
     private String id;
 
     @NotNull
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotNull
@@ -28,7 +28,7 @@ public class UserModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -37,8 +37,11 @@ public class UserModel implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PengadaanFasilitasModel> listPengadaanFasilitas;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PeminjamanRuanganModel> listPeminjamanRuangan;
+    @OneToMany(mappedBy = "userPeminjam", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PeminjamanRuanganModel> listPeminjamanRuanganPeminjam;
+
+    @OneToMany(mappedBy = "userPenyetuju", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PeminjamanRuanganModel> listPeminjamanRuanganPenyetuju;
 
 
     public String getId() {
@@ -81,11 +84,19 @@ public class UserModel implements Serializable {
         this.listPengadaanFasilitas = listPengadaanFasilitas;
     }
 
-    public List<PeminjamanRuanganModel> getListPeminjamanRuangan() {
-        return listPeminjamanRuangan;
+    public List<PeminjamanRuanganModel> getListPeminjamanRuanganPeminjam() {
+        return listPeminjamanRuanganPeminjam;
     }
 
-    public void setListPeminjamanRuangan(List<PeminjamanRuanganModel> listPeminjamanRuangan) {
-        this.listPeminjamanRuangan = listPeminjamanRuangan;
+    public void setListPeminjamanRuanganPeminjam(List<PeminjamanRuanganModel> listPeminjamanRuanganPeminjam) {
+        this.listPeminjamanRuanganPeminjam = listPeminjamanRuanganPeminjam;
+    }
+
+    public List<PeminjamanRuanganModel> getListPeminjamanRuanganPenyetuju() {
+        return listPeminjamanRuanganPenyetuju;
+    }
+
+    public void setListPeminjamanRuanganPenyetuju(List<PeminjamanRuanganModel> listPeminjamanRuanganPenyetuju) {
+        this.listPeminjamanRuanganPenyetuju = listPeminjamanRuanganPenyetuju;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 public class PeminjamanRuanganModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "waktu_mulai", nullable = false)
@@ -56,15 +56,20 @@ public class PeminjamanRuanganModel {
     private RuanganModel ruangan;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_user_peminjam", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserModel user;
+    private UserModel userPeminjam;
 
-    public int getId() {
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_user_penyetuju", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserModel userPenyetuju;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -141,10 +146,18 @@ public class PeminjamanRuanganModel {
     }
 
     public UserModel getUserPenyetuju() {
-        return user;
+        return userPenyetuju;
     }
 
     public void setUserPenyetuju(UserModel userPenyetuju) {
-        this.user = userPenyetuju;
+        this.userPenyetuju = userPenyetuju;
+    }
+
+    public UserModel getUserPeminjam() {
+        return userPeminjam;
+    }
+
+    public void setUserPeminjam(UserModel userPeminjam) {
+        this.userPeminjam = userPeminjam;
     }
 }

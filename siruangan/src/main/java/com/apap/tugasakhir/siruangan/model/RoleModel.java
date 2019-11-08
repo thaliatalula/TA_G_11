@@ -15,22 +15,22 @@ import java.util.List;
 public class RoleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "nama", nullable = false)
     private String nama;
 
-    @OneToOne(mappedBy = "role", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private UserModel user;
+    private List<UserModel> user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class RoleModel {
         this.nama = nama;
     }
 
-    public UserModel getUser() {
+    public List<UserModel> getUser() {
         return user;
     }
 
-    public void setUser(UserModel user) {
+    public void setUser(List<UserModel> user) {
         this.user = user;
     }
 }
