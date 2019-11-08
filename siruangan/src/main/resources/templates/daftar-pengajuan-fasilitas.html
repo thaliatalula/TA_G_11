@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title> Daftar Pengajuan Pengadaan Fasilitas </title>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid" th:align="center">
+        <br>
+        <center><h2>Daftar Pengajuan Pengadaan Fasilitas</h2></center>
+        <br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" th:align="center">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table order-list">
+                            <thead style="background-color:goldenrod">
+                            <tr>
+                                <th style="text-align: center; color: white;">No</th>
+                                <th style="text-align: center; color: white;">Nama Fasilitas</th>
+                                <th style="text-align: center; color: white;">Harga</th>
+                                <th style="text-align: center; color: white;">Jumlah</th>
+                                <th style="text-align: center; color: white;">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="fasilitas, iterationStatus : *{daftarPengajuan}">
+                                <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
+                                <td style="text-align: center;" th:text="${fasilitas.nama}"></td>
+                                <td style="text-align: center;" th:text="${fasilitas.harga}"></td>
+                                <td style="text-align: center;" th:text="${fasilitas.jumlah}"></td>
+                                <td style="text-align: center;" th:if="${fasilitas.status} == 0"> Usulan pengguna </td>
+                                <td style="text-align: center;" th:unless="${fasilitas.status} == 0"> Menunggu persetujuan </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <br>
+    </div>
+
+</body>
+</html>
