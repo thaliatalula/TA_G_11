@@ -1,0 +1,41 @@
+
+.containers{
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.input-container {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    padding: 10px;
+    background: #ffb31f;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+    font-size: 20px;
+}
+.buttonLogin {
+    background-color: #ffb31f;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.buttonLogin:hover {
+    opacity: 1;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}

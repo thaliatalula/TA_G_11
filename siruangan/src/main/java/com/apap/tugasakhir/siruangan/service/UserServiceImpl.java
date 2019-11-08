@@ -24,4 +24,14 @@ public class UserServiceImpl implements UserService {
         user.setPassword(pass);
         return userDB.save(user);
     }
+
+    @Override
+    public boolean checkIfUsernameTaken(UserModel user) {
+        if(userDB.existsUserModelByUsernameIsLike(user.getUsername())){
+            if(userDB.findByUsername(user.getUsername()).equals(user.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

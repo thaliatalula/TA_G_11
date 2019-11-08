@@ -21,10 +21,10 @@ public class RoleModel {
     @Column(name = "nama", nullable = false)
     private String nama;
 
-    @OneToOne(mappedBy = "role", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private UserModel user;
+    private List<UserModel> user;
 
     public int getId() {
         return id;
@@ -42,11 +42,11 @@ public class RoleModel {
         this.nama = nama;
     }
 
-    public UserModel getUser() {
+    public List<UserModel> getUser() {
         return user;
     }
 
-    public void setUser(UserModel user) {
+    public void setUser(List<UserModel> user) {
         this.user = user;
     }
 }
