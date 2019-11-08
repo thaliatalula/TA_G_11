@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface FasilitasDB extends JpaRepository<FasilitasModel, Integer> {
+public interface FasilitasDB extends JpaRepository<FasilitasModel, Long> {
     Optional<FasilitasModel> findById(int id);
     List<RuanganModel> findByRuanganList(RuanganModel ruanganModel);
 
