@@ -19,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/daftar-peminjaman/").hasAnyRole("Admin TU", "Siswa","Guru")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
