@@ -10,16 +10,18 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containerss row">
     <div class="col">
-
-        <button class="button">
-            Pinjam Ruangan
-        </button>
+        <a th:href="@{/daftar-peminjaman/}">
+            <button class="button">
+                    Pinjam Ruangan
+            </button>
+        </a>
     </div>
     <div class="col">
-
-        <button class="button">
-            Pengajuan Fasilitas
-        </button>
+        <a th:href="@{/pengadaan-fasilitas/daftar-pengajuan}">
+            <button class="button">
+                    Pengajuan Fasilitas
+            </button>
+        </a>
     </div>
 </div>
 </body>

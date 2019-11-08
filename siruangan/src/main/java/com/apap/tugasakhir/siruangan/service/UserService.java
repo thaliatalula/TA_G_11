@@ -7,5 +7,6 @@ public interface UserService {
     UserModel addUser(UserModel user);
     String encrypt(String password);
     boolean checkIfUsernameTaken(UserModel user);
+    UserModel findByUserName(String name);
 
 }
