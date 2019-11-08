@@ -13,7 +13,7 @@ import java.util.List;
 public class PengadaanFasilitasModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "nama", nullable = false)
@@ -36,11 +36,11 @@ public class PengadaanFasilitasModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

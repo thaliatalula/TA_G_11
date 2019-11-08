@@ -14,7 +14,7 @@ import java.util.Date;
 public class PeminjamanRuanganModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "waktu_mulai", nullable = false)
@@ -65,11 +65,11 @@ public class PeminjamanRuanganModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel userPenyetuju;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
