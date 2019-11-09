@@ -32,7 +32,7 @@ public class PengadaanFasilitasModel {
     private int status;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "uuid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel user;
 

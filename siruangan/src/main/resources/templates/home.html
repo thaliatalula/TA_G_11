@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymelaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymelaf.org">
 <head>
     <title>SiRuangan</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containerss row">
-    <div class="col">
+    <div sec:authorize="isAuthenticated()" class="col">
         <a th:href="@{/daftar-peminjaman/}">
             <button class="button">
                     Pinjam Ruangan
