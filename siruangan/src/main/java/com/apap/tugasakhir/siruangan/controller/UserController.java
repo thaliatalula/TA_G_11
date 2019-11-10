@@ -45,7 +45,7 @@ public class UserController {
             userRestService.addGuru(user);
         }
         else{
-            userRestService.addSiswa(user);
+            userRestService.addSiswa();
         }
         return "redirect:/";
 

@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface UserRestService {
     Mono<GuruDetail> addGuru(UserModel user);
-    Mono<SiswaDetail> addSiswa(UserModel user);
+    Mono<SiswaDetail> addSiswa();
 }
