@@ -3,7 +3,7 @@
 <head>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <title>Add User</title>
-    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="css/add-user.css"/>
 </head>
 <body>
 
@@ -11,23 +11,53 @@
 <div class="containers">
         <h5 th:text="${notif}" style="color: red"></h5>
             <form th:action="@{/add-user}" method="POST">
-                <div class="input-container">
-                    <i class="fa fa-user icon" ></i>
-                    <input type="text" required class="input-field" name="username" placeholder="Username">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-container">
+                            <i class="fa fa-user icon" ></i>
+                            <input type="text" required class="input-field" name="username" placeholder="Username">
+                        </div>
+                        <div class="input-container">
+                            <i class="fa fa-key icon" ></i>
+                            <input id="password" type="password" required class="input-field" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum eight characters, at least one letter and one number" name="password" placeholder="Password">
+                            <i class="fa fa-eye hider" onclick="showPassword()"></i>
+                        </div>
+                        <div class="input-container tambahan" >
+                            <input type="text"  class="input-field tambahan-input" name="name" placeholder="Nama">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input type="text" class="input-field tambahan-input" name="tempatLahir" placeholder="Tempat Lahir">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input placeholder="Tanggal Lahir" type="text" onblur="(this.type='text')" onfocus="(this.type='date')" class="input-field tambahan-input" name="tanggalLahir">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-container">
+                            <i class="fa fa-users icon" ></i>
+                            <select required name="role" class="input-field" id="role" onchange="showRole()">
+                                <option hidden selected value="">-- Pilih Role --</option>
+                                <option th:each="role :${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
+                            </select>
+                        </div>
+
+                        <div class="input-container roles" id="siswa">
+                            <input type="text" id="nis"  class="input-field" name="nis" placeholder="NIS">
+                        </div>
+                        <div class="input-container roles" id="guru">
+                            <input type="text" id="nig"  class="input-field" name="nig" placeholder="NIG">
+                        </div>
+
+                        <div class="input-container tambahan">
+                            <input type="text"  class="input-field tambahan-input" name="alamat" placeholder="Alamat">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input type="number"  class="input-field tambahan-input" name="telepon" placeholder="telepon">
+                        </div>
+
+                        <button type="submit" class="buttonLogin">Tambah User</button>
+                    </div>
                 </div>
-                <div class="input-container">
-                    <i class="fa fa-key icon" ></i>
-                    <input id="password" type="password" required class="input-field" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum eight characters, at least one letter and one number" name="password" placeholder="Password">
-                    <i class="fa fa-eye hider" onclick="showPassword()"></i>
-                </div>
-                <div class="input-container">
-                    <i class="fa fa-users icon" ></i>
-                    <select name="role" class="input-field">
-                        <option selected value="">-- Pilih Role --</option>
-                        <option th:each="role :${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
-                    </select>
-                </div>
-                <button type="submit" class="buttonLogin">Tambah User</button>
             </form>
 </div>
 <script>
@@ -43,6 +73,25 @@
             hider.className= "fa fa-eye hider";
         }
     }
+    function showRole() {
+        if ($("#role option:selected").text() == "Guru") {
+            $(".tambahan").show();
+            $(".tambahan-input").prop('required',true);
+            $("#guru").show();
+            $("#nig").prop('required',true);
+            $("#siswa").hide();
+            $("#nis").prop('required',false);
+        } else if ($("#role option:selected").text() === "Siswa") {
+            $(".tambahan").show();
+            $(".tambahan-input").prop('required',true);
+            $("#siswa").show();
+            $("#nis").prop('required',true);
+            $("#guru").hide();
+            $("#nig").prop('required',false);
+
+        }
+    }
+
 </script>
 </body>
 </html>

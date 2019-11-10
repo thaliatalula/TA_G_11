@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containerss row">
-    <div sec:authorize="isAuthenticated()" class="col">
+    <div class="col">
         <a th:href="@{/daftar-peminjaman/}">
             <button class="button">
                     Pinjam Ruangan

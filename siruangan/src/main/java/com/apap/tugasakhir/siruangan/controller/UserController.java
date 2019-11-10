@@ -2,6 +2,7 @@ package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.RoleModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class UserController {
     UserService userService;
 
     @Autowired
+    UserRestService userRestService;
+
+    @Autowired
     RoleService roleService;
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
@@ -37,6 +41,12 @@ public class UserController {
             return "redirect:/add-user";
         }
         userService.addUser(user);
+        if(user.getRole().getNama().equals("Guru")){
+            userRestService.addGuru(user);
+        }
+        else{
+            userRestService.addSiswa(user);
+        }
         return "redirect:/";
 
     }
@@ -56,6 +66,7 @@ public class UserController {
             return "redirect:/add-user/for-test";
         }
         userService.addUser(user);
+
         return "redirect:/";
 
     }
