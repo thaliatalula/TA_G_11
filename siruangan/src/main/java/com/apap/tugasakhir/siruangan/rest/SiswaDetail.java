@@ -3,7 +3,9 @@ package com.apap.tugasakhir.siruangan.rest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties
+import java.util.Date;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SiswaDetail {
     @JsonProperty("idUser")
     private String uuid_user;
@@ -14,7 +16,7 @@ public class SiswaDetail {
     @JsonProperty("tempatLahir")
     private String tempat_lahir;
     @JsonProperty("tanggalLahir")
-    private String tanggal_lahir;
+    private Date tanggal_lahir;
     @JsonProperty("alamat")
     private String alamat;
     @JsonProperty("telepon")
@@ -52,11 +54,11 @@ public class SiswaDetail {
         this.tempat_lahir = tempat_lahir;
     }
 
-    public String getTanggal_lahir() {
+    public Date getTanggal_lahir() {
         return tanggal_lahir;
     }
 
-    public void setTanggal_lahir(String tanggal_lahir) {
+    public void setTanggal_lahir(Date tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
     }
 
