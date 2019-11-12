@@ -26,7 +26,7 @@ public class PengadaanFasilitasController {
     public String daftarPengajuan(Model model, Authentication authentication){
         UserModel user= userService.findByUserName(authentication.getName());
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
-            List<PengadaanFasilitasModel> daftarPengajuanGuru =pengadaanFasilitasService.findAllPengajuanByIdUser(user.getId());
+            List<PengadaanFasilitasModel> daftarPengajuanGuru =pengadaanFasilitasService.findAllPengajuanByIdUser(user.getUuid());
             model.addAttribute("daftarPengajuan", daftarPengajuanGuru);
         }
         else{

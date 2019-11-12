@@ -56,12 +56,12 @@ public class PeminjamanRuanganModel {
     private RuanganModel ruangan;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user_peminjam", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "uuid_user_peminjam", referencedColumnName = "uuid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel userPeminjam;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user_penyetuju", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "uuid_user_penyetuju", referencedColumnName = "uuid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel userPenyetuju;
 
