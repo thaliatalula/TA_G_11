@@ -19,14 +19,13 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div sec:authorize="!isAuthenticated()"  class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" th:href="@{/login}">
+        <div class="navbar-nav ml-auto">
+            <a  sec:authorize="!isAuthenticated()" class="nav-item nav-link active" th:href="@{/login}">
                 Login
                 <span class="sr-only">(current)</span>
             </a>
-        </div>
-        <div sec:authorize="isAuthenticated()"  class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+            <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/add-user}">Add User</a>
+            <a  sec:authorize="isAuthenticated()"  class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
         </div>
     </div>
 </nav>
