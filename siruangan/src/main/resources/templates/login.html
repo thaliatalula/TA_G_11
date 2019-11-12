@@ -24,12 +24,27 @@
                         </div>
                         <div class="input-container">
                             <i class="fa fa-key icon" ></i>
-                            <input type="password" required class="input-field" name="password" placeholder="Password">
+                            <input id="password" type="password" required class="input-field" name="password" placeholder="Password">
+                            <i class="fa fa-eye hider" onclick="showPassword()"></i>
                         </div>
                         <button type="submit" class="buttonLogin">Login</button>
                     </form>
                 </div>
 </div>
+<script>
+    function showPassword() {
+        var password = document.getElementById("password");
+        var hider = document.getElementsByClassName("hider").item(0);
+        if (password.type === "password") {
+            password.type = "text";
+            hider.className= "fa fa-eye-slash hider";
+
+        } else {
+            password.type = "password";
+            hider.className= "fa fa-eye hider";
+        }
+    }
+</script>
 </body>
 
 </html>

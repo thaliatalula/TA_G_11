@@ -50,3 +50,9 @@
     margin: auto;
     transition: 0.5s all ease-in-out;
 }
+.tambahan{
+    display: none;
+}
+.roles{
+    display: none;
+}
