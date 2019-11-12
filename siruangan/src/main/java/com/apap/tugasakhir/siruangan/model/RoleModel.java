@@ -8,29 +8,30 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "role")
-public class RoleModel {
+public class RoleModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "nama", nullable = false)
     private String nama;
 
-    @OneToOne(mappedBy = "role", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private UserModel user;
+    private List<UserModel> user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,11 +43,12 @@ public class RoleModel {
         this.nama = nama;
     }
 
-    public UserModel getUser() {
+    public List<UserModel> getUser() {
         return user;
     }
 
-    public void setUser(UserModel user) {
+    public void setUser(List<UserModel> user) {
         this.user = user;
     }
+
 }

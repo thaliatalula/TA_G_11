@@ -1,0 +1,48 @@
+
+.containers{
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.input-container {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    padding: 10px;
+    background: goldenrod;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+    font-size: 20px;
+}
+.buttonLogin {
+    background-color: goldenrod;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.buttonLogin:hover {
+    opacity: 1;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    transition: 0.4s all ease-in-out;
+}
+.input-container:hover .input-field{
+    border-bottom: 1px solid black;
+    transition: 0.4s all ease-in-out;
+}

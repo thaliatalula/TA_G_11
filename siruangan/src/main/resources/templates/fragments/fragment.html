@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymelaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymelaf.org" >
 <head >
     <head th:fragment="head">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,13 +19,13 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div sec:authorize="!isAuthenticated()"  class="navbar-nav ml-auto">
             <a class="nav-item nav-link active" th:href="@{/login}">
                 Login
                 <span class="sr-only">(current)</span>
             </a>
         </div>
-        <div class="navbar-nav pull-right">
+        <div sec:authorize="isAuthenticated()"  class="navbar-nav ml-auto">
             <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
         </div>
     </div>

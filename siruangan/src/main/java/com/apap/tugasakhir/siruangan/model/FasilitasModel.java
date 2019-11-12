@@ -11,7 +11,7 @@ import java.util.List;
 public class FasilitasModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotNull
     @Column(name = "nama", nullable = false)
@@ -21,14 +21,17 @@ public class FasilitasModel {
     @Column(name = "jumlah", nullable = false)
     private int jumlah;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "fasilitas_ruangan",
+            joinColumns = @JoinColumn(name = "ruangan_id"),
+            inverseJoinColumns = @JoinColumn(name = "fasilitas_id"))
     List<RuanganModel> ruanganList;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

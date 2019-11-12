@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Peminjaman Ruangan</title>
+    <script src="css/style.css"></script>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <style>
+        @keyframes slide {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container text-center" style="animation: slide 2s forwards;">
+    <h2>Daftar Peminjaman Ruangan</h2>
+    <table class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded">
+        <thead style="background-color: #ffb31f; color: white">
+        <tr>
+            <th>No</th>
+            <th>Ruangan</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+            <th>Tujuan</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="peminjaman, peminjamanStatus : ${listPeminjaman}">
+            <td th:text="${peminjamanStatus.count}"></td>
+            <td><a th:href="'/ruangan/'+ ${peminjaman.id}" th:text="${peminjaman.ruangan.nama}"></a></td>
+            <td th:text="${#dates.format(peminjaman.tanggalMulai, 'dd-MMM-yyyy')}"></td>
+            <td th:text="${#dates.format(peminjaman.tanggalSelesai, 'dd-MMM-yyyy')}"></td>
+            <td th:text="${peminjaman.tujuan}"></td>
+            <td th:switch="${peminjaman.disetujui}">
+                <span th:case="true" style="color: darkgreen">Disetujui</span>
+                <span th:case="false" style="color: darkred">Ditolak</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
