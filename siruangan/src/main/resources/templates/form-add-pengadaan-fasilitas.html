@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title> Form Pengajuan Pengadaan Fasilitas </title>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container" th:align="center">
+        <div class="col-md-6" th:align="center">
+            <br><br><h3> Pengajuan Pengadaan Fasilitas </h3>
+            <form th:action="@{/pengadaan-fasilitas/berhasil}" th:object="${newPengadaan}" method="POST">
+                <input type="hidden" th:field="${newPengadaan.id}"/>
+                <table class="table order-list">
+                    <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <td><input th:field="${newPengadaan.nama}"/></td>
+                    </tr>
+                    <tr>
+                        <th>Jumlah</th>
+                        <td><input th:field="${newPengadaan.jumlah}"/></td>
+                    </tr>
+                    <tr>
+                        <th>Harga</th>
+                        <td><input th:field="${newPengadaan.harga}"/></td>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
+                <br>
+            </form>
+        </div>
+
+</body>
+</html>
