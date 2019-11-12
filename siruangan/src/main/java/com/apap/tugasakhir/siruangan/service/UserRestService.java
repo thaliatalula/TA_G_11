@@ -12,12 +12,6 @@ import reactor.core.publisher.Mono;
 import java.util.Date;
 
 public interface UserRestService{
-    Mono<GuruDetailResp> addGuru(UserModel user, String NIS,
-                                 String nama, String tempatLahir,
-                                 Date tanggalLahir, String alamat,
-                                 String telepon);
-    Mono<SiswaDetailResp> addSiswa(UserModel user, String NIS,
-                                   String nama, String tempatLahir,
-                                   Date tanggalLahir, String alamat,
-                                   String telepon);
+    Mono<GuruDetailResp> addGuru(UserModel user, GuruDetail guru);
+    Mono<SiswaDetailResp> addSiswa(UserModel user, SiswaDetail siswa);
 }

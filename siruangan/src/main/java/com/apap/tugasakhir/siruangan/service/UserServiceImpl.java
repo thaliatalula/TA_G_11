@@ -33,9 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkIfUsernameTaken(UserModel user) {
         if(userDB.existsUserModelByUsernameIsLike(user.getUsername())){
-            if(userDB.findByUsername(user.getUsername()).equals(user.getUsername())){
-                return true;
-            }
+            return true;
         }
         return false;
     }

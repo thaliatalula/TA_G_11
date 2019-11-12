@@ -31,15 +31,15 @@ public class UserRestServiceImpl implements UserRestService{
     }
 
     @Override
-    public Mono<GuruDetailResp> addGuru(UserModel user, String NIG, String nama, String tempatLahir, Date tanggalLahir, String alamat,  String telepon) {
+    public Mono<GuruDetailResp> addGuru(UserModel user, GuruDetail guru) {
         JSONObject data= new JSONObject();
         data.put("idUser", user.getUuid());
-        data.put("nig", NIG);
-        data.put("nama",nama);
-        data.put("tempatLahir", tempatLahir);
-        data.put("tanggalLahir", new SimpleDateFormat("yyyy-mm-dd").format(tanggalLahir));
-        data.put("alamat",alamat);
-        data.put("telepon",telepon);
+        data.put("nig", guru.getNig());
+        data.put("nama",guru.getNama());
+        data.put("tempatLahir", guru.getTempat_lahir());
+        data.put("tanggalLahir", new SimpleDateFormat("yyyy-mm-dd").format(guru.getTanggal_lahir()));
+        data.put("alamat",guru.getAlamat());
+        data.put("telepon",guru.getTelepon());
         System.out.println(data);
         return  this.webClient.post().uri("/api/teachers")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -49,15 +49,15 @@ public class UserRestServiceImpl implements UserRestService{
     }
 
     @Override
-    public Mono<SiswaDetailResp> addSiswa(UserModel user, String NIS, String nama, String tempatLahir, Date tanggalLahir, String alamat,  String telepon) {
+    public Mono<SiswaDetailResp> addSiswa(UserModel user, SiswaDetail siswa) {
         JSONObject data= new JSONObject();
         data.put("idUser", user.getUuid());
-        data.put("nis", NIS);
-        data.put("nama",nama);
-        data.put("tempatLahir", tempatLahir);
-        data.put("tanggalLahir", new SimpleDateFormat("yyyy-mm-dd").format(tanggalLahir));
-        data.put("alamat",alamat);
-        data.put("telepon",telepon);
+        data.put("nis", siswa.getNis());
+        data.put("nama",siswa.getNama());
+        data.put("tempatLahir", siswa.getTempat_lahir());
+        data.put("tanggalLahir", new SimpleDateFormat("yyyy-mm-dd").format(siswa.getTanggal_lahir()));
+        data.put("alamat",siswa.getAlamat());
+        data.put("telepon",siswa.getTelepon());
         System.out.println(data);
         return  this.webClient.post().uri("/api/students")
                 .contentType(MediaType.APPLICATION_JSON)

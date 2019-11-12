@@ -2,6 +2,8 @@ package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.RoleModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.rest.GuruDetail;
+import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
 import com.apap.tugasakhir.siruangan.service.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
@@ -43,21 +45,36 @@ public class UserController {
                                  @RequestParam String alamat,
                                  @RequestParam String telepon,
                                  RedirectAttributes redirect) throws ParseException {
-        Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
         if(userService.checkIfUsernameTaken(user)){
             redirect.addFlashAttribute("notif", "Username already taken");
             return "redirect:/add-user";
         }
         userService.addUser(user);
+
+        Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
         if(user.getRole().getNama().equals("Guru")){
+            GuruDetail guru= new GuruDetail();
             String NIG=userService.generateNIG(user, tanggalLahirDate);
-            if(userRestService.addGuru(user, NIG, nama, tempatLahir, tanggalLahirDate,alamat, telepon).block().getStatus()=="200"){
+            guru.setNama(nama);
+            guru.setAlamat(alamat);
+            guru.setTempat_lahir(tempatLahir);
+            guru.setTanggal_lahir(tanggalLahirDate);
+            guru.setTelepon(telepon);
+            guru.setNig(NIG);
+            if(userRestService.addGuru(user, guru).block().getStatus()=="200"){
                 return "redirect:/";
             }
         }
         else{
+            SiswaDetail siswa= new SiswaDetail();
             String NIS=userService.generateNIS(user, tanggalLahirDate);
-            if(userRestService.addSiswa(user, NIS, nama, tempatLahir, tanggalLahirDate,alamat, telepon).block().getStatus()=="200"){
+            siswa.setNama(nama);
+            siswa.setAlamat(alamat);
+            siswa.setTempat_lahir(tempatLahir);
+            siswa.setTanggal_lahir(tanggalLahirDate);
+            siswa.setTelepon(telepon);
+            siswa.setNis(NIS);
+            if(userRestService.addSiswa(user, siswa).block().getStatus()=="200"){
                 return "redirect:/";
             }
         }
