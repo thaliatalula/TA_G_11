@@ -4,7 +4,7 @@ import com.apap.tugasakhir.siruangan.model.RoleModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
 import com.apap.tugasakhir.siruangan.rest.GuruDetail;
 import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
-import com.apap.tugasakhir.siruangan.service.UserRestService;
+import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +57,8 @@ public class UserController {
             String NIG=userService.generateNIG(user, tanggalLahirDate);
             guru.setNama(nama);
             guru.setAlamat(alamat);
-            guru.setTempat_lahir(tempatLahir);
-            guru.setTanggal_lahir(tanggalLahirDate);
+            guru.setTempatLahir(tempatLahir);
+            guru.setTanggalLahir(tanggalLahirDate);
             guru.setTelepon(telepon);
             guru.setNig(NIG);
             if(userRestService.addGuru(user, guru).block().getStatus()=="200"){
@@ -70,8 +70,8 @@ public class UserController {
             String NIS=userService.generateNIS(user, tanggalLahirDate);
             siswa.setNama(nama);
             siswa.setAlamat(alamat);
-            siswa.setTempat_lahir(tempatLahir);
-            siswa.setTanggal_lahir(tanggalLahirDate);
+            siswa.setTempatLahir(tempatLahir);
+            siswa.setTanggalLahir(tanggalLahirDate);
             siswa.setTelepon(telepon);
             siswa.setNis(NIS);
             if(userRestService.addSiswa(user, siswa).block().getStatus()=="200"){

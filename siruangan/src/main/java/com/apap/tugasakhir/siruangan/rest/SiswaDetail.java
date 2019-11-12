@@ -14,9 +14,9 @@ public class SiswaDetail {
     @JsonProperty("nama")
     private String nama;
     @JsonProperty("tempatLahir")
-    private String tempat_lahir;
+    private String tempatLahir;
     @JsonProperty("tanggalLahir")
-    private Date tanggal_lahir;
+    private Date tanggalLahir;
     @JsonProperty("alamat")
     private String alamat;
     @JsonProperty("telepon")
@@ -46,20 +46,20 @@ public class SiswaDetail {
         this.nama = nama;
     }
 
-    public String getTempat_lahir() {
-        return tempat_lahir;
+    public String getTempatLahir() {
+        return tempatLahir;
     }
 
-    public void setTempat_lahir(String tempat_lahir) {
-        this.tempat_lahir = tempat_lahir;
+    public void setTempatLahir(String tempatLahir) {
+        this.tempatLahir = tempatLahir;
     }
 
-    public Date getTanggal_lahir() {
-        return tanggal_lahir;
+    public Date getTanggalLahir() {
+        return tanggalLahir;
     }
 
-    public void setTanggal_lahir(Date tanggal_lahir) {
-        this.tanggal_lahir = tanggal_lahir;
+    public void setTanggalLahir(Date tanggalLahir) {
+        this.tanggalLahir = tanggalLahir;
     }
 
     public String getAlamat() {

@@ -1,4 +1,4 @@
-package com.apap.tugasakhir.siruangan.service;
+package com.apap.tugasakhir.siruangan.restService;
 
 import com.apap.tugasakhir.siruangan.model.UserModel;
 import com.apap.tugasakhir.siruangan.rest.GuruDetail;
