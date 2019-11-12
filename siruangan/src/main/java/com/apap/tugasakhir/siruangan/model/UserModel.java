@@ -17,7 +17,7 @@ public class UserModel implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    private String uuid;
 
     @NotNull
     @Column(name = "username", nullable = false, unique = true)
@@ -44,12 +44,12 @@ public class UserModel implements Serializable {
     private List<PeminjamanRuanganModel> listPeminjamanRuanganPenyetuju;
 
 
-    public String getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getUsername() {

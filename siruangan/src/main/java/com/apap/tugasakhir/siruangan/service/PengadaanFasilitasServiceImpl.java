@@ -20,6 +20,6 @@ public class PengadaanFasilitasServiceImpl implements PengadaanFasilitasService{
 
     @Override
     public List<PengadaanFasilitasModel> findAllPengajuanByIdUser(String idUser){
-        return pengadaanFasilitasDb.findByUserId(idUser);
+        return pengadaanFasilitasDb.findByUserUuid(idUser);
     }
 }

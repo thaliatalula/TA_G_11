@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PageController {
-
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     private String homePage(){
       return "home";
