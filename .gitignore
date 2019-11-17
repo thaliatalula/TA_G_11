@@ -43,7 +43,7 @@ target/
 /.nb-gradle/
 build/
 
-/siruangan/src/main/resources/application.properties
+/src/main/resources/application.properties
 
 ### VS Code ###
 .vscode/
