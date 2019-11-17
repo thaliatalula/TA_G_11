@@ -11,8 +11,8 @@
     <div class="container" th:align="center">
         <div class="col-md-6" th:align="center">
             <br><br><h3> Pengajuan Pengadaan Fasilitas </h3>
-            <form th:action="@{/pengadaan-fasilitas/berhasil}" th:object="${newPengadaan}" method="POST">
-                <input type="hidden" th:field="${newPengadaan.id}"/>
+            <form th:action="@{/pengadaan-fasilitas/add}" th:object="${user}" method="POST">
+                <input type="hidden" th:field="${user.uuid}"/>
                 <table class="table order-list">
                     <thead>
                     <tr>
