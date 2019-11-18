@@ -16,7 +16,6 @@ public class UserRestController {
     private UserRestService userRestService;
     @Autowired
     private RuanganRestService ruanganRestService;
-
     @GetMapping("/")
     public Mono<StatusDetail> x(){
         return ruanganRestService.getStatus("2");
