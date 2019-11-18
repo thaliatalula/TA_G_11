@@ -23,4 +23,9 @@ public class FasilitasServiceImpl implements FasilitasService{
     public FasilitasModel getFasilitasById(int id) {
         return fasilitasDB.findById(id).get();
     }
+
+    @Override
+    public void addFasilitas(FasilitasModel fasilitasModel) {
+        fasilitasDB.save(fasilitasModel);
+    }
 }

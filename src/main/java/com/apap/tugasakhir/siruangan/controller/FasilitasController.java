@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,7 +31,20 @@ public class FasilitasController {
     }
     @RequestMapping(value = "/tambah-fasilitas", method = RequestMethod.POST)
     private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, HttpServletRequest request){
-        RuanganModel ruangan =ruanganService.getRuanganById(Integer.parseInt(request.getParameter("ruangan")));
+        RuanganModel ruangan =ruanganService.getRuanganById(Integer.parseInt(request.getParameter("Ruangan")));
+        if( fasilitas.getRuanganList()==null ){
+            fasilitas.setRuanganList(new ArrayList<RuanganModel>());
+            fasilitas.getRuanganList().add(ruangan);
+        }
+        else{
+            if(!fasilitas.getRuanganList().contains(ruangan)){
+                fasilitas.getRuanganList().add(ruangan);
+            }
+            else{
+                
+            }
+        }
+        fasilitasService.addFasilitas(fasilitas);
         return "redirect:/tambah-fasilitas";
     }
 
