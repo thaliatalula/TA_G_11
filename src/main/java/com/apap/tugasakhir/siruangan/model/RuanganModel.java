@@ -3,11 +3,12 @@ package com.apap.tugasakhir.siruangan.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "ruangan")
-public class RuanganModel {
+public class RuanganModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
