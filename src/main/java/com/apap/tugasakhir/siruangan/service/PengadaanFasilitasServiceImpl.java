@@ -13,7 +13,6 @@ import java.util.List;
 public class PengadaanFasilitasServiceImpl implements PengadaanFasilitasService{
     @Autowired
     private PengadaanFasilitasDb pengadaanFasilitasDb;
-
     @Override
     public List<PengadaanFasilitasModel> getPengadaanFasilitasList(){
         return pengadaanFasilitasDb.findAll();
