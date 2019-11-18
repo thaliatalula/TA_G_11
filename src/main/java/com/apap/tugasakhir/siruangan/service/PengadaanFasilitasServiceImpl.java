@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PengadaanFasilitasServiceImpl implements PengadaanFasilitasService{
@@ -21,5 +20,10 @@ public class PengadaanFasilitasServiceImpl implements PengadaanFasilitasService{
     @Override
     public List<PengadaanFasilitasModel> findAllPengajuanByIdUser(String idUser){
         return pengadaanFasilitasDb.findByUserUuid(idUser);
+    }
+
+    @Override
+    public void addPengadaanFasilitas(PengadaanFasilitasModel pengadaanFasilitas){
+        pengadaanFasilitasDb.save(pengadaanFasilitas);
     }
 }
