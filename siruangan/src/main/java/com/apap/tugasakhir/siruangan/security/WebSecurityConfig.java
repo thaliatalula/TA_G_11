@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/add-user").hasAuthority("Admin TU")
                 .antMatchers("/daftar-peminjaman/").hasAnyAuthority("Admin TU", "Siswa","Guru")
                 .antMatchers("/pengadaan-fasilitas/daftar-pengajuan").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/pengadaan-fasilitas/add").hasAnyAuthority("Admin TU", "Guru")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
