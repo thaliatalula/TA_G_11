@@ -32,19 +32,10 @@ public class FasilitasController {
     @RequestMapping(value = "/tambah-fasilitas", method = RequestMethod.POST)
     private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, HttpServletRequest request){
         RuanganModel ruangan =ruanganService.getRuanganById(Integer.parseInt(request.getParameter("Ruangan")));
-        if( fasilitas.getRuanganList()==null ){
-            fasilitas.setRuanganList(new ArrayList<RuanganModel>());
-            fasilitas.getRuanganList().add(ruangan);
+        if(ruangan.getFasilitasList().contains(fasilitas.getNama())){
+
         }
-        else{
-            if(!fasilitas.getRuanganList().contains(ruangan)){
-                fasilitas.getRuanganList().add(ruangan);
-            }
-            else{
-                
-            }
-        }
-        fasilitasService.addFasilitas(fasilitas);
+//        fasilitasService.addFasilitas(fasilitas);
         return "redirect:/tambah-fasilitas";
     }
 

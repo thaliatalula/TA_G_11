@@ -1,6 +1,10 @@
 package com.apap.tugasakhir.siruangan.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -21,8 +25,16 @@ public class RuanganModel implements Serializable {
     @Column(name = "kapasitas", nullable = false)
     private int kapasitas;
 
-    @ManyToMany(mappedBy = "ruanganList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    List<FasilitasModel> fasilitasList;
+    @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<FasilitasModel> fasilitasList;
+
+    @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<PeminjamanRuanganModel> peminjamanRuanganList;
+
 
     public Integer getId() {
         return id;
