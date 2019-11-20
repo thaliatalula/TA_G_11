@@ -16,7 +16,20 @@ public class FasilitasRestController {
     private FasilitasRestService fasilitasRestService;
 
     @GetMapping(value = "/allFasilitas")
-    private List<FasilitasModel> retriveListFasilitas(){
-        return fasilitasRestService.retriveListFasilitas();
+    private List<FasilitasModel> retrieveListFasilitas(){
+        return fasilitasRestService.retrieveListFasilitas();
     }
+
+    //    @GetMapping(value = "/allFasilitas")
+//    private List<FasilitasModel> retriveListFasilitas(){
+//        RuanganModel ruangan = ruanganService.getRuanganById(48);
+//        List<FasilitasModel> listFasilitas = ruangan.getFasilitasList();
+//        return listFasilitas;
+//
+//        if(ruangan.getNama().equalsIgnoreCase("koperasi")){
+////            List<FasilitasModel> listFasilitas = ruangan.getFasilitasList();
+//        }
+//        else{
+//            return null;
+//        }
 }
