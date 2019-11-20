@@ -7,4 +7,5 @@ import java.util.List;
 public interface FasilitasService {
     List<FasilitasModel> getFasilitasList();
     FasilitasModel getFasilitasById(int id);
+    void addFasilitas(FasilitasModel fasilitasModel);
 }

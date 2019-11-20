@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymelaf.org">
+<head>
+    <title>Tambah Fasilitas</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers">
+    <form th:action="@{/tambah-fasilitas}" method="POST">
+        <div class="input-container">
+            <input type="text" required class="input-field" name="nama" placeholder="Nama Fasilitas">
+        </div>
+        <div class="input-container">
+            <input type="number" required class="input-field" name="jumlah" placeholder="Jumlah">
+        </div>
+        <div class="input-container">
+            <select required name="Ruangan" class="input-field" >
+                <option hidden selected value="">-- Pilih Ruangan --</option>
+                <option th:each="ruangan :${listRuangan}" th:value="${ruangan.id}" th:text="${ruangan.nama}"></option>
+            </select>
+        </div>
+        <button type="submit" class="buttonLogin">Tambah Fasilitas</button>
+    </form>
+</div>
+</body>
+</html>
