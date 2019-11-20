@@ -1,10 +1,7 @@
 package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.FasilitasModel;
-import com.apap.tugasakhir.siruangan.model.RuanganFasilitasModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
-import com.apap.tugasakhir.siruangan.repository.FasilitasDB;
-import com.apap.tugasakhir.siruangan.repository.RuanganDB;
 import com.apap.tugasakhir.siruangan.service.FasilitasService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,6 @@ import java.util.List;
 
 @Controller
 public class FasilitasController {
-
     @Autowired
     private RuanganService ruanganService;
 
@@ -36,23 +32,18 @@ public class FasilitasController {
     @RequestMapping(value = "/tambah-fasilitas", method = RequestMethod.POST)
     private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, HttpServletRequest request){
         RuanganModel ruangan =ruanganService.getRuanganById(Integer.parseInt(request.getParameter("Ruangan")));
-//        if(fasilitasService.getFasilitasByName(fasilitas.getNama())==null){
-//            RuanganFasilitasModel ruanganFasilitas= new RuanganFasilitasModel();
-//            ruanganFasilitas.setFasilitas(fasilitas);
-//            fasilitas.setRuanganFasilitas(r);
-//        }
-//        if( fasilitas.getRuanganFasilitas()==null ){
-//            fasilitas.setRuanganList(new ArrayList<RuanganModel>());
-//            fasilitas.getRuanganList().add(ruangan);
-//        }
-//        else{
-//            if(!fasilitas.getRuanganList().contains(ruangan)){
-//                fasilitas.getRuanganList().add(ruangan);
-//            }
-//            else{
-//
-//            }
-//        }
+        if( fasilitas.getRuanganList()==null ){
+            fasilitas.setRuanganList(new ArrayList<RuanganModel>());
+            fasilitas.getRuanganList().add(ruangan);
+        }
+        else{
+            if(!fasilitas.getRuanganList().contains(ruangan)){
+                fasilitas.getRuanganList().add(ruangan);
+            }
+            else{
+                
+            }
+        }
         fasilitasService.addFasilitas(fasilitas);
         return "redirect:/tambah-fasilitas";
     }

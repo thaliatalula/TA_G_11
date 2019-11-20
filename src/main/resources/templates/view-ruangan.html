@@ -48,7 +48,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
-        <tr th:each="fasilitas.fasilitas, iterationStatus : ${listFasilitas}">
+        <tr th:each="fasilitas, iterationStatus : ${listFasilitas}">
             <td th:text="${iterationStatus.count}"></td>
             <td th:text="${fasilitas.nama}"></td>
             <td th:text="${fasilitas.jumlah}"></td>

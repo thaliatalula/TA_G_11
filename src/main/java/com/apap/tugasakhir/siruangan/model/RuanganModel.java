@@ -21,8 +21,8 @@ public class RuanganModel implements Serializable {
     @Column(name = "kapasitas", nullable = false)
     private int kapasitas;
 
-    @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<RuanganFasilitasModel> ruanganFasilitas;
+    @ManyToMany(mappedBy = "ruanganList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    List<FasilitasModel> fasilitasList;
 
     public Integer getId() {
         return id;
@@ -48,11 +48,11 @@ public class RuanganModel implements Serializable {
         this.kapasitas = kapasitas;
     }
 
-    public List<RuanganFasilitasModel> getRuanganFasilitas() {
-        return ruanganFasilitas;
+    public List<FasilitasModel> getFasilitasList() {
+        return fasilitasList;
     }
 
-    public void setRuanganFasilitas(List<RuanganFasilitasModel> ruanganFasilitas) {
-        this.ruanganFasilitas = ruanganFasilitas;
+    public void setFasilitasList(List<FasilitasModel> fasilitasList) {
+        this.fasilitasList = fasilitasList;
     }
 }
