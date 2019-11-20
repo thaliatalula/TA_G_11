@@ -1,6 +1,7 @@
 package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.FasilitasModel;
+import com.apap.tugasakhir.siruangan.model.RuanganFasilitasModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.service.FasilitasService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
@@ -28,7 +29,7 @@ public class RuanganController {
     @RequestMapping(value = "/ruangan/{id}", method = RequestMethod.GET)
     public String viewRuangan(@PathVariable int id, Model model){
         RuanganModel ruangan = ruanganService.getRuanganById(id);
-        List<FasilitasModel> listFasilitas = ruangan.getFasilitasList();
+        List<RuanganFasilitasModel> listFasilitas = ruangan.getRuanganFasilitas();
         model.addAttribute("ruangan", ruangan);
         model.addAttribute("listFasilitas", listFasilitas);
         return "view-ruangan";

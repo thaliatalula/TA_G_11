@@ -1,6 +1,8 @@
 package com.apap.tugasakhir.siruangan.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "fasilitas")
+@JsonIgnoreProperties(value = {"jumlah","ruanganFasilitas"}, allowSetters = true)
+
 public class FasilitasModel  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +26,8 @@ public class FasilitasModel  implements Serializable {
     @Column(name = "jumlah", nullable = false)
     private int jumlah;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "fasilitas_ruangan",
-            joinColumns = @JoinColumn(name = "ruangan_id"),
-            inverseJoinColumns = @JoinColumn(name = "fasilitas_id"))
-    List<RuanganModel> ruanganList;
+    @OneToMany(mappedBy = "fasilitas", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<RuanganFasilitasModel> ruanganFasilitas;
 
     public Integer getId() {
         return id;
@@ -52,11 +53,11 @@ public class FasilitasModel  implements Serializable {
         this.jumlah = jumlah;
     }
 
-    public List<RuanganModel> getRuanganList() {
-        return ruanganList;
+    public List<RuanganFasilitasModel> getRuanganFasilitas() {
+        return ruanganFasilitas;
     }
 
-    public void setRuanganList(List<RuanganModel> ruanganList) {
-        this.ruanganList = ruanganList;
+    public void setRuanganFasilitas(List<RuanganFasilitasModel> ruanganFasilitas) {
+        this.ruanganFasilitas = ruanganFasilitas;
     }
 }

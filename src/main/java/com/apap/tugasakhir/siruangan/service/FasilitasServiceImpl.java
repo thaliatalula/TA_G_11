@@ -15,7 +15,6 @@ public class FasilitasServiceImpl implements FasilitasService{
     @Autowired
     FasilitasDB fasilitasDB;
 
-
     @Override
     public List<FasilitasModel> getFasilitasList() {
         return fasilitasDB.findAll();
@@ -29,5 +28,10 @@ public class FasilitasServiceImpl implements FasilitasService{
     @Override
     public void addFasilitas(FasilitasModel fasilitasModel) {
         fasilitasDB.save(fasilitasModel);
+    }
+
+    @Override
+    public FasilitasModel getFasilitasByName(String nama) {
+        return fasilitasDB.findByNama(nama).get();
     }
 }
