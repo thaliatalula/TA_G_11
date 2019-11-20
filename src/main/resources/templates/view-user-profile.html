@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymelaf.org">
 <head>
@@ -39,10 +40,77 @@
 
     <h2 th:if="${user}">
         <h3 th:text="${user.username}"></h3>
-        <!--<h2 th:text="${user.nik}"></h2>-->
+        &lt;!&ndash;<h2 th:text="${user.nik}"></h2>&ndash;&gt;
     </h2>
 
 
+</div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title> My Profile </title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="row justify-content-center" style="margin-top: 100px; margin-bottom: 60px">
+    <div class="col-md-8">
+        <div class="card">
+            <h4 class="card-header" style="margin-bottom:20px; text-align: center; background-color:goldenrod; color:white" th:text="'My Profile'"><b></b></h4>
+            <div class="card-body">
+                <table class="table" style="width:100%">
+                    <tbody>
+
+                    <tr th:if="${sisivitas == null}">
+                        <td>Username</td>
+                        <td th:text="${user.username}"></td>
+                    </tr>
+
+                    <tr th:if="${sisivitas != null}">
+                        <td>Nama</td>
+                        <td th:text="${guru} != null ? ${guru.nama}"></td>
+                        <td th:text="${siswa} != null ? ${siswa.nama}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Role</td>
+                        <td th:text="${user.getRole().getNama()}"></td>
+                    </tr>
+
+                    <tr th:if="${sisivitas != null}">
+                        <td th:text="${guru} != null ? 'NIG' : 'NIS'"></td>
+                        <td th:text="${guru} != null ? ${guru.nig}"></td>
+                        <td th:text="${siswa} != null ? ${siswa.nis}"></td>
+                    </tr>
+                    <tr th:if="${sisivitas != null}">
+                        <td>Tempat Lahir</td>
+                        <td th:text="${guru} != null ? ${guru.tempatLahir}"></td>
+                        <td th:text="${siswa} != null ? ${siswa.tempatLahir}"></td>
+                    </tr>
+                    <tr th:if="${sisivitas != null}">
+                        <td>Tanggal Lahir</td>
+                        <td th:text="${guru} != null ? ${#dates.format(new java.util.Date(guru.tanggalLahir), 'dd-MM-yyyy')}"></td>
+                        <td th:text="${siswa} != null ? ${#dates.format(new java.util.Date(siswa.tanggalLahir), 'dd-MM-yyyy')}"></td>
+                    </tr>
+                    <tr th:if="${sisivitas != null}">
+                        <td>Alamat</td>
+                        <td th:text="${guru} != null ? ${guru.alamat}"></td>
+                        <td th:text="${siswa} != null ? ${siswa.alamat}"></td>
+                    </tr>
+                    <tr th:if="${sisivitas != null}">
+                        <td>Telepon</td>
+                        <td th:text="${guru} != null ? ${guru.telepon}"></td>
+                        <td th:text="${siswa} != null ? ${siswa.telepon}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
