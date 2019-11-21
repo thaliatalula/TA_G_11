@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RuanganDB extends JpaRepository<RuanganModel, Long> {
     RuanganModel findRuanganById(int id);
+    RuanganModel findRuanganByNama(String nama);
 }
