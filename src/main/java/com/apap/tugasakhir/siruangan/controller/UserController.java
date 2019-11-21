@@ -1,17 +1,23 @@
 package com.apap.tugasakhir.siruangan.controller;
 
+import com.apap.tugasakhir.siruangan.model.FasilitasModel;
 import com.apap.tugasakhir.siruangan.model.RoleModel;
+import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
 import com.apap.tugasakhir.siruangan.rest.GuruDetail;
+import com.apap.tugasakhir.siruangan.rest.GuruDetailResp;
 import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
+import com.apap.tugasakhir.siruangan.rest.SiswaDetailResp;
 import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import reactor.core.publisher.Mono;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +41,28 @@ public class UserController {
         List<RoleModel> listRole= roleService.findAll().subList(2,4);
         model.addAttribute("listRole", listRole );
         return "add-new-user";
+    }
+
+    @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
+    public String viewProfile(Authentication authentication, Model model){
+
+        UserModel user = userService.findByUserName(authentication.getName());
+        SiswaDetail siswa;
+        GuruDetail guru;
+
+        if(user.getRole().getNama().equalsIgnoreCase("guru")){
+            guru=userRestService.getGuru(user.getUuid()).block().getResult();
+            model.addAttribute("guru", guru);
+            model.addAttribute("sisivitas", guru.getNama());
+        }
+        else if(user.getRole().getNama().equalsIgnoreCase("siswa")){
+            siswa=userRestService.getSiswa(user.getUuid()).block().getResult();
+            model.addAttribute("siswa", siswa);
+            model.addAttribute("sisivitas", siswa.getNama());
+        }
+
+        model.addAttribute("user", user);
+        return "view-user-profile";
     }
 
     @PostMapping(value = "/add-user")
@@ -101,5 +129,8 @@ public class UserController {
         return "redirect:/";
 
     }
+
+    /*@RequestMapping(value = "/myprofile", method = RequestMethod.GET)
+    private String viewUserProfile(@ModelAttribute UserModel)*/
 
 }
