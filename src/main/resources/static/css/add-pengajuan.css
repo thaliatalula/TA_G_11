@@ -50,3 +50,13 @@
     margin: auto;
     transition: 0.5s all ease-in-out;
 }
+
+.message{
+    background-color: goldenrod;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+    text-align: center;
+}
