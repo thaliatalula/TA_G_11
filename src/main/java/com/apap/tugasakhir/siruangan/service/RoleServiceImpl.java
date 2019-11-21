@@ -18,4 +18,9 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleModel> findAll() {
         return roleDB.findAll();
     }
+
+    @Override
+    public RoleModel findByName(String nama) {
+        return roleDB.findByNama(nama);
+    }
 }

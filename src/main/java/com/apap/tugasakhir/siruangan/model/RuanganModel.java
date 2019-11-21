@@ -31,7 +31,7 @@ public class RuanganModel implements Serializable {
     @JsonIgnore
     private List<FasilitasModel> fasilitasList;
 
-    @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<PeminjamanRuanganModel> peminjamanRuanganList;
