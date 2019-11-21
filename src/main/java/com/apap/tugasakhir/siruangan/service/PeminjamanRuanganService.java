@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PeminjamanRuanganService {
     List<PeminjamanRuanganModel> getPeminjamanRuanganList();
+    PeminjamanRuanganModel addPeminjamanRUangan(PeminjamanRuanganModel peminjamanRuanganModel);
 }

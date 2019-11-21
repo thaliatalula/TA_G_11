@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface RoleDB extends JpaRepository<RoleModel, Integer> {
     List<RoleModel> findAll();
+    RoleModel findByNama(String nama);
 
 }
