@@ -9,10 +9,18 @@
 
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containers">
-        <h5 th:text="${notif}" style="color: red"></h5>
-            <form th:action="@{/add-user}" method="POST">
+    <div th:if="{usernameGagal">
+        <i style="color: red" class="fa fa-times"></i><span th:text="${usernameGagal}" style="color: red"></span>
+    </div>
+    <div th:if="${berhasil}" style="width:100%;text-align: center">
+        <i style="color: mediumseagreen" class="fa fa-check"></i><span th:text="${berhasil}" style="color: mediumseagreen"></span>
+    </div>
+    <div th:if="{gagal">
+    <i style="color: red" class="fa fa-times"></i><span th:text="${gagal}" style="color: red"></span>
+    </div>
+            <form onsubmit="loading()" th:action="@{/add-user}" method="POST" id="form">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="input-container">
                             <i class="fa fa-user icon" ></i>
                             <input type="text" required class="input-field" name="username" placeholder="Username">
@@ -29,10 +37,13 @@
                                 <option th:each="role :${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
                             </select>
                         </div>
-
-                        <button type="submit" class="buttonLogin">Tambah User</button>
+                        <div id="gede">
+                            <button type="submit" class="buttonLogin">Tambah User</button>
+                            <br>
+                            <h6 style="text-align: center; display: none" id="spin"><i class="fa fa-circle-o-notch fa-spin"></i> Menambahkan user..</h6>
+                        </div>
                     </div>
-                    <div class="col tambahan">
+                    <div class="col-sm tambahan">
 
                         <div class="input-container tambahan" >
                             <input type="text"  class="input-field tambahan-input" name="nama" placeholder="Nama">
@@ -50,12 +61,21 @@
                         <div class="input-container tambahan">
                             <input type="number"  class="input-field tambahan-input" name="telepon" placeholder="Telepon">
                         </div>
-
+                    </div>
+                    <div id="kecil">
+                        <button type="submit" class="buttonLogin">Tambah User</button>
+                        <br>
+                        <h6 style="text-align: center; display: none" id="spins"><i class="fa fa-circle-o-notch fa-spin"></i> Menambahkan user..</h6>
                     </div>
                 </div>
             </form>
 </div>
 <script>
+    function loading(){
+            $("#spin").show();
+            $("#spins").show();
+            $(".buttonLogin").disabled();
+    }
     function showPassword() {
         var password = document.getElementById("password");
         var hider = document.getElementsByClassName("hider").item(0);
@@ -69,13 +89,13 @@
         }
     }
     function showRole() {
-        if ($("#role option:selected").text() == "Guru") {
+        if ($("#role option:selected").text() == "Guru" || $("#role option:selected").text() == "Siswa") {
             $(".tambahan").show();
             $(".tambahan-input").prop('required',true);
-        } else if ($("#role option:selected").text() === "Siswa") {
-            $(".tambahan").show();
-            $(".tambahan-input").prop('required',true);
-
+        }
+        else {
+            $(".tambahan").hide();
+            $(".tambahan-input").prop('required',false);
         }
     }
 
