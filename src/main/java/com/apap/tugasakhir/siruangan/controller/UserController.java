@@ -4,7 +4,6 @@ import com.apap.tugasakhir.siruangan.model.RoleModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
 import com.apap.tugasakhir.siruangan.rest.GuruDetail;
 import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
-import com.apap.tugasakhir.siruangan.rest.UserDetail;
 import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
@@ -39,24 +38,41 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-user")
-    private String addUserSubmit(@ModelAttribute UserModel user,@ModelAttribute UserDetail userDetail,
+    private String addUserSubmit(@ModelAttribute UserModel user,
+                                 @RequestParam String nama,
+                                 @RequestParam String tempatLahir,
+                                 @RequestParam String tanggalLahir,
+                                 @RequestParam String alamat,
+                                 @RequestParam String telepon,
                                  RedirectAttributes redirect) throws ParseException {
         if(userService.checkIfUsernameTaken(user)){
             redirect.addFlashAttribute("notif", "Username already taken");
             return "redirect:/add-user";
         }
         userService.addUser(user);
+
+        Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
         if(user.getRole().getNama().equals("Guru")){
-            GuruDetail guru= (GuruDetail) userDetail;
-            String NIG=userService.generateNIG(user, guru.getTanggalLahir());
+            GuruDetail guru= new GuruDetail();
+            String NIG=userService.generateNIG(user, tanggalLahirDate);
+            guru.setNama(nama);
+            guru.setAlamat(alamat);
+            guru.setTempatLahir(tempatLahir);
+            guru.setTanggalLahir(tanggalLahirDate);
+            guru.setTelepon(telepon);
             guru.setNig(NIG);
             if(userRestService.addGuru(user, guru).block().getStatus()=="200"){
                 return "redirect:/";
             }
         }
         else{
-            SiswaDetail siswa= (SiswaDetail) userDetail;
-            String NIS=userService.generateNIS(user, siswa.getTanggalLahir());
+            SiswaDetail siswa= new SiswaDetail();
+            String NIS=userService.generateNIS(user, tanggalLahirDate);
+            siswa.setNama(nama);
+            siswa.setAlamat(alamat);
+            siswa.setTempatLahir(tempatLahir);
+            siswa.setTanggalLahir(tanggalLahirDate);
+            siswa.setTelepon(telepon);
             siswa.setNis(NIS);
             if(userRestService.addSiswa(user, siswa).block().getStatus()=="200"){
                 return "redirect:/";
