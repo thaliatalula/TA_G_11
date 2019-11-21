@@ -9,13 +9,13 @@
 
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containers">
-    <div th:if="{usernameGagal">
+    <div th:if="${usernameGagal}">
         <i style="color: red" class="fa fa-times"></i><span th:text="${usernameGagal}" style="color: red"></span>
     </div>
     <div th:if="${berhasil}" style="width:100%;text-align: center">
         <i style="color: mediumseagreen" class="fa fa-check"></i><span th:text="${berhasil}" style="color: mediumseagreen"></span>
     </div>
-    <div th:if="{gagal">
+    <div th:if="${gagal}">
     <i style="color: red" class="fa fa-times"></i><span th:text="${gagal}" style="color: red"></span>
     </div>
             <form onsubmit="loading()" th:action="@{/add-user}" method="POST" id="form">
