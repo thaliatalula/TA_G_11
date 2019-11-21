@@ -36,14 +36,14 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
-    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/tambah", method = RequestMethod.GET)
     private String addUserPage(Model model) {
         List<RoleModel> listRole= roleService.findAll();
         model.addAttribute("listRole", listRole );
         return "add-new-user";
     }
 
-    @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/profil", method = RequestMethod.GET)
     public String viewProfile(Authentication authentication, Model model){
 
         UserModel user = userService.findByUserName(authentication.getName());
@@ -65,7 +65,7 @@ public class UserController {
         return "view-user-profile";
     }
 
-    @PostMapping(value = "/add-user")
+    @PostMapping(value = "/user/tambah")
     private String addUserSubmit(@ModelAttribute UserModel user,
                                  @RequestParam String nama,
                                  @RequestParam String tempatLahir,
@@ -75,7 +75,7 @@ public class UserController {
                                  RedirectAttributes redirect) throws ParseException {
         if(userService.checkIfUsernameTaken(user)){
             redirect.addFlashAttribute("usernameGagal", "Username already taken");
-            return "redirect:/add-user";
+            return "redirect:/user/tambah";
         }
         userService.addUser(user);
         if(user.getRole().getNama().equals("Guru")){
@@ -94,7 +94,7 @@ public class UserController {
             else {
                 redirect.addFlashAttribute("gagal","User gagal ditambah");
             }
-            return  "redirect:/add-user";
+            return  "redirect:/user/tambah";
         }
         else if(user.getRole().getNama().equals("Siswa")){
             SiswaDetail siswa= new SiswaDetail();
@@ -112,10 +112,10 @@ public class UserController {
             else {
                 redirect.addFlashAttribute("gagal","User gagal ditambah");
             }
-            return "redirect:/add-user";
+            return "redirect:/user/tambah";
         }
         redirect.addFlashAttribute("berhasil","User berhasil ditambah");
-        return "redirect:/add-user";
+        return "redirect:/user/tambah";
     }
 
 //    =============================FOR TESTING ADD USER===========================

@@ -12,7 +12,7 @@
 <div class="containers">
     <br><h3> Pengajuan Pengadaan Fasilitas </h3>
     <div>
-        <form th:action="@{/pengadaan-fasilitas/add}" th:object="${user}" method="POST">
+        <form th:action="@{/fasilitas/pengadaan/tambah}" th:object="${user}" method="POST">
             <input type="hidden" th:field="${user.uuid}"/>
             <div class="input-container">
                 <i class="fa fa-desktop icon" ></i>

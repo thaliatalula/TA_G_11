@@ -3,7 +3,7 @@
 <head>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <title>Add User</title>
-    <link rel="stylesheet" href="css/add-user.css"/>
+    <link rel="stylesheet" href="/css/add-user.css"/>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <div th:if="${gagal}">
     <i style="color: red" class="fa fa-times"></i><span th:text="${gagal}" style="color: red"></span>
     </div>
-            <form onsubmit="loading()" th:action="@{/add-user}" method="POST" id="form">
+            <form onsubmit="loading()" th:action="@{/user/tambah}" method="POST" id="form">
                 <div class="row">
                     <div class="col-sm">
                         <div class="input-container">
