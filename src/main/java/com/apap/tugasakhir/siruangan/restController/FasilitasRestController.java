@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/koperasi")
+@RequestMapping("/api/fasilitas")
 public class FasilitasRestController {
     @Autowired
     private FasilitasRestService fasilitasRestService;
 
-    @GetMapping(value = "/allFasilitas")
+    @GetMapping(value = "/koperasi")
     private List<FasilitasModel> retrieveListFasilitas() {
         return fasilitasRestService.retrieveListFasilitas();
     }
