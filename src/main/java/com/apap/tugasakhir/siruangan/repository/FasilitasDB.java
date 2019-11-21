@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface FasilitasDB extends JpaRepository<FasilitasModel, Long> {
     Optional<FasilitasModel> findById(int id);
     RuanganModel findByRuangan(RuanganModel ruanganModel);
-
 }
