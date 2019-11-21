@@ -24,6 +24,7 @@
                 Login
                 <span class="sr-only">(current)</span>
             </a>
+            <a  sec:authorize="isAuthenticated()"  class="nav-item nav-link active" th:href="@{/my-profile}">Profile</a>
             <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/add-user}">Tambah User</a>
             <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/tambah-fasilitas}">Tambah Fasilitas</a>
             <a  sec:authorize="isAuthenticated()"  class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
