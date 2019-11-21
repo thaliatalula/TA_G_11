@@ -38,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
     private String addUserPage(Model model) {
-        List<RoleModel> listRole= roleService.findAll().subList(2,4);
+        List<RoleModel> listRole= roleService.findAll();
         model.addAttribute("listRole", listRole );
         return "add-new-user";
     }
@@ -74,14 +74,13 @@ public class UserController {
                                  @RequestParam String telepon,
                                  RedirectAttributes redirect) throws ParseException {
         if(userService.checkIfUsernameTaken(user)){
-            redirect.addFlashAttribute("notif", "Username already taken");
+            redirect.addFlashAttribute("usernameGagal", "Username already taken");
             return "redirect:/add-user";
         }
         userService.addUser(user);
-
-        Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
         if(user.getRole().getNama().equals("Guru")){
             GuruDetail guru= new GuruDetail();
+            Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
             String NIG=userService.generateNIG(user, tanggalLahirDate);
             guru.setNama(nama);
             guru.setAlamat(alamat);
@@ -89,12 +88,17 @@ public class UserController {
             guru.setTanggalLahir(tanggalLahirDate);
             guru.setTelepon(telepon);
             guru.setNig(NIG);
-            if(userRestService.addGuru(user, guru).block().getStatus()=="200"){
-                return "redirect:/";
+            if(userRestService.addGuru(user, guru).block().getStatus().equals("200")){
+                redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
+            else {
+                redirect.addFlashAttribute("gagal","User gagal ditambah");
+            }
+            return  "redirect:/add-user";
         }
-        else{
+        else if(user.getRole().getNama().equals("Siswa")){
             SiswaDetail siswa= new SiswaDetail();
+            Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
             String NIS=userService.generateNIS(user, tanggalLahirDate);
             siswa.setNama(nama);
             siswa.setAlamat(alamat);
@@ -102,12 +106,16 @@ public class UserController {
             siswa.setTanggalLahir(tanggalLahirDate);
             siswa.setTelepon(telepon);
             siswa.setNis(NIS);
-            if(userRestService.addSiswa(user, siswa).block().getStatus()=="200"){
-                return "redirect:/";
+            if(userRestService.addSiswa(user, siswa).block().getStatus().equals("200")){
+                redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
+            else {
+                redirect.addFlashAttribute("gagal","User gagal ditambah");
+            }
+            return "redirect:/add-user";
         }
-        return "redirect:/";
-
+        redirect.addFlashAttribute("berhasil","User berhasil ditambah");
+        return "redirect:/add-user";
     }
 
 //    =============================FOR TESTING ADD USER===========================

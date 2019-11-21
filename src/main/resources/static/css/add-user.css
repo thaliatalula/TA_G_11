@@ -56,3 +56,19 @@
 .roles{
     display: none;
 }
+#kecil{
+    display: none;
+    width: 100%;
+}
+
+@media only screen and (max-width: 575px) {
+    #gede{
+        display: none;
+    }
+    #kecil{
+        display: block;
+    }
+    .containers{
+        margin-top: 30px;
+    }
+}
