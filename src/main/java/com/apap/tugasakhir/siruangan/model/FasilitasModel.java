@@ -1,6 +1,10 @@
 package com.apap.tugasakhir.siruangan.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,11 +26,11 @@ public class FasilitasModel  implements Serializable {
     @Column(name = "jumlah", nullable = false)
     private int jumlah;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "fasilitas_ruangan",
-            joinColumns = @JoinColumn(name = "ruangan_id"),
-            inverseJoinColumns = @JoinColumn(name = "fasilitas_id"))
-    List<RuanganModel> ruanganList;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_ruangan",referencedColumnName = "id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private RuanganModel ruangan;
 
     public Integer getId() {
         return id;
@@ -52,11 +56,11 @@ public class FasilitasModel  implements Serializable {
         this.jumlah = jumlah;
     }
 
-    public List<RuanganModel> getRuanganList() {
-        return ruanganList;
+    public RuanganModel getRuangan() {
+        return ruangan;
     }
 
-    public void setRuanganList(List<RuanganModel> ruanganList) {
-        this.ruanganList = ruanganList;
+    public void setRuangan(RuanganModel ruangan) {
+        this.ruangan = ruangan;
     }
 }

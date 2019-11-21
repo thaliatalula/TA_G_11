@@ -24,8 +24,13 @@
                 Login
                 <span class="sr-only">(current)</span>
             </a>
+<<<<<<< HEAD
             <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/add-user}">Add User</a>
             <a  sec:authorize="isAuthenticated()"  class="nav-item nav-link active" th:href="@{/my-profile}">Profile</a>
+=======
+            <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/add-user}">Tambah User</a>
+            <a  sec:authorize="hasAuthority('Admin TU')"  class="nav-item nav-link active" th:href="@{/tambah-fasilitas}">Tambah Fasilitas</a>
+>>>>>>> fbc84323e97a2d447686683a9c3e6d3e0278154a
             <a  sec:authorize="isAuthenticated()"  class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
         </div>
     </div>
