@@ -14,4 +14,7 @@ import java.util.Date;
 public interface UserRestService{
     Mono<GuruDetailResp> addGuru(UserModel user, GuruDetail guru);
     Mono<SiswaDetailResp> addSiswa(UserModel user, SiswaDetail siswa);
+    Mono<GuruDetailResp> getGuru(String uuid);
+    Mono<SiswaDetailResp> getSiswa(String uuid);
+
 }

@@ -3,28 +3,28 @@
 <head>
     <title>SiRuangan</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
-    <link rel="stylesheet" href="css/home.css"/>
+    <link rel="stylesheet" href="/css/home.css"/>
     <script src="js/home.js"></script>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containerss row">
     <div class="col">
-        <a th:href="@{/daftar-peminjaman/}">
+        <a th:href="@{/ruangan/peminjaman}">
             <button class="button">
                     Pinjam Ruangan
             </button>
         </a>
     </div>
     <div class="col">
-        <a th:href="@{/pengadaan-fasilitas/daftar-pengajuan}">
+        <a th:href="@{/fasilitas/pengadaan}">
             <button class="button">
                     Pengajuan Fasilitas
             </button>
         </a>
     </div>
     <div class="col">
-        <a th:href="@{/pengadaan-fasilitas/add}">
+        <a th:href="@{/fasilitas/pengadaan/tambah}">
             <button class="button">
                 Tambah Pengajuan Fasilitas
             </button>

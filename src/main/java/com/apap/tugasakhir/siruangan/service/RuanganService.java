@@ -9,4 +9,7 @@ public interface RuanganService {
     List<RuanganModel> getRuanganList();
     RuanganModel getRuanganById(int id);
     List<FasilitasModel> getFasilitas(RuanganModel ruanganModel);
+    void updateRuangan(RuanganModel ruanganModel);
+    boolean canAddFasilitas(RuanganModel ruanganModel,FasilitasModel fasilitasModel);
+    FasilitasModel sameFasilitas(RuanganModel ruanganModel, FasilitasModel fasilitasModel);
 }

@@ -19,15 +19,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/add-user").hasAuthority("Admin TU")
-                .antMatchers("/daftar-peminjaman/").hasAnyAuthority("Admin TU", "Siswa","Guru")
-                .antMatchers("/pengadaan-fasilitas/daftar-pengajuan").hasAnyAuthority("Admin TU", "Guru")
-                .antMatchers("/pengadaan-fasilitas/add").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/user/tambah").hasAuthority("Admin TU")
+                .antMatchers("/ruangan/peminjaman").hasAnyAuthority("Admin TU", "Siswa","Guru")
+                .antMatchers("/fasilitas/pengadaan").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/fasilitas/pengadaan/tambah").hasAnyAuthority("Admin TU", "Guru")
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/user/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")).logoutSuccessUrl("/").permitAll();
     }
 
     @Bean
