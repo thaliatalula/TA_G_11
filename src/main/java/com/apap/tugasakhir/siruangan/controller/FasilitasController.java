@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -23,20 +24,36 @@ public class FasilitasController {
     @Autowired
     private FasilitasService fasilitasService;
 
-    @RequestMapping(value = "/tambah-fasilitas", method = RequestMethod.GET)
+    @RequestMapping(value = "/fasilitas/tambah", method = RequestMethod.GET)
     private String addFasilitas(Model model){
         List<RuanganModel> listRuangan=  ruanganService.getRuanganList();
         model.addAttribute("listRuangan",listRuangan);
         return "tambah-fasilitas";
     }
-    @RequestMapping(value = "/tambah-fasilitas", method = RequestMethod.POST)
-    private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, HttpServletRequest request){
-        RuanganModel ruangan =ruanganService.getRuanganById(Integer.parseInt(request.getParameter("Ruangan")));
-        if(ruangan.getFasilitasList().contains(fasilitas.getNama())){
-
+    @RequestMapping(value = "/fasilitas/tambah", method = RequestMethod.POST)
+    private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, RedirectAttributes attributes){
+        RuanganModel ruanganTarget=fasilitas.getRuangan();
+        if(ruanganTarget.getFasilitasList().size()==0 && ruanganTarget.getKapasitas()>fasilitas.getJumlah()){
+            fasilitasService.addFasilitas(fasilitas);
+            ruanganTarget.getFasilitasList().add(fasilitas);
+            ruanganService.updateRuangan(ruanganTarget);
+            return "redirect:/ruangan/"+ruanganTarget.getId();
         }
-//        fasilitasService.addFasilitas(fasilitas);
-        return "redirect:/tambah-fasilitas";
+        if(!ruanganService.canAddFasilitas(ruanganTarget,fasilitas)){
+            attributes.addFlashAttribute("gagal","Jumlah fasilitas melebihi kapasitas ruangan");
+            return "redirect:/fasilitas/tambah";
+        }
+        if(ruanganService.sameFasilitas(ruanganTarget,fasilitas)!=null){
+            FasilitasModel fasilitasSama=ruanganService.sameFasilitas(ruanganTarget,fasilitas);
+            fasilitasSama.setJumlah(fasilitasSama.getJumlah()+fasilitas.getJumlah());
+            ruanganService.updateRuangan(ruanganTarget);
+        }
+        else{
+            fasilitasService.addFasilitas(fasilitas);
+            ruanganTarget.getFasilitasList().add(fasilitas);
+            ruanganService.updateRuangan(ruanganTarget);
+        }
+        return "redirect:/ruangan/"+ruanganTarget.getId();
     }
 
 

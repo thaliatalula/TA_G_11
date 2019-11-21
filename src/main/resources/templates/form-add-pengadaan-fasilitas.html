@@ -12,7 +12,7 @@
 <div class="containers">
     <br><h3> Pengajuan Pengadaan Fasilitas </h3>
     <div>
-        <form th:action="@{/pengadaan-fasilitas/add}" th:object="${user}" method="POST">
+        <form th:action="@{/fasilitas/pengadaan/tambah}" th:object="${user}" method="POST">
             <input type="hidden" th:field="${user.uuid}"/>
             <div class="input-container">
                 <i class="fa fa-desktop icon" ></i>
@@ -20,11 +20,11 @@
             </div>
             <div class="input-container">
                 <i class="fa fa-plus icon" ></i>
-                <input type="text" required class="input-field" name="jumlah" placeholder="Jumlah">
+                <input type="text" required class="input-field" name="jumlah" placeholder="Jumlah" pattern="[0-9]{1.}" title="Masukkan Angka">
             </div>
             <div class="input-container">
                 <i class="fa fa-dollar icon"></i>
-                <input type="text" required class="input-field" name="harga" placeholder="Harga">
+                <input type="text" required class="input-field" name="harga" placeholder="Harga" pattern="[0-9]{1.}" title="Masukkan Angka">
             </div>
             <button type="submit" class="buttonLogin">Submit</button>
         </form>

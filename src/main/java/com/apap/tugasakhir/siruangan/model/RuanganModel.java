@@ -23,6 +23,7 @@ public class RuanganModel implements Serializable {
 
     @NotNull
     @Column(name = "kapasitas", nullable = false)
+    @JsonIgnore
     private int kapasitas;
 
     @OneToMany(mappedBy = "ruangan", fetch = FetchType.LAZY)

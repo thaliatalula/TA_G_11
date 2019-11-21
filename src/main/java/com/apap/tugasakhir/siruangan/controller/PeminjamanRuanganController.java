@@ -13,7 +13,7 @@ public class PeminjamanRuanganController {
     @Autowired
     private PeminjamanRuanganService peminjamanRuanganService;
 
-    @RequestMapping(value = "/daftar-peminjaman/", method = RequestMethod.GET)
+    @RequestMapping(value = "/ruangan/peminjaman", method = RequestMethod.GET)
     public String daftarPengajuan(Model model) {
         List<PeminjamanRuanganModel> listPeminjaman = peminjamanRuanganService.getPeminjamanRuanganList();
         model.addAttribute("listPeminjaman", listPeminjaman);

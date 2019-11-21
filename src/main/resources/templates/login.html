@@ -4,7 +4,7 @@
 <head>
     <title>Login</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
-    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="/css/login.css"/>
 
 </head>
 
@@ -17,7 +17,7 @@
                         <span style="color: red"><i class="fa fa-exclamation-triangle"></i> Invalid username or password</span>
                         <br>
                     </div>
-                    <form th:action="@{/login}" method="POST">
+                    <form th:action="@{/user/login}" method="POST">
                         <div class="input-container">
                             <i class="fa fa-user icon" ></i>
                             <input type="text" required class="input-field" name="username" placeholder="Username">

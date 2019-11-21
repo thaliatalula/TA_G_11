@@ -24,7 +24,7 @@ public class PengadaanFasilitasController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/pengadaan-fasilitas/daftar-pengajuan")
+    @RequestMapping(value = "/fasilitas/pengadaan")
     public String daftarPengajuan(Model model, Authentication authentication){
         UserModel user = userService.findByUserName(authentication.getName());
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
@@ -38,7 +38,7 @@ public class PengadaanFasilitasController {
         return "daftar-pengajuan-fasilitas";
     }
 
-    @RequestMapping(value = "/pengadaan-fasilitas/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/fasilitas/pengadaan/tambah", method = RequestMethod.GET)
     public String addPengadaanFasilitasForm(Model model, Authentication authentication){
         UserModel user = userService.findByUserName(authentication.getName());
         ArrayList<PengadaanFasilitasModel> listPengadaanFasilitas = new ArrayList<>();
@@ -51,7 +51,7 @@ public class PengadaanFasilitasController {
         return "form-add-pengadaan-fasilitas";
     }
 
-    @RequestMapping(value = "/pengadaan-fasilitas/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/fasilitas/pengadaan/tambah", method = RequestMethod.POST)
     public String addPengadaanFasilitasSubmit(@ModelAttribute PengadaanFasilitasModel pengadaanFasilitas, Model model, Authentication authentication){
         UserModel user = userService.findByUserName(authentication.getName());
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
