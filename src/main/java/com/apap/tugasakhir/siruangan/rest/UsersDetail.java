@@ -25,6 +25,8 @@ public class UsersDetail {
     private String nis=null;
     @JsonProperty("nig")
     private String nig=null;
+    @JsonProperty("nip")
+    private String nip=null;
 
     public String getNig() {
         return nig;
@@ -88,5 +90,13 @@ public class UsersDetail {
 
     public void setTelepon(String telepon) {
         this.telepon = telepon;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 }
