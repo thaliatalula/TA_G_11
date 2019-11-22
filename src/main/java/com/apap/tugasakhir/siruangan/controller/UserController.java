@@ -58,10 +58,15 @@ public class UserController {
             model.addAttribute("siswa", siswa);
             model.addAttribute("sisivitas", siswa.getNama());
         }
-        else if(user.getRole().getNama().equalsIgnoreCase("admin")){
-            admin=userRestService.getAdmin(user.getUuid()).block().getResult();
-            model.addAttribute("admin", admin);
-            model.addAttribute("sisivitas", admin.getNama());
+        else if(user.getRole().getNama().equalsIgnoreCase("Admin TU")){
+            try {
+                admin = userRestService.getAdmin(user.getUuid()).block().getResult();
+                model.addAttribute("admin", admin);
+                model.addAttribute("sisivitas", admin.getNama());
+            }
+            catch (Exception e){
+
+            }
         }
 
         model.addAttribute("user", user);
