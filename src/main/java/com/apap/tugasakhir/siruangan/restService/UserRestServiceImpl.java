@@ -24,7 +24,7 @@ public class UserRestServiceImpl implements UserRestService{
     }
 
     @Override
-    public Mono<GuruDetailResp> addGuru(UserModel user, GuruDetail guru) {
+    public Mono<UsersDetailResp> addGuru(UserModel user, UsersDetail guru) {
         JSONObject data= new JSONObject();
         data.put("idUser", user.getUuid());
         data.put("nig", guru.getNig());
@@ -38,11 +38,11 @@ public class UserRestServiceImpl implements UserRestService{
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(data.toString())
                 .retrieve()
-                .bodyToMono(GuruDetailResp.class);
+                .bodyToMono(UsersDetailResp.class);
     }
 
     @Override
-    public Mono<SiswaDetailResp> addSiswa(UserModel user, SiswaDetail siswa) {
+    public Mono<UsersDetailResp> addSiswa(UserModel user, UsersDetail siswa) {
         JSONObject data= new JSONObject();
         data.put("idUser", user.getUuid());
         data.put("nis", siswa.getNis());
@@ -56,16 +56,16 @@ public class UserRestServiceImpl implements UserRestService{
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(data.toString())
                 .retrieve()
-                .bodyToMono(SiswaDetailResp.class);
+                .bodyToMono(UsersDetailResp.class);
     }
 
     @Override
-    public Mono<GuruDetailResp> getGuru(String uuid) {
-        return this.webClient.get().uri("/api/teachers/" + uuid).retrieve().bodyToMono(GuruDetailResp.class);
+    public Mono<UsersDetailResp> getGuru(String uuid) {
+        return this.webClient.get().uri("/api/teachers/" + uuid).retrieve().bodyToMono(UsersDetailResp.class);
     }
     @Override
-    public Mono<SiswaDetailResp> getSiswa(String uuid) {
-        return this.webClient.get().uri("/api/students/"+uuid).retrieve().bodyToMono(SiswaDetailResp.class);
+    public Mono<UsersDetailResp> getSiswa(String uuid) {
+        return this.webClient.get().uri("/api/students/"+uuid).retrieve().bodyToMono(UsersDetailResp.class);
     }
 }
 

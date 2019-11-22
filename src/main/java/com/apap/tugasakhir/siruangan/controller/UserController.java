@@ -4,10 +4,7 @@ import com.apap.tugasakhir.siruangan.model.FasilitasModel;
 import com.apap.tugasakhir.siruangan.model.RoleModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
-import com.apap.tugasakhir.siruangan.rest.GuruDetail;
-import com.apap.tugasakhir.siruangan.rest.GuruDetailResp;
-import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
-import com.apap.tugasakhir.siruangan.rest.SiswaDetailResp;
+import com.apap.tugasakhir.siruangan.rest.*;
 import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
@@ -47,8 +44,8 @@ public class UserController {
     public String viewProfile(Authentication authentication, Model model){
 
         UserModel user = userService.findByUserName(authentication.getName());
-        SiswaDetail siswa;
-        GuruDetail guru;
+        UsersDetail siswa;
+        UsersDetail guru;
 
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
             guru=userRestService.getGuru(user.getUuid()).block().getResult();
@@ -66,12 +63,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/tambah")
-    private String addUserSubmit(@ModelAttribute UserModel user,
-                                 @RequestParam String nama,
-                                 @RequestParam String tempatLahir,
-                                 @RequestParam String tanggalLahir,
-                                 @RequestParam String alamat,
-                                 @RequestParam String telepon,
+    private String addUserSubmit(@ModelAttribute UserModel user,@ModelAttribute UsersDetail usersDetail,
                                  RedirectAttributes redirect) throws ParseException {
         if(userService.checkIfUsernameTaken(user)){
             redirect.addFlashAttribute("usernameGagal", "Username already taken");
@@ -79,16 +71,9 @@ public class UserController {
         }
         userService.addUser(user);
         if(user.getRole().getNama().equals("Guru")){
-            GuruDetail guru= new GuruDetail();
-            Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
-            String NIG=userService.generateNIG(user, tanggalLahirDate);
-            guru.setNama(nama);
-            guru.setAlamat(alamat);
-            guru.setTempatLahir(tempatLahir);
-            guru.setTanggalLahir(tanggalLahirDate);
-            guru.setTelepon(telepon);
-            guru.setNig(NIG);
-            if(userRestService.addGuru(user, guru).block().getStatus().equals("200")){
+            String NIG=userService.generateNIG(user, usersDetail.getTanggalLahir());
+            usersDetail.setNig(NIG);
+            if(userRestService.addGuru(user, usersDetail).block().getStatus().equals("200")){
                 redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
             else {
@@ -96,17 +81,10 @@ public class UserController {
             }
             return  "redirect:/user/tambah";
         }
-        else if(user.getRole().getNama().equals("Siswa")){
-            SiswaDetail siswa= new SiswaDetail();
-            Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
-            String NIS=userService.generateNIS(user, tanggalLahirDate);
-            siswa.setNama(nama);
-            siswa.setAlamat(alamat);
-            siswa.setTempatLahir(tempatLahir);
-            siswa.setTanggalLahir(tanggalLahirDate);
-            siswa.setTelepon(telepon);
-            siswa.setNis(NIS);
-            if(userRestService.addSiswa(user, siswa).block().getStatus().equals("200")){
+        if(user.getRole().getNama().equals("Siswa")){
+            String NIS=userService.generateNIS(user, usersDetail.getTanggalLahir());
+            usersDetail.setNis(NIS);
+            if(userRestService.addSiswa(user, usersDetail).block().getStatus().equals("200")){
                 redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
             else {

@@ -2,32 +2,36 @@ package com.apap.tugasakhir.siruangan.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SiswaDetail {
+public class UsersDetail {
     @JsonProperty("idUser")
     private String uuid_user;
-    @JsonProperty("nis")
-    private String nis;
     @JsonProperty("nama")
     private String nama;
     @JsonProperty("tempatLahir")
     private String tempatLahir;
     @JsonProperty("tanggalLahir")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date tanggalLahir;
     @JsonProperty("alamat")
     private String alamat;
     @JsonProperty("telepon")
     private String telepon;
+    @JsonProperty("nis")
+    private String nis=null;
+    @JsonProperty("nig")
+    private String nig=null;
 
-    public String getUuid_user() {
-        return uuid_user;
+    public String getNig() {
+        return nig;
     }
 
-    public void setUuid_user(String uuid_user) {
-        this.uuid_user = uuid_user;
+    public void setNig(String nig) {
+        this.nig = nig;
     }
 
     public String getNis() {
@@ -37,6 +41,14 @@ public class SiswaDetail {
     public void setNis(String nis) {
         this.nis = nis;
     }
+    public String getUuid_user() {
+        return uuid_user;
+    }
+
+    public void setUuid_user(String uuid_user) {
+        this.uuid_user = uuid_user;
+    }
+
 
     public String getNama() {
         return nama;
