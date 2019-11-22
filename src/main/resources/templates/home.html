@@ -35,6 +35,13 @@
             </button>
         </a>
     </div>
+        <div sec:authorize="hasAnyAuthority('Admin TU')"  class="col">
+            <a th:href="@{/fasilitas/pengadaan/buku}">
+                <button class="button">
+                    Tambah Pengadaan Buku
+                </button>
+            </a>
+        </div>
     </div>
 
 </div>
