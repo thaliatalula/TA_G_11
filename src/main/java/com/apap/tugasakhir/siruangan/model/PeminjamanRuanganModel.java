@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "peminjaman_ruangan")
-@JsonIgnoreProperties(value = {"ruangan", "userPenyetuju"}, allowSetters = true)
+@JsonIgnoreProperties(value = "ruangan", allowSetters = true)
 public class PeminjamanRuanganModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +54,7 @@ public class PeminjamanRuanganModel implements Serializable {
     @Column(name = "is_disetujui", nullable = false)
     private boolean isDisetujui=false;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_ruangan", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RuanganModel ruangan;

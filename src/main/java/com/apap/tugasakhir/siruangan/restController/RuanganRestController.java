@@ -3,6 +3,7 @@ package com.apap.tugasakhir.siruangan.restController;
 import com.apap.tugasakhir.siruangan.model.PeminjamanRuanganModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.restService.PeminjamanRuanganRestService;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
 import com.apap.tugasakhir.siruangan.service.RoleServiceImpl;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
@@ -28,7 +29,7 @@ public class RuanganRestController {
     private UserServiceImpl userService;
 
     @Autowired
-    private PeminjamanRuanganService peminjamanRuanganService;
+    private PeminjamanRuanganRestService peminjamanRuanganRestService;
 
     @GetMapping("/")
     private List<RuanganModel> getAllRuangan(){
@@ -37,19 +38,15 @@ public class RuanganRestController {
 
     @PostMapping("/peminjaman/tambah")
     private PeminjamanRuanganModel addPeminjaman(@Valid @RequestBody PeminjamanRuanganModel peminjamanRuanganModel, BindingResult bindingResult){
-        UserModel userNew= new UserModel();
-        userNew.setUsername(RandomString.make(35));
-        userNew.setRole(roleService.findByName("Guru"));
-        userNew.setPassword("password");
-        userService.addUser(userNew);
-        peminjamanRuanganModel.setUserPeminjam(userNew);
+        UserModel user=userService.findByUserName("sikoperasi");
+        peminjamanRuanganModel.setUserPeminjam(user);
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
             );
         }
         else{
-            return peminjamanRuanganService.addPeminjamanRUangan(peminjamanRuanganModel);
+            return peminjamanRuanganRestService.createPeminjaman(peminjamanRuanganModel);
         }
     }
 }
