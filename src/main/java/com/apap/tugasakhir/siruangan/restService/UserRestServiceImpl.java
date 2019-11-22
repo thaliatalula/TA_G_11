@@ -40,6 +40,23 @@ public class UserRestServiceImpl implements UserRestService{
                 .retrieve()
                 .bodyToMono(UsersDetailResp.class);
     }
+    @Override
+    public Mono<UsersDetailResp> addAdmin(UserModel user, UsersDetail admin) {
+        JSONObject data= new JSONObject();
+        data.put("idUser", user.getUuid());
+        data.put("nip", admin.getNip());
+        data.put("nama",admin.getNama());
+        data.put("tempatLahir", admin.getTempatLahir());
+        data.put("tanggalLahir", new SimpleDateFormat("yyyy-mm-dd").format(admin.getTanggalLahir()));
+        data.put("alamat",admin.getAlamat());
+        data.put("telepon",admin.getTelepon());
+        System.out.println(data);
+        return  this.webClient.post().uri("/api/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(data.toString())
+                .retrieve()
+                .bodyToMono(UsersDetailResp.class);
+    }
 
     @Override
     public Mono<UsersDetailResp> addSiswa(UserModel user, UsersDetail siswa) {

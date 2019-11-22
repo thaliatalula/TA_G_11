@@ -35,7 +35,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/tambah", method = RequestMethod.GET)
     private String addUserPage(Model model) {
-        List<RoleModel> listRole= roleService.findAll();
+        List<RoleModel> listRole= roleService.findAll().subList(1,4);
         model.addAttribute("listRole", listRole );
         return "add-new-user";
     }
@@ -85,6 +85,17 @@ public class UserController {
             String NIS=userService.generateNIS(user, usersDetail.getTanggalLahir());
             usersDetail.setNis(NIS);
             if(userRestService.addSiswa(user, usersDetail).block().getStatus().equals("200")){
+                redirect.addFlashAttribute("berhasil","User berhasil ditambah");
+            }
+            else {
+                redirect.addFlashAttribute("gagal","User gagal ditambah");
+            }
+            return "redirect:/user/tambah";
+        }
+        if(user.getRole().getNama().equals("Admin TU")){
+            String NIP=userService.generateNIP(user, usersDetail.getTanggalLahir());
+            usersDetail.setNip(NIP);
+            if(userRestService.addAdmin(user, usersDetail).block().getStatus().equals("200")){
                 redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
             else {
