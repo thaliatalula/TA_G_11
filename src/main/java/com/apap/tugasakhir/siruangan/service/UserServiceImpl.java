@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String generateNIP(UserModel user, Date tanggalLahir) {
-        String NIP= "A";
+        String NIP= "P";
         SimpleDateFormat format= new SimpleDateFormat("ddmmyyyy");
         NIP=NIP.concat(format.format(tanggalLahir));
         Random rnds = new Random();
@@ -97,6 +97,5 @@ public class UserServiceImpl implements UserService {
         NIP=NIP.concat(numberRandom);
         NIP=NIP.concat(user.getUuid());
         return NIP;
-
     }
 }
