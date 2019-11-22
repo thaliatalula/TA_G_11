@@ -18,4 +18,8 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
         return peminjamanRuanganDB.findAll();
     }
 
+    @Override
+    public PeminjamanRuanganModel addPeminjamanRUangan(PeminjamanRuanganModel peminjamanRuanganModel) {
+        return peminjamanRuanganDB.save(peminjamanRuanganModel);
+    }
 }
