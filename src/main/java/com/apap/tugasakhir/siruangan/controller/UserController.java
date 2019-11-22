@@ -46,6 +46,7 @@ public class UserController {
         UserModel user = userService.findByUserName(authentication.getName());
         UsersDetail siswa;
         UsersDetail guru;
+        UsersDetail admin;
 
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
             guru=userRestService.getGuru(user.getUuid()).block().getResult();
@@ -56,6 +57,11 @@ public class UserController {
             siswa=userRestService.getSiswa(user.getUuid()).block().getResult();
             model.addAttribute("siswa", siswa);
             model.addAttribute("sisivitas", siswa.getNama());
+        }
+        else if(user.getRole().getNama().equalsIgnoreCase("admin")){
+            admin=userRestService.getAdmin(user.getUuid()).block().getResult();
+            model.addAttribute("admin", admin);
+            model.addAttribute("sisivitas", admin.getNama());
         }
 
         model.addAttribute("user", user);
