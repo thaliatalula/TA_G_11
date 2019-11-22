@@ -2,19 +2,15 @@ package com.apap.tugasakhir.siruangan.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import reactor.core.publisher.Mono;
-
-import java.util.Date;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SiswaDetailResp {
+public class UsersDetailResp {
     @JsonProperty("status")
     private String status;
     @JsonProperty("message")
     private String message;
     @JsonProperty("result")
-    private SiswaDetail result;
+    private UsersDetail result;
 
     public String getStatus() {
         return status;
@@ -32,11 +28,11 @@ public class SiswaDetailResp {
         this.message = message;
     }
 
-    public SiswaDetail getResult() {
+    public UsersDetail getResult() {
         return result;
     }
 
-    public void setResult(SiswaDetail result) {
+    public void setResult(UsersDetail result) {
         this.result = result;
     }
 }

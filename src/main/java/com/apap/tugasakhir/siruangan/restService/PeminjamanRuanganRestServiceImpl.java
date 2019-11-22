@@ -1,25 +1,19 @@
-package com.apap.tugasakhir.siruangan.service;
+package com.apap.tugasakhir.siruangan.restService;
+
 import com.apap.tugasakhir.siruangan.model.PeminjamanRuanganModel;
-import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.repository.PeminjamanRuanganDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
-public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
+public class PeminjamanRuanganRestServiceImpl implements PeminjamanRuanganRestService {
     @Autowired
     private PeminjamanRuanganDB peminjamanRuanganDB;
 
-    public List<PeminjamanRuanganModel> getPeminjamanRuanganList(){
-        return peminjamanRuanganDB.findAll();
-    }
-
     @Override
-    public PeminjamanRuanganModel addPeminjamanRUangan(PeminjamanRuanganModel peminjamanRuanganModel) {
+    public PeminjamanRuanganModel createPeminjaman(PeminjamanRuanganModel peminjamanRuanganModel) {
         return peminjamanRuanganDB.save(peminjamanRuanganModel);
     }
 }
