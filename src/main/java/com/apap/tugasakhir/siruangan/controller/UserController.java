@@ -1,17 +1,20 @@
 package com.apap.tugasakhir.siruangan.controller;
 
+import com.apap.tugasakhir.siruangan.model.FasilitasModel;
 import com.apap.tugasakhir.siruangan.model.RoleModel;
+import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
-import com.apap.tugasakhir.siruangan.rest.GuruDetail;
-import com.apap.tugasakhir.siruangan.rest.SiswaDetail;
+import com.apap.tugasakhir.siruangan.rest.*;
 import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import reactor.core.publisher.Mono;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,56 +33,67 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
-    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/tambah", method = RequestMethod.GET)
     private String addUserPage(Model model) {
-        List<RoleModel> listRole= roleService.findAll().subList(2,4);
+        List<RoleModel> listRole= roleService.findAll();
         model.addAttribute("listRole", listRole );
         return "add-new-user";
     }
 
-    @PostMapping(value = "/add-user")
-    private String addUserSubmit(@ModelAttribute UserModel user,
-                                 @RequestParam String nama,
-                                 @RequestParam String tempatLahir,
-                                 @RequestParam String tanggalLahir,
-                                 @RequestParam String alamat,
-                                 @RequestParam String telepon,
+    @RequestMapping(value = "/user/profil", method = RequestMethod.GET)
+    public String viewProfile(Authentication authentication, Model model){
+
+        UserModel user = userService.findByUserName(authentication.getName());
+        UsersDetail siswa;
+        UsersDetail guru;
+
+        if(user.getRole().getNama().equalsIgnoreCase("guru")){
+            guru=userRestService.getGuru(user.getUuid()).block().getResult();
+            model.addAttribute("guru", guru);
+            model.addAttribute("sisivitas", guru.getNama());
+        }
+        else if(user.getRole().getNama().equalsIgnoreCase("siswa")){
+            siswa=userRestService.getSiswa(user.getUuid()).block().getResult();
+            model.addAttribute("siswa", siswa);
+            model.addAttribute("sisivitas", siswa.getNama());
+        }
+
+        model.addAttribute("user", user);
+        return "view-user-profile";
+    }
+
+    @PostMapping(value = "/user/tambah")
+    private String addUserSubmit(@ModelAttribute UserModel user,@ModelAttribute UsersDetail usersDetail,
                                  RedirectAttributes redirect) throws ParseException {
         if(userService.checkIfUsernameTaken(user)){
-            redirect.addFlashAttribute("notif", "Username already taken");
-            return "redirect:/add-user";
+            redirect.addFlashAttribute("usernameGagal", "Username already taken");
+            return "redirect:/user/tambah";
         }
         userService.addUser(user);
-
-        Date tanggalLahirDate= new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
         if(user.getRole().getNama().equals("Guru")){
-            GuruDetail guru= new GuruDetail();
-            String NIG=userService.generateNIG(user, tanggalLahirDate);
-            guru.setNama(nama);
-            guru.setAlamat(alamat);
-            guru.setTempatLahir(tempatLahir);
-            guru.setTanggalLahir(tanggalLahirDate);
-            guru.setTelepon(telepon);
-            guru.setNig(NIG);
-            if(userRestService.addGuru(user, guru).block().getStatus()=="200"){
-                return "redirect:/";
+            String NIG=userService.generateNIG(user, usersDetail.getTanggalLahir());
+            usersDetail.setNig(NIG);
+            if(userRestService.addGuru(user, usersDetail).block().getStatus().equals("200")){
+                redirect.addFlashAttribute("berhasil","User berhasil ditambah");
             }
-        }
-        else{
-            SiswaDetail siswa= new SiswaDetail();
-            String NIS=userService.generateNIS(user, tanggalLahirDate);
-            siswa.setNama(nama);
-            siswa.setAlamat(alamat);
-            siswa.setTempatLahir(tempatLahir);
-            siswa.setTanggalLahir(tanggalLahirDate);
-            siswa.setTelepon(telepon);
-            siswa.setNis(NIS);
-            if(userRestService.addSiswa(user, siswa).block().getStatus()=="200"){
-                return "redirect:/";
+            else {
+                redirect.addFlashAttribute("gagal","User gagal ditambah");
             }
+            return  "redirect:/user/tambah";
         }
-        return "redirect:/";
-
+        if(user.getRole().getNama().equals("Siswa")){
+            String NIS=userService.generateNIS(user, usersDetail.getTanggalLahir());
+            usersDetail.setNis(NIS);
+            if(userRestService.addSiswa(user, usersDetail).block().getStatus().equals("200")){
+                redirect.addFlashAttribute("berhasil","User berhasil ditambah");
+            }
+            else {
+                redirect.addFlashAttribute("gagal","User gagal ditambah");
+            }
+            return "redirect:/user/tambah";
+        }
+        redirect.addFlashAttribute("berhasil","User berhasil ditambah");
+        return "redirect:/user/tambah";
     }
 
 //    =============================FOR TESTING ADD USER===========================
@@ -101,5 +115,8 @@ public class UserController {
         return "redirect:/";
 
     }
+
+    /*@RequestMapping(value = "/myprofile", method = RequestMethod.GET)
+    private String viewUserProfile(@ModelAttribute UserModel)*/
 
 }

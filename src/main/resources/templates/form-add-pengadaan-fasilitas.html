@@ -1,39 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeLeaf.org">
+<html xmlns:th="http://www.thymeLeaf.org">
 
 <head>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <title> Form Pengajuan Pengadaan Fasilitas </title>
+    <link rel="stylesheet" href="/css/add-pengajuan.css"/>
 </head>
 
 <body>
-    <nav th:replace="fragments/fragment :: navbar"></nav>
-    <div class="container" th:align="center">
-        <div class="col-md-6" th:align="center">
-            <br><br><h3> Pengajuan Pengadaan Fasilitas </h3>
-            <form th:action="@{/pengadaan-fasilitas/add}" th:object="${user}" method="POST">
-                <input type="hidden" th:field="${user.uuid}"/>
-                <table class="table order-list">
-                    <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <td><input th:field="${newPengadaan.nama}"/></td>
-                    </tr>
-                    <tr>
-                        <th>Jumlah</th>
-                        <td><input th:field="${newPengadaan.jumlah}"/></td>
-                    </tr>
-                    <tr>
-                        <th>Harga</th>
-                        <td><input th:field="${newPengadaan.harga}"/></td>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
-                <br>
-            </form>
-        </div>
-
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers">
+    <br><h3> Pengajuan Pengadaan Fasilitas </h3>
+    <div>
+        <form th:action="@{/fasilitas/pengadaan/tambah}" th:object="${user}" method="POST">
+            <input type="hidden" th:field="${user.uuid}"/>
+            <div class="input-container">
+                <i class="fa fa-desktop icon" ></i>
+                <input type="text" required class="input-field" name="nama" placeholder="Fasilitas">
+            </div>
+            <div class="input-container">
+                <i class="fa fa-plus icon" ></i>
+                <input type="text" required class="input-field" name="jumlah" placeholder="Jumlah" pattern="[0-9]{1.}" title="Masukkan Angka">
+            </div>
+            <div class="input-container">
+                <i class="fa fa-dollar icon"></i>
+                <input type="text" required class="input-field" name="harga" placeholder="Harga" pattern="[0-9]{1.}" title="Masukkan Angka">
+            </div>
+            <button type="submit" class="buttonLogin">Submit</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
+
+
+
+<!--<body>-->
+<!--    <nav th:replace="fragments/fragment :: navbar"></nav>-->
+<!--    <div class="container" th:align="center">-->
+<!--        <div class="col-md-6" th:align="center">-->
+<!--            <br><br><h3> Pengajuan Pengadaan Fasilitas </h3>-->
+<!--            <form th:action="@{/pengadaan-fasilitas/add}" th:object="${user}" method="POST">-->
+<!--                <input type="hidden" th:field="${user.uuid}"/>-->
+<!--                <table class="table order-list">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>Nama</th>-->
+<!--                        <td><input th:field="${newPengadaan.nama}"/></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Jumlah</th>-->
+<!--                        <td><input th:field="${newPengadaan.jumlah}"/></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Harga</th>-->
+<!--                        <td><input th:field="${newPengadaan.harga}"/></td>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody></tbody>-->
+<!--                </table>-->
+<!--                <button class="btn btn-primary" type="submit" name="submit"> Submit </button>-->
+<!--                <br>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--</body>-->
+<!--</html>-->

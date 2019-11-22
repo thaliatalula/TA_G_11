@@ -1,6 +1,8 @@
 package com.apap.tugasakhir.siruangan.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +14,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "peminjaman_ruangan")
+@JsonIgnoreProperties(value = {"ruangan", "userPenyetuju"}, allowSetters = true)
 public class PeminjamanRuanganModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +54,7 @@ public class PeminjamanRuanganModel implements Serializable {
     @Column(name = "is_disetujui", nullable = false)
     private boolean isDisetujui=false;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade=CascadeType.ALL)
     @JoinColumn(name = "id_ruangan", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RuanganModel ruangan;
@@ -59,12 +62,14 @@ public class PeminjamanRuanganModel implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "uuid_user_peminjam", referencedColumnName = "uuid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private UserModel userPeminjam;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "uuid_user_penyetuju", referencedColumnName = "uuid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserModel userPenyetuju;
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "uuid_user_penyetuju", referencedColumnName = "uuid")
+    @OnDelete(action = OnDeleteAction.CASCADE )
+    @JsonIgnore
+    private UserModel userPenyetuju=null;
 
     public Integer getId() {
         return id;

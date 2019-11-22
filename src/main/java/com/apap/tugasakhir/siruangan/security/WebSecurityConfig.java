@@ -3,6 +3,7 @@ package com.apap.tugasakhir.siruangan.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,15 +20,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/add-user").hasAuthority("Admin TU")
-                .antMatchers("/daftar-peminjaman/").hasAnyAuthority("Admin TU", "Siswa","Guru")
-                .antMatchers("/pengadaan-fasilitas/daftar-pengajuan").hasAnyAuthority("Admin TU", "Guru")
-                .antMatchers("/pengadaan-fasilitas/add").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/user/tambah").hasAuthority("Admin TU")
+                .antMatchers("/ruangan/peminjaman").hasAnyAuthority("Admin TU", "Siswa","Guru")
+                .antMatchers("/fasilitas/pengadaan").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/fasilitas/pengadaan/tambah").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/fasilitas/pengadaan/hapus").hasAnyAuthority("Admin TU", "Guru")
+                .antMatchers("/fasilitas/tambah").hasAuthority("Admin TU")
+                .antMatchers("/ruangan/{\\\\d+}/ubah").hasAuthority("Admin TU")
+                .antMatchers("/ruangan/{\\\\d+}/hapus").hasAuthority("Admin TU")
+                .antMatchers("/ruangan/peminjaman/tambah").hasAnyAuthority( "Siswa","Guru")
+                .antMatchers("/ruangan/peminjaman/ubah").hasAuthority("Admin TU")
+                .antMatchers("/fasilitas/pengadaan/buku").hasAuthority("Admin TU")
+                .antMatchers(HttpMethod.POST,"/api/ruangan/peminjaman/tambah").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/user/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")).logoutSuccessUrl("/").permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Bean
