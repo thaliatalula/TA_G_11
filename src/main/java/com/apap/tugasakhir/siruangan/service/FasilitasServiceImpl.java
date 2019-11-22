@@ -30,4 +30,13 @@ public class FasilitasServiceImpl implements FasilitasService{
     public void addFasilitas(FasilitasModel fasilitasModel) {
         fasilitasDB.save(fasilitasModel);
     }
+
+    @Override
+    public FasilitasModel changeFasilitas(FasilitasModel fasilitasModel) {
+        FasilitasModel targetFasilitas = fasilitasDB.findById(fasilitasModel.getId()).get();
+        targetFasilitas.setNama(fasilitasModel.getNama());
+        targetFasilitas.setJumlah(fasilitasModel.getJumlah());
+        fasilitasDB.save(targetFasilitas);
+        return targetFasilitas;
+    }
 }

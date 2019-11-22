@@ -8,4 +8,5 @@ public interface FasilitasService {
     List<FasilitasModel> getFasilitasList();
     FasilitasModel getFasilitasById(int id);
     void addFasilitas(FasilitasModel fasilitasModel);
+    FasilitasModel changeFasilitas(FasilitasModel fasilitasModel);
 }

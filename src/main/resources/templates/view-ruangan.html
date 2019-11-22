@@ -53,6 +53,12 @@
             <td th:text="${fasilitas.nama}"></td>
             <td th:text="${fasilitas.jumlah}"></td>
         </tr>
+
+        <td scope="col" style="text-align: left">
+            <button class="btn btn-dark">
+                <a th:href="@{'/ruangan/'+${ruangan.id}+'/ubah?'+${ruangan.id}}" style="color: white"> Ubah </a>
+            </button>
+        </td>
     </table>
 </div>
 </body>

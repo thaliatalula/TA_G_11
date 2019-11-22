@@ -7,9 +7,7 @@ import com.apap.tugasakhir.siruangan.service.RuanganService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +52,21 @@ public class FasilitasController {
             ruanganService.updateRuangan(ruanganTarget);
         }
         return "redirect:/ruangan/"+ruanganTarget.getId();
+    }
+
+    @RequestMapping(value = "/ruangan/{idRuangan}/ubah?idFasilitas={idFasilitas}", method = RequestMethod.GET)
+    public String ubahFasilitasFormPage(@PathVariable int idRuangan, @RequestParam int idFasilitas, Model model){
+        FasilitasModel existingFasilitas = fasilitasService.getFasilitasById(idRuangan);
+        model.addAttribute("fasilitas", existingFasilitas);
+        return "form-ubah-fasilitas";
+    }
+
+    @RequestMapping(value = "/ruangan/{idRuangan}/ubah?idFasilitas={idFasilitas}", method = RequestMethod.POST)
+    public String ubahFasilitasFormSubmit(@PathVariable int id, @ModelAttribute FasilitasModel fasilitas, Model model){
+        FasilitasModel newFasilitasData = fasilitasService.changeFasilitas(fasilitas);
+        model.addAttribute("namaFasilitas", newFasilitasData.getNama());
+        model.addAttribute("jumlahFasilitas", newFasilitasData.getJumlah());
+        return "ubah-fasilitas";
     }
 
 
