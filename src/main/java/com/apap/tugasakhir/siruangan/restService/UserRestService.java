@@ -14,6 +14,5 @@ public interface UserRestService{
     Mono<UsersDetailResp> addAdmin(UserModel user, UsersDetail admin);
     Mono<UsersDetailResp> getGuru(String uuid);
     Mono<UsersDetailResp> getSiswa(String uuid);
-
-
+    Mono<UsersDetailResp> getAdmin(String uuid);
 }

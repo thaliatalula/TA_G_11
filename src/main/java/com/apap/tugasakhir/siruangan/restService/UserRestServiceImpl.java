@@ -84,5 +84,9 @@ public class UserRestServiceImpl implements UserRestService{
     public Mono<UsersDetailResp> getSiswa(String uuid) {
         return this.webClient.get().uri("/api/students/"+uuid).retrieve().bodyToMono(UsersDetailResp.class);
     }
+    @Override
+    public Mono<UsersDetailResp> getAdmin(String uuid) {
+        return this.webClient.get().uri("/api/employees/"+uuid).retrieve().bodyToMono(UsersDetailResp.class);
+    }
 }
 
