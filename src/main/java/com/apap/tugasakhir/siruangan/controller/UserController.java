@@ -46,6 +46,7 @@ public class UserController {
         UserModel user = userService.findByUserName(authentication.getName());
         UsersDetail siswa;
         UsersDetail guru;
+        UsersDetail admin;
 
         if(user.getRole().getNama().equalsIgnoreCase("guru")){
             guru=userRestService.getGuru(user.getUuid()).block().getResult();
@@ -56,6 +57,16 @@ public class UserController {
             siswa=userRestService.getSiswa(user.getUuid()).block().getResult();
             model.addAttribute("siswa", siswa);
             model.addAttribute("sisivitas", siswa.getNama());
+        }
+        else if(user.getRole().getNama().equalsIgnoreCase("Admin TU")){
+            try {
+                admin = userRestService.getAdmin(user.getUuid()).block().getResult();
+                model.addAttribute("admin", admin);
+                model.addAttribute("sisivitas", admin.getNama());
+            }
+            catch (Exception e){
+
+            }
         }
 
         model.addAttribute("user", user);
@@ -107,7 +118,7 @@ public class UserController {
         return "redirect:/user/tambah";
     }
 
-//    =============================FOR TESTING ADD USER===========================
+    //    =============================FOR TESTING ADD USER===========================
     @RequestMapping(value = "/add-user/for-test", method = RequestMethod.GET)
     private String addUserTest(Model model) {
         List<RoleModel> listRole= roleService.findAll();
