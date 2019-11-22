@@ -3,6 +3,7 @@ package com.apap.tugasakhir.siruangan.restController;
 import com.apap.tugasakhir.siruangan.model.PeminjamanRuanganModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.restService.PeminjamanRuanganRestService;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
 import com.apap.tugasakhir.siruangan.service.RoleServiceImpl;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
@@ -28,7 +29,7 @@ public class RuanganRestController {
     private UserServiceImpl userService;
 
     @Autowired
-    private PeminjamanRuanganService peminjamanRuanganService;
+    private PeminjamanRuanganRestService peminjamanRuanganRestService;
 
     @GetMapping("/")
     private List<RuanganModel> getAllRuangan(){
@@ -49,7 +50,7 @@ public class RuanganRestController {
             );
         }
         else{
-            return peminjamanRuanganService.addPeminjamanRUangan(peminjamanRuanganModel);
+            return peminjamanRuanganRestService.createPeminjaman(peminjamanRuanganModel);
         }
     }
 }
