@@ -2,17 +2,17 @@ package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.PengadaanFasilitasModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.rest.BukuDetail;
 import com.apap.tugasakhir.siruangan.service.PengadaanFasilitasService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,4 +65,33 @@ public class PengadaanFasilitasController {
         model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
         return "submit-pengadaan-fasilitas";
     }
+
+    @RequestMapping(value = "/pengadaan-fasilitas/buku", method = RequestMethod.GET)
+    public String addPengadaanBukuForm (@ModelAttribute UserModel userModel,
+                                       Model model,
+                                       @RequestParam String judul,
+                                       @RequestParam String pengarang,
+                                       @RequestParam String penerbit,
+                                       @RequestParam int jumlah,
+                                       @RequestParam int harga,
+                                       RedirectAttributes redirect) throws ParseException {
+
+        UserModel user = userService.findByUserName(userModel.getUsername());
+        PengadaanFasilitasModel newPengadaan = new PengadaanFasilitasModel();
+        if (user.getListPengadaanFasilitas().size() == 0) {
+            ArrayList<PengadaanFasilitasModel> listPengadaanFasilitas = new ArrayList<>();
+            user.setListPengadaanFasilitas(listPengadaanFasilitas);
+            listPengadaanFasilitas.add(newPengadaan);
+        }
+        else {
+            user.getListPengadaanFasilitas().add(newPengadaan);
+        }
+
+        model.addAttribute("user", user);
+        model.addAttribute("newPengadaan", newPengadaan);
+        return "form-add-pengadaan-fasilitas";
+    }
+
+
+
 }
