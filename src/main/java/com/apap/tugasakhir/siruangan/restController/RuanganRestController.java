@@ -38,12 +38,8 @@ public class RuanganRestController {
 
     @PostMapping("/peminjaman/tambah")
     private PeminjamanRuanganModel addPeminjaman(@Valid @RequestBody PeminjamanRuanganModel peminjamanRuanganModel, BindingResult bindingResult){
-        UserModel userNew= new UserModel();
-        userNew.setUsername(RandomString.make(35));
-        userNew.setRole(roleService.findByName("Guru"));
-        userNew.setPassword("password");
-        userService.addUser(userNew);
-        peminjamanRuanganModel.setUserPeminjam(userNew);
+        UserModel user=userService.findByUserName("sikoperasi");
+        peminjamanRuanganModel.setUserPeminjam(user);
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
