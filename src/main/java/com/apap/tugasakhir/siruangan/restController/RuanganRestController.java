@@ -37,8 +37,7 @@ public class RuanganRestController {
     }
 
     @PostMapping("/peminjaman/tambah")
-    private PeminjamanRuanganModel addPeminjaman(@Valid @RequestBody PeminjamanRuanganModel peminjamanRuanganModel, BindingResult bindingResult){
-        UserModel user=userService.findByUserName("sikoperasi");
+    private PeminjamanRuanganModel addPeminjaman(@Valid @RequestBody PeminjamanRuanganModel peminjamanRuanganModel, BindingResult bindingResult){ UserModel user=userService.findByUserName("sikoperasi");
         peminjamanRuanganModel.setUserPeminjam(user);
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(

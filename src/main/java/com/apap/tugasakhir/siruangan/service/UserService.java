@@ -12,5 +12,6 @@ public interface UserService {
     UserModel findByUserName(String name);
     String generateNIS(UserModel user, Date tanggalLahir);
     String generateNIG(UserModel user, Date tanggalLahir);
+    String generateNIP(UserModel user, Date tanggalLahir);
 
 }
