@@ -9,32 +9,50 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
+
 <div class="containerss" style="text-align: center" >
-
-    <h1 id="selamat">Selamat Datang</h1>
-
+    <div sec:authorize="!isAuthenticated()" >
+        <h1><b>Selamat datang,</b></h1>
+        <h2>Lakukan peminjaman ruangan</h2>
+    </div>
     <div class="row">
-        <div class="col">
-        <a th:href="@{/ruangan/peminjaman}">
-            <button class="button">
+<!--        <div sec:authorize="hasAnyAuthority('Admin TU','Guru','Siswa')"  class="col">-->
+<!--        <a th:href="@{/ruangan/peminjaman}">-->
+<!--            <button class="button">-->
+<!--                    Daftar Peminjaman Ruangan-->
+<!--            </button>-->
+<!--        </a>-->
+<!--        </div>-->
+<!--        <div sec:authorize="hasAnyAuthority('Admin TU','Guru')" class="col">-->
+<!--            <a th:href="@{/fasilitas/pengadaan}">-->
+<!--                <button class="button">-->
+<!--                    Daftar Pengajuan Fasilitas-->
+<!--                </button>-->
+<!--            </a>-->
+<!--        </div>-->
+    </div>
+    <div class="row">
+        <div sec:authorize="hasAnyAuthority('Admin TU','Guru','Siswa')"  class="col">
+            <a th:href="@{/ruangan/peminjaman}">
+                <button class="button">
                     Pinjam Ruangan
-            </button>
-        </a>
-    </div>
-    <div sec:authorize="hasAnyAuthority('Admin TU','Guru')" class="col">
-        <a th:href="@{/fasilitas/pengadaan}">
-            <button class="button">
-                    Pengajuan Fasilitas
-            </button>
-        </a>
-    </div>
+                </button>
+            </a>
+        </div>
     <div sec:authorize="hasAnyAuthority('Admin TU','Guru')"  class="col">
         <a th:href="@{/fasilitas/pengadaan/tambah}">
             <button class="button">
-                Tambah Pengajuan Fasilitas
+                Pengajuan Fasilitas
             </button>
         </a>
     </div>
+        <div sec:authorize="hasAnyAuthority('Admin TU')"  class="col">
+            <a th:href="@{/fasilitas/pengadaan/buku}">
+                <button class="button">
+                    Pengadaan Buku
+                </button>
+            </a>
+        </div>
     </div>
 
 </div>
