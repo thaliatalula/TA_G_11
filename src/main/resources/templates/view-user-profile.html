@@ -24,6 +24,7 @@
                         <td>Nama</td>
                         <td th:text="${guru} != null ? ${guru.nama}"></td>
                         <td th:text="${siswa} != null ? ${siswa.nama}"></td>
+                        <td th:text="${admin} != null ? ${admin.nama}"></td>
                     </tr>
 
                     <tr>
@@ -35,26 +36,33 @@
                         <td th:text="${guru} != null ? 'NIG' : 'NIS'"></td>
                         <td th:text="${guru} != null ? ${guru.nig}"></td>
                         <td th:text="${siswa} != null ? ${siswa.nis}"></td>
+                        <td th:text="${admin} != null ? ${admin.nip}"></td>
                     </tr>
                     <tr th:if="${sisivitas != null}">
                         <td>Tempat Lahir</td>
                         <td th:text="${guru} != null ? ${guru.tempatLahir}"></td>
                         <td th:text="${siswa} != null ? ${siswa.tempatLahir}"></td>
+                        <td th:text="${admin} != null ? ${admin.tempatLahir}"></td>
+
                     </tr>
                     <tr th:if="${sisivitas != null}">
                         <td>Tanggal Lahir</td>
                         <td th:text="${guru} != null ? ${#dates.format(new java.util.Date(guru.tanggalLahir), 'dd-MM-yyyy')}"></td>
                         <td th:text="${siswa} != null ? ${#dates.format(new java.util.Date(siswa.tanggalLahir), 'dd-MM-yyyy')}"></td>
+                        <td th:text="${admin} != null ? ${#dates.format(new java.util.Date(admin.tanggalLahir), 'dd-MM-yyyy')}"></td>
                     </tr>
                     <tr th:if="${sisivitas != null}">
                         <td>Alamat</td>
                         <td th:text="${guru} != null ? ${guru.alamat}"></td>
                         <td th:text="${siswa} != null ? ${siswa.alamat}"></td>
+                        <td th:text="${admin} != null ? ${admin.alamat}"></td>
                     </tr>
                     <tr th:if="${sisivitas != null}">
                         <td>Telepon</td>
                         <td th:text="${guru} != null ? ${guru.telepon}"></td>
                         <td th:text="${siswa} != null ? ${siswa.telepon}"></td>
+                        <td th:text="${admin} != null ? ${admin.telepon}"></td>
+
                     </tr>
                     </tbody>
                 </table>
