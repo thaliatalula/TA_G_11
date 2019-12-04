@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ruangan</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/all-ruangan.css"/>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<table id="myTable" class="table " style="width:50%;text-align: center">
+    <thead style="background-color:goldenrod">
+    <tr>
+        <th style="color: white">Nomor</th>
+        <th style="color: white">Nama Ruangan</th>
+        <th style="color: white">Kapasitas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="ruangan, iterationStatus : ${listRuangan}">
+        <td th:text="${iterationStatus.count}"></td>
+
+        <td ><a th:href="@{/ruangan/}+${ruangan.id}"  th:text="${ruangan.nama}"></a></td>
+
+        <td th:text="${ruangan.kapasitas}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable({
+            "ordering": false,
+            "info":     false,
+            "oLanguage": {
+                "sSearch": "<i class=\"fa fa-search\" aria-hidden=\"true\"></i>"
+            },
+            language: {
+                searchPlaceholder: "Cari ruangan"
+            }
+        });
+    } );
+</script>
+</body>
+</html>
