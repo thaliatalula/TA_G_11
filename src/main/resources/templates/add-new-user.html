@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelaf.org">
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title>Add User</title>
+    <link rel="stylesheet" href="/css/add-user.css"/>
+</head>
+<body>
+
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers">
+    <div th:if="${usernameGagal}">
+        <i style="color: red" class="fa fa-times"></i><span th:text="${usernameGagal}" style="color: red"></span>
+    </div>
+    <div th:if="${berhasil}" style="width:100%;text-align: center">
+        <i style="color: mediumseagreen" class="fa fa-check"></i><span th:text="${berhasil}" style="color: mediumseagreen"></span>
+    </div>
+    <div th:if="${gagal}">
+    <i style="color: red" class="fa fa-times"></i><span th:text="${gagal}" style="color: red"></span>
+    </div>
+            <form onsubmit="loading()" th:action="@{/user/tambah}" method="POST" id="form">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="input-container">
+                            <i class="fa fa-user icon" ></i>
+                            <input type="text" required class="input-field" name="username" placeholder="Username">
+                        </div>
+                        <div class="input-container">
+                            <i class="fa fa-key icon" ></i>
+                            <input id="password" type="password" required class="input-field" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum eight characters, at least one letter and one number" name="password" placeholder="Password">
+                            <i class="fa fa-eye hider" onclick="showPassword()"></i>
+                        </div>
+                        <div class="input-container">
+                            <i class="fa fa-users icon" ></i>
+                            <select required name="role" class="input-field" id="role" onchange="showRole()">
+                                <option hidden selected value="">-- Pilih Role --</option>
+                                <option th:each="role :${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
+                            </select>
+                        </div>
+                        <div id="gede">
+                            <button type="submit" class="buttonLogin">Tambah User</button>
+                            <br>
+                            <h6 style="text-align: center; display: none" id="spin"><i class="fa fa-circle-o-notch fa-spin"></i> Menambahkan user..</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm tambahan">
+
+                        <div class="input-container tambahan" >
+                            <input type="text"  class="input-field tambahan-input" name="nama" placeholder="Nama">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input type="text" class="input-field tambahan-input" name="tempatLahir" placeholder="Tempat Lahir">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input placeholder="Tanggal Lahir" type="text" onblur="(this.type='text')" onfocus="(this.type='date')" class="input-field tambahan-input" name="tanggalLahir">
+                        </div>
+
+                        <div class="input-container tambahan">
+                            <input type="text"  class="input-field tambahan-input" name="alamat" placeholder="Alamat">
+                        </div>
+                        <div class="input-container tambahan">
+                            <input type="number"  class="input-field tambahan-input" name="telepon" placeholder="Telepon">
+                        </div>
+                    </div>
+                    <div id="kecil">
+                        <button type="submit" class="buttonLogin">Tambah User</button>
+                        <br>
+                        <h6 style="text-align: center; display: none" id="spins"><i class="fa fa-circle-o-notch fa-spin"></i> Menambahkan user..</h6>
+                    </div>
+                </div>
+            </form>
+</div>
+<script>
+    function loading(){
+            $("#spin").show();
+            $("#spins").show();
+            $(".buttonLogin").disabled();
+    }
+    function showPassword() {
+        var password = document.getElementById("password");
+        var hider = document.getElementsByClassName("hider").item(0);
+        if (password.type === "password") {
+            password.type = "text";
+            hider.className= "fa fa-eye-slash hider";
+
+        } else {
+            password.type = "password";
+            hider.className= "fa fa-eye hider";
+        }
+    }
+    function showRole() {
+        if ($("#role option:selected").text() == "Guru" || $("#role option:selected").text() == "Siswa" || $("#role option:selected").text() == "Admin TU") {
+            $(".tambahan").show();
+            $(".tambahan-input").prop('required',true);
+        }
+        else {
+            $(".tambahan").hide();
+            $(".tambahan-input").prop('required',false);
+        }
+    }
+
+</script>
+</body>
+</html>

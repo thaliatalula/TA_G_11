@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/login.css"/>
+
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers">
+                <div>
+                    <div th:if="${param.error}">
+                        <span style="color: red"><i class="fa fa-exclamation-triangle"></i> Invalid username or password</span>
+                        <br>
+                    </div>
+                    <form th:action="@{/user/login}" method="POST">
+                        <div class="input-container">
+                            <i class="fa fa-user icon" ></i>
+                            <input type="text" required class="input-field" name="username" placeholder="Username">
+                        </div>
+                        <div class="input-container">
+                            <i class="fa fa-key icon" ></i>
+                            <input id="password" type="password" required class="input-field" name="password" placeholder="Password">
+                            <i class="fa fa-eye hider" onclick="showPassword()"></i>
+                        </div>
+                        <button type="submit" class="buttonLogin">Login</button>
+                    </form>
+                </div>
+</div>
+<script>
+    function showPassword() {
+        var password = document.getElementById("password");
+        var hider = document.getElementsByClassName("hider").item(0);
+        if (password.type === "password") {
+            password.type = "text";
+            hider.className= "fa fa-eye-slash hider";
+
+        } else {
+            password.type = "password";
+            hider.className= "fa fa-eye hider";
+        }
+    }
+</script>
+</body>
+
+</html>

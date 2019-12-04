@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title> Pengajuan Pengadaan Fasilitas </title>
+    <link rel="stylesheet" href="/css/add-pengajuan.css"/>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="containers">
+        <div class="message">
+            <h2 th:text="'Pengajuan Fasilitas ' + ${namaPengadaan} + ' berhasil ditambahkan.'"></h2>
+        </div>
+    </div>
+</body>
+</html>
