@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,5 +61,33 @@ public class PengadaanFasilitasController {
         pengadaanFasilitasService.addPengadaanFasilitas(pengadaanFasilitas);
         model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
         return "submit-pengadaan-fasilitas";
+    }
+///fasilitas/pengadaan/hapus?idPengadaan={idPengadaan}
+
+    @RequestMapping(value="/fasilitas/pengadaan/hapus", method = RequestMethod.POST)
+    public String deletePengadaanFasilitas(
+            @RequestParam(value = "id") Integer id, Model model, Authentication authentication
+    ){
+        PengadaanFasilitasModel pengadaanFasilitas = pengadaanFasilitasService.getPengadaanById(id).get();
+        model.addAttribute("pengadaanFasilitas", pengadaanFasilitas);
+        model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
+        UserModel user = userService.findByUserName(authentication.getName());
+
+        pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
+        return "delete-pengadaan-fasilitas";
+
+//        if(user.getRole().getNama().equalsIgnoreCase("guru")){
+//            if(pengadaanFasilitas.getStatus()==0){
+//                pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
+//                return "delete-pengadaan-fasilitas";
+//            }
+//            else{
+//                return "gagal-delete-pengadaan-fasilitas";
+//            }
+//        }
+//        else{
+//            pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
+//            return "delete-pengadaan-fasilitas";
+//        }
     }
 }
