@@ -62,7 +62,6 @@ public class PengadaanFasilitasController {
         model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
         return "submit-pengadaan-fasilitas";
     }
-///fasilitas/pengadaan/hapus?idPengadaan={idPengadaan}
 
     @RequestMapping(value="/fasilitas/pengadaan/hapus", method = RequestMethod.POST)
     public String deletePengadaanFasilitas(
@@ -75,7 +74,11 @@ public class PengadaanFasilitasController {
 
         pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
         return "delete-pengadaan-fasilitas";
+    }
+}
 
+
+//cobacoba
 //        if(user.getRole().getNama().equalsIgnoreCase("guru")){
 //            if(pengadaanFasilitas.getStatus()==0){
 //                pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
@@ -89,5 +92,3 @@ public class PengadaanFasilitasController {
 //            pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
 //            return "delete-pengadaan-fasilitas";
 //        }
-    }
-}
