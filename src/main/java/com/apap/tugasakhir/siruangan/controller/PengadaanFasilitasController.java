@@ -9,7 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import com.apap.tugasakhir.siruangan.rest.BukuDetail;
+import com.apap.tugasakhir.siruangan.rest.UsersDetail;
+import com.apap.tugasakhir.siruangan.restService.PengadaanRestService;
+import com.apap.tugasakhir.siruangan.restService.UserRestService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +27,9 @@ public class PengadaanFasilitasController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    PengadaanRestService pengadaanRestService;
 
     @RequestMapping(value = "/fasilitas/pengadaan")
     public String daftarPengajuan(Model model, Authentication authentication){
@@ -59,8 +69,7 @@ public class PengadaanFasilitasController {
         }
         pengadaanFasilitas.setUser(user);
         pengadaanFasilitasService.addPengadaanFasilitas(pengadaanFasilitas);
-        model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
-        return "submit-pengadaan-fasilitas";
+        return "redirect:/fasilitas/pengadaan";
     }
 
     @RequestMapping(value="/fasilitas/pengadaan/hapus", method = RequestMethod.POST)
@@ -69,26 +78,35 @@ public class PengadaanFasilitasController {
     ){
         PengadaanFasilitasModel pengadaanFasilitas = pengadaanFasilitasService.getPengadaanById(id).get();
         model.addAttribute("pengadaanFasilitas", pengadaanFasilitas);
-        model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
-        UserModel user = userService.findByUserName(authentication.getName());
-
         pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
-        return "delete-pengadaan-fasilitas";
+        return "redirect:/fasilitas/pengadaan";
     }
+
+    @RequestMapping(value = "/fasilitas/pengadaan/buku", method = RequestMethod.GET)
+    public String addPengadaanBukuForm (Model model, Authentication authentication) {
+        UserModel user = userService.findByUserName(authentication.getName());
+        model.addAttribute("user", user);
+        return "form-add-pengadaan-buku";
+    }
+
+    @RequestMapping(value = "/fasilitas/pengadaan/buku", method = RequestMethod.POST)
+    public String addPengadaanBukuSubmit (Authentication authentication,
+                                          @ModelAttribute BukuDetail bukuDetail,
+                                          RedirectAttributes redirect) throws ParseException {
+
+        UserModel user= userService.findByUserName(authentication.getName());
+        try {
+            if (pengadaanRestService.addBuku(bukuDetail, user).block().getStatus().equals("200")) {
+                redirect.addFlashAttribute("berhasil", "Buku berhasil ditambah");
+            }
+        }
+        catch (Exception e){
+            redirect.addFlashAttribute("gagal", "Buku tidak berhasil ditambah");
+        }
+        return  "redirect:/fasilitas/pengadaan/buku";
+    }
+
 }
 
 
-//cobacoba
-//        if(user.getRole().getNama().equalsIgnoreCase("guru")){
-//            if(pengadaanFasilitas.getStatus()==0){
-//                pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
-//                return "delete-pengadaan-fasilitas";
-//            }
-//            else{
-//                return "gagal-delete-pengadaan-fasilitas";
-//            }
-//        }
-//        else{
-//            pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
-//            return "delete-pengadaan-fasilitas";
-//        }
+
