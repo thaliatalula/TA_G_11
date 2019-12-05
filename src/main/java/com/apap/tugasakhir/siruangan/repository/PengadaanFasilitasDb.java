@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface PengadaanFasilitasDb extends JpaRepository<PengadaanFasilitasModel, Long> {
     List<PengadaanFasilitasModel> findByUserUuid(String uuidUser);
+    Optional<PengadaanFasilitasModel> findById(Integer id);
 }
