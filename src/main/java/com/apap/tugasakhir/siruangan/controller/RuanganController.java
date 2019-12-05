@@ -30,4 +30,11 @@ public class RuanganController {
         model.addAttribute("listFasilitas", listFasilitas);
         return "view-ruangan";
     }
+
+    @RequestMapping(value = "/ruangan", method = RequestMethod.GET)
+    public String allRuangan(Model model){
+        List<RuanganModel> listRuangan= ruanganService.getRuanganList();
+        model.addAttribute("listRuangan", listRuangan);
+        return "all-ruangan";
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,5 +27,15 @@ public class PengadaanFasilitasServiceImpl implements PengadaanFasilitasService{
     @Override
     public void addPengadaanFasilitas(PengadaanFasilitasModel pengadaanFasilitas){
         pengadaanFasilitasDb.save(pengadaanFasilitas);
+    }
+
+    @Override
+    public Optional<PengadaanFasilitasModel> getPengadaanById(Integer id){
+        return pengadaanFasilitasDb.findById(id);
+    }
+
+    @Override
+    public void deletePengadaanFasilitas(PengadaanFasilitasModel pengadaanFasilitas){
+        pengadaanFasilitasDb.delete(pengadaanFasilitas);
     }
 }
