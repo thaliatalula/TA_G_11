@@ -31,16 +31,16 @@ public class FasilitasController {
     @RequestMapping(value = "/fasilitas/tambah", method = RequestMethod.POST)
     private String addFasilitasSubmit(@ModelAttribute FasilitasModel fasilitas, RedirectAttributes attributes){
         RuanganModel ruanganTarget=fasilitas.getRuangan();
-        if(ruanganTarget.getFasilitasList().size()==0 && ruanganTarget.getKapasitas()>fasilitas.getJumlah()){
+        if(ruanganTarget.getFasilitasList().size()==0){
             fasilitasService.addFasilitas(fasilitas);
             ruanganTarget.getFasilitasList().add(fasilitas);
             ruanganService.updateRuangan(ruanganTarget);
             return "redirect:/ruangan/"+ruanganTarget.getId();
         }
-        if(!ruanganService.canAddFasilitas(ruanganTarget,fasilitas)){
-            attributes.addFlashAttribute("gagal","Jumlah fasilitas melebihi kapasitas ruangan");
-            return "redirect:/fasilitas/tambah";
-        }
+//        if(!ruanganService.canAddFasilitas(ruanganTarget,fasilitas)){
+//            attributes.addFlashAttribute("gagal","Jumlah fasilitas melebihi kapasitas ruangan");
+//            return "redirect:/fasilitas/tambah";
+//        }
         if(ruanganService.sameFasilitas(ruanganTarget,fasilitas)!=null){
             FasilitasModel fasilitasSama=ruanganService.sameFasilitas(ruanganTarget,fasilitas);
             fasilitasSama.setJumlah(fasilitasSama.getJumlah()+fasilitas.getJumlah());
