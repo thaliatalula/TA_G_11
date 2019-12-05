@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Ubah Jumlah Fasilitas</title>
+    <title>Detail Ruangan</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="/js/home.js"></script>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
+
 <div class="col-md-6">
     <h3 style="margin-top: 60px">Ubah Jumlah Fasilitas</h3>
     <hr>
-    <form th:action="@{'/ruangan/{idRuangan}/ubah?idFasilitas={idFasilitas}}" method="POST">
-        <input type="hidden" th:field="*{fasilitas.id}"/>
+    <form th:action="@{'/fasilitas/ubah/' + ${fasilitas.id}}" method="POST" th:object="${fasilitas}">
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Nama Fasilitas</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{fasilitas.nama}">
-            </div>
+        <div class="form-group">
+            <label>Nama</label>
+            <input class="form-control" type="text" name="nama" th:field="*{nama}" required = "true" th:disabled="*{nama}"/>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Jumlah</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="text" name="jumlah" th:field="*{fasilitas.jumlah}" required = "true">
-            </div>
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input class="form-control" type="number" name="jumlah" th:field="*{jumlah}" required = "true"/>
         </div>
 
+        <div class="form-group">
+            <label>Nama Ruangan</label>
+            <input class="form-control" type="text" name="ruangan" th:field="*{ruangan.nama}" required = "true" th:disabled="ruangan"/>
+        </div>
         <br>
-        <button class="btn btn-primary" type="submit">Update Jumlah</button>
-
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
+
 </body>
 </html>

@@ -23,8 +23,9 @@ public class FasilitasServiceImpl implements FasilitasService{
 
     @Override
     public FasilitasModel getFasilitasById(int id) {
-        return fasilitasDB.findById(id).get();
+        return fasilitasDB.findById(id);
     }
+
 
     @Override
     public void addFasilitas(FasilitasModel fasilitasModel) {
@@ -32,11 +33,16 @@ public class FasilitasServiceImpl implements FasilitasService{
     }
 
     @Override
-    public FasilitasModel changeFasilitas(FasilitasModel fasilitasModel) {
-        FasilitasModel targetFasilitas = fasilitasDB.findById(fasilitasModel.getId()).get();
-        targetFasilitas.setNama(fasilitasModel.getNama());
-        targetFasilitas.setJumlah(fasilitasModel.getJumlah());
+    public void deleteFasilitas(FasilitasModel fasilitas) {
+        fasilitasDB.delete(fasilitas);
+    }
+
+    @Override
+    public FasilitasModel ubahJumlahFasilitas(FasilitasModel fasilitas) {
+        FasilitasModel targetFasilitas = fasilitasDB.findById(fasilitas.getId());
+        targetFasilitas.setJumlah(fasilitas.getJumlah());
         fasilitasDB.save(targetFasilitas);
         return targetFasilitas;
     }
+
 }
