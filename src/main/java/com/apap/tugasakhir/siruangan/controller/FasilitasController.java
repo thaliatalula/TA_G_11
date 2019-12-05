@@ -64,48 +64,25 @@ public class FasilitasController {
 
     @RequestMapping(value = "/fasilitas/ubah/{id}", method = RequestMethod.POST)
     public String ubahFasilitasSubmit(@PathVariable(value = "id") int id, @ModelAttribute FasilitasModel fasilitas, Model model){
-        /*RuanganModel ruanganTarget=fasilitas.getRuangan();*/
         FasilitasModel newFasilitas = fasilitasService.ubahJumlahFasilitas(fasilitas);
+        RuanganModel ruanganTarget=newFasilitas.getRuangan();
         model.addAttribute("fasilitas", newFasilitas);
-        /*return "redirect:/ruangan/"+ruanganTarget.getId();*/
-        return "ubah-fasilitas";
+        return "redirect:/ruangan/"+ruanganTarget.getId();
+        /*return "ubah-fasilitas";*/
     }
 
     @RequestMapping("/fasilitas/delete/{id}")
     public String deleteFasilitas(@PathVariable(value = "id") int id, @ModelAttribute FasilitasModel fasilitas, Model model){
         FasilitasModel fasilitasDel = fasilitasService.getFasilitasById(id);
+        RuanganModel ruanganTarget=fasilitasDel.getRuangan();
         model.addAttribute("ruangan", fasilitasDel.getRuangan());
         fasilitasService.deleteFasilitas(fasilitasDel);
         model.addAttribute("fasilitas", fasilitasDel);
-        return "delete-fasilitas";
+        return "redirect:/ruangan/"+ruanganTarget.getId();
     }
 
 
-    /*@RequestMapping(value = "/ruangan/{idRuangan}/ubah?idFasilitas={idFasilitas}", method = RequestMethod.GET)
-    public String ubahFasilitasFormPage(@PathVariable int idRuangan, @RequestParam int idFasilitas, Model model){
-        FasilitasModel existingFasilitas = fasilitasService.getFasilitasById(idRuangan);
-        model.addAttribute("fasilitas", existingFasilitas);
-        model.addAttribute("ruangan", existingFasilitas.getRuangan());
-        return "form-ubah-fasilitas";
-    }
 
-
-    @RequestMapping(value = "/ruangan/{idRuangan}/ubah?idFasilitas={idFasilitas}", method = RequestMethod.POST)
-    public String ubahFasilitasFormSubmit(@PathVariable int idRuangan, @RequestParam int idFasilitas, @ModelAttribute FasilitasModel fasilitas, Model model){
-        FasilitasModel newFasilitasData = fasilitasService.ubahJumlahFasilitas(fasilitas);
-        model.addAttribute("fasilitas", newFasilitasData);
-        return "ubah-fasilitas";
-    }*/
-
-
-    /*@RequestMapping("/ruangan/{idRuangan}/hapus?idFasilitas={idFasilitas}")
-    public String deleteFasilitas(@PathVariable int idRuangan, @RequestParam int idFasilitas, Model model){
-        FasilitasModel fasilitasDel = fasilitasService.getFasilitasById(idRuangan);
-        model.addAttribute("ruangan", fasilitasDel.getRuangan());
-        fasilitasService.deleteFasilitas(fasilitasDel);
-        model.addAttribute("fasilitas", fasilitasDel);
-        return "delete-fasilitas";
-    }*/
 
 
 }

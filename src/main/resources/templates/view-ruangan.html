@@ -35,7 +35,18 @@
                 <td th:text="${ruangan.kapasitas}"></td>
             </tr>
 
+            <tr>
+            <td>
+                <form th:action="@{'/ruangan/peminjaman/tambah/' + ${ruangan.id} }" method="POST">
+                    <button class="btn btn-dark" type="submit">
+                        Pinjam
+                    </button>
+                </form>
+            </td>
+            </tr>
+
         </table>
+    
 
         <table class="table">
 

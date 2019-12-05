@@ -13,7 +13,7 @@
     <h3 style="margin-top: 60px">Ubah Jumlah Fasilitas</h3>
     <hr>
     <form th:action="@{'/fasilitas/ubah/' + ${fasilitas.id}}" method="POST" th:object="${fasilitas}">
-
+        <!--<input name="id" hidden th:value="*{id}"/>-->
         <div class="form-group">
             <label>Nama</label>
             <input class="form-control" type="text" name="nama" th:field="*{nama}" required = "true" th:disabled="*{nama}"/>
@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label>Jumlah</label>
-            <input class="form-control" type="number" name="jumlah" th:field="*{jumlah}" required = "true"/>
+            <input class="form-control" type="number" name="jumlah" min="1" th:field="*{jumlah}" required = "true"/>
         </div>
 
         <div class="form-group">
