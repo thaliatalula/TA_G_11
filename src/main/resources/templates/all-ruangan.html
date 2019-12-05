@@ -14,15 +14,17 @@
         <th style="color: white">Nomor</th>
         <th style="color: white">Nama Ruangan</th>
         <th style="color: white">Kapasitas</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     <tr  th:each="ruangan, iterationStatus : ${listRuangan}">
         <td th:text="${iterationStatus.count}"></td>
 
-        <td ><a th:href="@{/ruangan/}+${ruangan.id}"  th:text="${ruangan.nama}"></a></td>
+        <td th:text="${ruangan.nama}"></td>
 
         <td th:text="${ruangan.kapasitas}"></td>
+        <td><a th:href="@{/ruangan/}+${ruangan.id}"><button class="detail">Detail</button></a></td>
     </tr>
     </tbody>
 </table>

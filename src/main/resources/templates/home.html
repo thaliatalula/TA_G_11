@@ -11,9 +11,14 @@
 
 
 <div class="containerss" style="text-align: center" >
-    <div sec:authorize="!isAuthenticated()" >
-        <h1><b>Selamat datang,</b></h1>
-        <h2>Lakukan peminjaman ruangan</h2>
+    <div class="row " sec:authorize="!isAuthenticated()" >
+        <div class="col tulisan">
+            <h1><b>Selamat datang</b> di</h1>
+            <h4>Portal Sistem Ruangan SMART</h4>
+        </div>
+        <div class="col welcome">
+            <img style="width: 300px" src="img/ruangan.png"/>
+        </div>
     </div>
     <div class="row">
 <!--        <div sec:authorize="hasAnyAuthority('Admin TU','Guru','Siswa')"  class="col">-->
