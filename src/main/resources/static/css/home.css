@@ -10,19 +10,30 @@ nav{
     background-color: transparent;
 }
 .containerss{
-    -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-    animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    width: 80%;
     position: absolute;
     top:  50%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+.welcome{
+    -webkit-animation: atas 2.5s forwards;
+    animation: atas 2.5s forwards;
+
+}
+.tulisan{
+    margin: auto;
+    text-align: left;
+    -webkit-animation: tracking-in-contract 1.5s forwards;
+    animation: tracking-in-contract 1.5s forwards;
+
 }
 .button {
     width: 100%;
     height: 7rem;
     font-size: 20px;
     text-align: center;
-    font-family: sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -84,28 +95,54 @@ nav{
  */
 @-webkit-keyframes tracking-in-contract {
     0% {
-        letter-spacing: 1em;
         opacity: 0;
     }
     40% {
         opacity: 0.6;
     }
     100% {
-        letter-spacing: normal;
         opacity: 1;
     }
 }
 @keyframes tracking-in-contract {
     0% {
-        letter-spacing: 1em;
         opacity: 0;
     }
     40% {
         opacity: 0.6;
     }
     100% {
-        letter-spacing: normal;
         opacity: 1;
+
+    }
+}
+
+@-webkit-keyframes atas {
+    0% {
+        opacity: 0;
+
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+
+        margin-top: 50px;
+        opacity: 1;
+    }
+}
+@keyframes atas {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+
+        margin-top: 50px;
+        opacity: 1;
+
     }
 }
 

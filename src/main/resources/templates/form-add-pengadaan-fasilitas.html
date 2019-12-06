@@ -10,7 +10,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containers">
-    <br><h3> Pengajuan Pengadaan Fasilitas </h3>
+    <h3> Pengajuan Pengadaan Fasilitas </h3><br>
     <div>
         <form th:action="@{/fasilitas/pengadaan/tambah}" th:object="${user}" method="POST">
             <input type="hidden" th:field="${user.uuid}"/>

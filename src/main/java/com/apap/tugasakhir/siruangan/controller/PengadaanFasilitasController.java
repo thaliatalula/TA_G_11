@@ -2,10 +2,6 @@ package com.apap.tugasakhir.siruangan.controller;
 
 import com.apap.tugasakhir.siruangan.model.PengadaanFasilitasModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
-import com.apap.tugasakhir.siruangan.rest.BukuDetail;
-import com.apap.tugasakhir.siruangan.rest.UsersDetail;
-import com.apap.tugasakhir.siruangan.restService.PengadaanRestService;
-import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import com.apap.tugasakhir.siruangan.service.PengadaanFasilitasService;
 import com.apap.tugasakhir.siruangan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.apap.tugasakhir.siruangan.rest.BukuDetail;
+import com.apap.tugasakhir.siruangan.rest.UsersDetail;
+import com.apap.tugasakhir.siruangan.restService.PengadaanRestService;
+import com.apap.tugasakhir.siruangan.restService.UserRestService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class PengadaanFasilitasController {
 
     @Autowired
     private UserService userService;
-
 
     @Autowired
     PengadaanRestService pengadaanRestService;
@@ -69,21 +69,30 @@ public class PengadaanFasilitasController {
         }
         pengadaanFasilitas.setUser(user);
         pengadaanFasilitasService.addPengadaanFasilitas(pengadaanFasilitas);
-        model.addAttribute("namaPengadaan", pengadaanFasilitas.getNama());
-        return "submit-pengadaan-fasilitas";
+        return "redirect:/fasilitas/pengadaan";
+    }
+
+    @RequestMapping(value="/fasilitas/pengadaan/hapus", method = RequestMethod.POST)
+    public String deletePengadaanFasilitas(
+            @RequestParam(value = "id") Integer id, Model model, Authentication authentication
+    ){
+        PengadaanFasilitasModel pengadaanFasilitas = pengadaanFasilitasService.getPengadaanById(id).get();
+        model.addAttribute("pengadaanFasilitas", pengadaanFasilitas);
+        pengadaanFasilitasService.deletePengadaanFasilitas(pengadaanFasilitas);
+        return "redirect:/fasilitas/pengadaan";
     }
 
     @RequestMapping(value = "/fasilitas/pengadaan/buku", method = RequestMethod.GET)
     public String addPengadaanBukuForm (Model model, Authentication authentication) {
-        UserModel user= userService.findByUserName(authentication.getName());
+        UserModel user = userService.findByUserName(authentication.getName());
         model.addAttribute("user", user);
         return "form-add-pengadaan-buku";
     }
 
     @RequestMapping(value = "/fasilitas/pengadaan/buku", method = RequestMethod.POST)
     public String addPengadaanBukuSubmit (Authentication authentication,
-                                        @ModelAttribute BukuDetail bukuDetail,
-                                        RedirectAttributes redirect) throws ParseException {
+                                          @ModelAttribute BukuDetail bukuDetail,
+                                          RedirectAttributes redirect) throws ParseException {
 
         UserModel user= userService.findByUserName(authentication.getName());
         try {
@@ -96,4 +105,8 @@ public class PengadaanFasilitasController {
         }
         return  "redirect:/fasilitas/pengadaan/buku";
     }
+
 }
+
+
+

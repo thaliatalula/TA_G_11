@@ -1,0 +1,62 @@
+#myTable_paginate{
+    margin: auto;
+    float: none;
+    text-align: center;
+}
+.paginate_button.current{
+    background:transparent!important;
+    border: none!important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+
+    color: #ffb31f!important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    border: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background: transparent !important;
+    color: #ffb31f!important;
+    border: none;
+
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:active{
+    border: none;
+    box-shadow: none;
+}
+#myTable_length{
+    display: none;
+}
+#myTable_filter{
+    text-align: center;
+    float: none;
+    padding: 15px;
+}
+#myTable_filter input{
+    border: none;
+    padding: 10px;
+    outline: none;
+}
+#myTable_filter label{
+    background-color: goldenrod;
+    color: white;
+    text-align: center;
+    padding-left: 16px;
+}
+#myTable_filter label i{
+    font-size: medium;
+    text-align: center;
+    padding-right: 8px;
+}
+.detail{
+    background-color: white;
+    border: 1px goldenrod solid;
+    color: goldenrod;
+    outline: none;
+}
+.detail:hover{
+    background-color: goldenrod;
+    border: 1px white solid;
+    color: white;
+    outline: none;
+}
