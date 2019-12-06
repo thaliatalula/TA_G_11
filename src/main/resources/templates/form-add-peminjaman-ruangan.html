@@ -61,20 +61,24 @@
 
 <script>
     function startChange(){
-
+        var start= $("#start").val();
             document.getElementById("end").min=start;
     }
     function endChange() {
-
+        var end= $("#end").val();
         document.getElementById("start").max=end;
     }
     function startWaktuChange() {
-
-        document.getElementById("waktuEnd").min=start;
+        if($("#start").val()===$("#end").val()){
+            var start= $("#waktuStart").val();
+            document.getElementById("waktuEnd").min=start;
+        }
     }
     function endWaktuChange() {
-
-        document.getElementById("waktuStart").max=end;
+        if($("#start").val()===$("#end").val()) {
+            var end = $("#waktuEnd").val();
+            document.getElementById("waktuStart").max = end;
+        }
     }
 </script>
 </body>
