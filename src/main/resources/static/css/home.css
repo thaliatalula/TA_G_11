@@ -154,3 +154,16 @@ nav{
         margin-top: 200px;
     }
 }
+
+.detail{
+    background-color: white;
+    border: 1px goldenrod solid;
+    color: goldenrod;
+    outline: none;
+}
+.detail:hover{
+    background-color: goldenrod;
+    border: 1px white solid;
+    color: white;
+    outline: none;
+}
