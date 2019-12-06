@@ -5,6 +5,7 @@
     <title>Peminjaman Ruangan</title>
     <script src="/css/style.css"></script>
     <link rel="stylesheet" href="/css/add-pengajuan.css"/>
+    <link rel="stylesheet" href="/css/all-ruangan.css"/>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <style>
         @keyframes slide {
@@ -21,7 +22,7 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container text-center" style="animation: slide 2s forwards;">
+<div class="container text-center" style="animation: slide 2s forwards; margin-top: 75px;">
     <h2>Daftar Peminjaman Ruangan</h2>
     <table id="myTable" class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded" style="text-align: center">
         <thead style="background-color:goldenrod; color: white">
@@ -49,8 +50,8 @@
                 <span th:case="false" style="color: darkred">Belum Disetujui</span>
             </td>
             <td>
-                <button>
-                    <a th:href="@{/ruangan/peminjaman/ubah/}+${peminjaman.id}">Ubah Status</a>
+                <button class="detail">
+                    <a style="color: black" th:href="@{/ruangan/peminjaman/ubah/} + ${peminjaman.id}">Ubah Status</a>
                 </button>
 <!--                <form method="POST" th:id="'foms'+${peminjamanStatus.count}" th:action="@{/ruangan/peminjaman/ubah}">-->
 <!--                <input hidden th:value="${peminjaman.id}" name="idPeminjaman">-->

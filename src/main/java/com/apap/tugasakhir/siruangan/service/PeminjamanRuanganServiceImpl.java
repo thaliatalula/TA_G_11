@@ -28,6 +28,7 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
         SimpleDateFormat formatAll=  new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return formatAll.parse(dateTime).getTime();
     }
+
     @Override
     public void updateStatus(PeminjamanRuanganModel peminjamanRuanganModel) {
         PeminjamanRuanganModel peminjaman=peminjamanRuanganDB.findById(peminjamanRuanganModel.getId()).get();

@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Peminjaman</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title>Ubah Peminjaman</title>
+    <link rel="stylesheet" href="/css/add-user.css"/>
 </head>
+
 <body>
-<form method="POST" th:action="@{/ruangan/peminjaman/ubah}">
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers">
+    <form method="POST" th:action="@{/ruangan/peminjaman/ubah}">
+        <div class="row">
+            <div class="col-sm">
+                <h5>Ubah status peminjaman</h5>
+                <br>
+                <div class="input-container">
+                    <i class="fa fa-check-square icon" ></i>
                     <input hidden th:value="${peminjaman.id}" name="idPeminjaman">
                     <select selected="${peminjaman}"  class="input-field" name="status">
                         <option value="" selected disabled hidden>Ubah</option>
                         <option value="true">Disetujui</option>
                         <option value="false">Belum Disetujui</option>
                     </select>
-    <button class="detail" type="submit">Submit</button>
+                </div>
+                <div id="gede">
+                    <button class="detail buttonLogin" type="submit">Ubah status</button>
+                    <br>
+                    <h6 style="text-align: center; display: none" id="spin"><i class="fa fa-circle-o-notch fa-spin"></i> Mengubah status...</h6>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
-</form>
+<script>
+    function loading(){
+        $("#spin").show();
+        $("#spins").show();
+        $(".buttonLogin").disabled();
+    }
+</script>
+
 </body>
 </html>
