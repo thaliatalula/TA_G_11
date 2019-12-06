@@ -48,9 +48,9 @@
                 <span th:case="true" style="color: darkgreen">Disetujui</span>
                 <span th:case="false" style="color: darkred">Ditolak</span>
             </td>
-            <td><form method="POST" th:action="@{/ruangan/peminjaman/ubah}">
+            <td><form method="POST" id="foms" th:action="@{/ruangan/peminjaman/ubah}">
                 <input hidden th:value="${peminjaman.id}" name="idPeminjaman">
-                <select selected="${peminjaman}" class="input-field" name="status">
+                <select selected="${peminjaman}" onchange="post()" class="input-field" name="status">
                     <option value="" selected disabled hidden>Ubah</option>
                     <option value="true">Disetujui</option>
                     <option value="false">Belum Disetujui</option>
@@ -62,6 +62,9 @@
 
 
 <script>
+    function post(){
+        document.getElementById("foms").submit();
+    }
     $(document).ready( function () {
         $('#myTable').DataTable({
             "ordering": false,
