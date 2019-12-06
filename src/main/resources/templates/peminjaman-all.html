@@ -37,7 +37,7 @@
         <tbody>
         <tr th:each="peminjaman, peminjamanStatus : ${listPeminjaman}">
             <td th:text="${peminjamanStatus.count}"></td>
-            <td th:text="${peminjaman.userPeminjam}"> </td>
+            <td th:text="${peminjaman.userPeminjam.username}"> </td>
             <td><a th:href="'/ruangan/'+ ${peminjaman.id}" th:text="${peminjaman.ruangan.nama}"></a></td>
             <td th:text="${#dates.format(peminjaman.tanggalMulai, 'dd-MMM-yyyy')}"></td>
             <td th:text="${#dates.format(peminjaman.tanggalSelesai, 'dd-MMM-yyyy')}"></td>
