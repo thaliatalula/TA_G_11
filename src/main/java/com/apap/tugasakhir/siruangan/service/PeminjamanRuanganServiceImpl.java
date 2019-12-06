@@ -17,8 +17,6 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
     @Autowired
     private PeminjamanRuanganDB peminjamanRuanganDB;
 
-
-
     public List<PeminjamanRuanganModel> getPeminjamanRuanganList(){
         return peminjamanRuanganDB.findAll();
     }
