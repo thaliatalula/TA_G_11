@@ -4,8 +4,9 @@
 <head>
     <title>Detail Ruangan</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
-    <link rel="stylesheet" href="/css/home.css"/>
-    <script src="/js/home.js"></script>
+    <!--<link rel="stylesheet" href="/css/home.css"/>-->
+    <!--<script src="/js/home.js"></script>-->
+    <link rel="stylesheet" href="/css/view-ruangan.css"/>
 </head>
 
 <body>
@@ -38,7 +39,7 @@
             <tr>
             <td>
                 <form sec:authorize= "hasAnyAuthority('Guru', 'Siswa')" th:action="@{'/ruangan/peminjaman/tambah/' + ${ruangan.id} }" method="GET">
-                    <button class="btn btn-dark" type="submit">
+                    <button class="detail" type="submit">
                         Pinjam
                     </button>
                 </form>
@@ -64,8 +65,8 @@
 
                 <td>
 
-                <button class="btn btn-primary" sec:authorize= "hasAnyAuthority('Admin TU')">
-                    <a style="color: white" th:href="@{'/fasilitas/ubah/' + ${fasilitas.id}}">
+                <button class="detail" sec:authorize= "hasAnyAuthority('Admin TU')">
+                    <a  th:href="@{'/fasilitas/ubah/' + ${fasilitas.id}}">
                         Ubah
                     </a>
                 </button>
@@ -74,7 +75,7 @@
 
                 <td>
                 <form sec:authorize= "hasAnyAuthority('Admin TU')"th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
-                    <button class="btn btn-danger" type="submit">
+                    <button class="detail-hapus" type="submit">
                         Hapus
                     </button>
                 </form>
