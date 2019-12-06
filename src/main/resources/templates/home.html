@@ -13,7 +13,7 @@
 <div class="containerss" style="text-align: center" >
     <div class="row " sec:authorize="!isAuthenticated()" >
         <div class="col tulisan">
-            <h1><b>Selamat datang</b> di</h1>
+            <h1><b>Selamat Datang</b> di</h1>
             <h4>Portal Sistem Ruangan SMART</h4>
         </div>
         <div class="col welcome">
@@ -37,7 +37,7 @@
 <!--        </div>-->
     </div>
     <div class="row">
-        <div sec:authorize="hasAnyAuthority('Admin TU','Guru','Siswa')"  class="col">
+        <div sec:authorize="hasAnyAuthority('Guru','Siswa')"  class="col">
             <a th:href="@{/ruangan/peminjaman}">
                 <button class="button">
                     Pinjam Ruangan
