@@ -17,15 +17,21 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
     @Autowired
     private PeminjamanRuanganDB peminjamanRuanganDB;
 
+    @Override
+    public void updateStatus(PeminjamanRuanganModel peminjamanRuanganModel) {
+        PeminjamanRuanganModel peminjaman=peminjamanRuanganDB.findById(peminjamanRuanganModel.getId()).get();
+        peminjaman.setDisetujui(peminjamanRuanganModel.isDisetujui());
+        peminjamanRuanganDB.save(peminjaman);
 
+    }
 
     public List<PeminjamanRuanganModel> getPeminjamanRuanganList(){
         return peminjamanRuanganDB.findAll();
     }
 
     @Override
-    public PeminjamanRuanganModel getPeminjamanByIdPeminjaman(int idPeminjaman){
-        return peminjamanRuanganDB.findById(idPeminjaman);
+    public PeminjamanRuanganModel getPeminjamanByIdPeminjaman(Integer idPeminjaman){
+        return peminjamanRuanganDB.findById(idPeminjaman).get();
     }
 
 

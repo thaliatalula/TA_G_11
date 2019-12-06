@@ -46,7 +46,7 @@
             <td th:text="${peminjaman.tujuan}"></td>
             <td th:switch="${peminjaman.disetujui}">
                 <span th:case="true" style="color: darkgreen">Disetujui</span>
-                <span th:case="false" style="color: darkred">Ditolak</span>
+                <span th:case="false" style="color: darkred">Belum Disetujui</span>
             </td>
             <td><form method="POST" id="foms" th:action="@{/ruangan/peminjaman/ubah}">
                 <input hidden th:value="${peminjaman.id}" name="idPeminjaman">

@@ -86,4 +86,25 @@ public class PeminjamanRuanganController {
         return "redirect:/ruangan/peminjaman";
     }
 
+
+    @RequestMapping(value = {"/ruangan/peminjaman/ubah"},
+            method = RequestMethod.POST)
+    public String UbahStatusPersetujuanPeminjamanSubmit(
+            @RequestParam("idPeminjaman") int idPeminjaman,
+            @RequestParam("status") boolean status,
+            Model model,
+            Authentication authentication
+    ) {
+        PeminjamanRuanganModel newpeminjamanRuanganModel=peminjamanRuanganService.getPeminjamanByIdPeminjaman(idPeminjaman);
+        UserModel user = userService.findByUserName(authentication.getName());
+        newpeminjamanRuanganModel.setUserPenyetuju(user);
+        newpeminjamanRuanganModel.setDisetujui(status);
+        peminjamanRuanganService.updateStatus(newpeminjamanRuanganModel);
+        model.addAttribute("peminjaman", newpeminjamanRuanganModel);
+
+        return "redirect:/ruangan/peminjaman";
+    }
+
 }
+
+
