@@ -30,15 +30,14 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
     public boolean canPinjamWaktu(PeminjamanRuanganModel peminjamanRuanganModel) throws ParseException {
         SimpleDateFormat formatWaktu= new SimpleDateFormat("HH:mm");
         RuanganModel ruangan= peminjamanRuanganModel.getRuangan();
+
         for (PeminjamanRuanganModel peminjaman: ruangan.getPeminjamanRuanganList()
              ) {
-            if(peminjamanRuanganModel.getTanggalMulai().getTime()>peminjaman.getTanggalSelesai().getTime() || peminjamanRuanganModel.getTanggalSelesai().getTime()<peminjaman.getTanggalMulai().getTime() ){
-                if(formatWaktu.parse(peminjamanRuanganModel.getWaktuMulai()).getTime()>formatWaktu.parse(peminjaman.getWaktuSelesai()).getTime() || formatWaktu.parse(peminjamanRuanganModel.getWaktuSelesai()).getTime()<formatWaktu.parse(peminjaman.getWaktuMulai()).getTime()){
-                    return true;
+            if(peminjamanRuanganModel.getTanggalMulai().getTime()<=peminjaman.getTanggalSelesai().getTime() && peminjamanRuanganModel.getTanggalSelesai().getTime()>=peminjaman.getTanggalMulai().getTime() ){
+                if(formatWaktu.parse(peminjamanRuanganModel.getWaktuMulai()).getTime()<=formatWaktu.parse(peminjaman.getWaktuSelesai()).getTime() && formatWaktu.parse(peminjamanRuanganModel.getWaktuSelesai()).getTime()>=formatWaktu.parse(peminjaman.getWaktuMulai()).getTime()){
+                   return false;
                 }
-                return false;
             }
-            return false;
         }
         return true;
     }
