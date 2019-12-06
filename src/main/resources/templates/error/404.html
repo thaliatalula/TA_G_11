@@ -2,14 +2,20 @@
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymelaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/404.css"/>
+
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/error.css"/>
 </head>
+
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<body>
 
 
 <div class="box">
     <div>
         close !
     </div>
-    <p><span>error 404 !</span> sorry page isn't found for one of the reformes </p>
+    <p><span>error 404!</span> sorry page isn't found for one of the reformes </p>
 </div>
+</body>
 </html>
