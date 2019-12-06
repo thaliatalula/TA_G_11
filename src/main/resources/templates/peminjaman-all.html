@@ -22,8 +22,8 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container text-center" style="animation: slide 2s forwards;">
     <h2>Daftar Peminjaman Ruangan</h2>
-    <table class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded">
-        <thead style="background-color: #ffb31f; color: white">
+    <table id="myTable" class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded" style="text-align: center">
+        <thead style="background-color:goldenrod; color: white">
         <tr>
             <th>No</th>
             <th>Nama Peminjam</th>
@@ -37,7 +37,7 @@
         <tbody>
         <tr th:each="peminjaman, peminjamanStatus : ${listPeminjaman}">
             <td th:text="${peminjamanStatus.count}"></td>
-            <td th:text="${peminjaman.userPeminjam}"> </td>
+            <td th:text="${peminjaman.userPeminjam.username}"> </td>
             <td><a th:href="'/ruangan/'+ ${peminjaman.id}" th:text="${peminjaman.ruangan.nama}"></a></td>
             <td th:text="${#dates.format(peminjaman.tanggalMulai, 'dd-MMM-yyyy')}"></td>
             <td th:text="${#dates.format(peminjaman.tanggalSelesai, 'dd-MMM-yyyy')}"></td>
@@ -50,6 +50,19 @@
         </tbody>
     </table>
 </div>
-
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable({
+            "ordering": false,
+            "info":     false,
+            "oLanguage": {
+                "sSearch": "<i class=\"fa fa-search\" aria-hidden=\"true\"></i>"
+            },
+            language: {
+                searchPlaceholder: "Cari Peminjaman"
+            }
+        });
+    } );
+</script>
 </body>
 </html>

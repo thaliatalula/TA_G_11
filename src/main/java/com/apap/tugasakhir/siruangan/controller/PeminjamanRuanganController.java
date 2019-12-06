@@ -5,6 +5,7 @@ import com.apap.tugasakhir.siruangan.model.UserModel;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
 import com.apap.tugasakhir.siruangan.service.UserService;
+import net.bytebuddy.implementation.Implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -79,4 +80,25 @@ public class PeminjamanRuanganController {
         return "redirect:/ruangan/peminjaman";
     }
 
+
+    @RequestMapping(value = {"/ruangan/peminjaman/ubah"},
+            method = RequestMethod.POST)
+    public String UbahStatusPersetujuanPeminjamanSubmit(
+            @RequestParam("idPeminjaman") int idPeminjaman,
+            @RequestParam("status") boolean status,
+            @ModelAttribute PeminjamanRuanganModel peminjamanRuangan,
+            Model model,
+            Authentication authentication
+    ) {
+        PeminjamanRuanganModel newpeminjamanRuanganModel=peminjamanRuanganService.getPeminjamanByIdPeminjaman(idPeminjaman);
+        UserModel user = userService.findByUserName(authentication.getName());
+        newpeminjamanRuanganModel.setUserPenyetuju(user);
+        newpeminjamanRuanganModel.setDisetujui(peminjamanRuangan.isDisetujui());
+        model.addAttribute("peminjaman", newpeminjamanRuanganModel);
+
+        return "redirect:/ruangan/peminjaman";
+    }
+
 }
+
+

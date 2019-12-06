@@ -51,4 +51,9 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
         }
         return true;
     }
+
+    @Override
+    public PeminjamanRuanganModel getPeminjamanByIdPeminjaman(int idPeminjaman){
+       return peminjamanRuanganDB.findById(idPeminjaman);
+    }
 }
