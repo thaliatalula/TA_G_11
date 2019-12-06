@@ -28,11 +28,22 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
         SimpleDateFormat formatAll=  new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return formatAll.parse(dateTime).getTime();
     }
+    @Override
+    public void updateStatus(PeminjamanRuanganModel peminjamanRuanganModel) {
+        PeminjamanRuanganModel peminjaman=peminjamanRuanganDB.findById(peminjamanRuanganModel.getId()).get();
+        peminjaman.setDisetujui(peminjamanRuanganModel.isDisetujui());
+        peminjamanRuanganDB.save(peminjaman);
+
+    }
 
     public List<PeminjamanRuanganModel> getPeminjamanRuanganList(){
         return peminjamanRuanganDB.findAll();
     }
 
+    @Override
+    public PeminjamanRuanganModel getPeminjamanByIdPeminjaman(Integer idPeminjaman){
+        return peminjamanRuanganDB.findById(idPeminjaman).get();
+    }
 
 
     @Override

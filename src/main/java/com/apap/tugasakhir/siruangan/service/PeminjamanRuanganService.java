@@ -11,4 +11,6 @@ public interface PeminjamanRuanganService {
     PeminjamanRuanganModel addPeminjamanRuangan(PeminjamanRuanganModel peminjamanRuanganModel);
     boolean canPinjamWaktu(PeminjamanRuanganModel peminjamanRuanganModel) throws ParseException;
     boolean canPinjamKapasitas(PeminjamanRuanganModel peminjamanRuanganModel);
+    PeminjamanRuanganModel getPeminjamanByIdPeminjaman(Integer id);
+    void updateStatus(PeminjamanRuanganModel peminjamanRuanganModel);
 }

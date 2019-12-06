@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Peminjaman Ruangan</title>
     <script src="/css/style.css"></script>
+    <link rel="stylesheet" href="/css/add-pengajuan.css"/>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <style>
         @keyframes slide {
@@ -22,8 +23,8 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container text-center" style="animation: slide 2s forwards;">
     <h2>Daftar Peminjaman Ruangan</h2>
-    <table class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded">
-        <thead style="background-color: #ffb31f; color: white">
+    <table id="myTable" class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded" style="text-align: center">
+        <thead style="background-color:goldenrod; color: white">
         <tr>
             <th>No</th>
             <th>Nama Peminjam</th>
@@ -38,20 +39,44 @@
         <tbody>
         <tr th:each="peminjaman, peminjamanStatus : ${listPeminjaman}">
             <td th:text="${peminjamanStatus.count}"></td>
-            <td th:text="${peminjaman.userPeminjam}"> </td>
+            <td th:text="${peminjaman.userPeminjam.username}"> </td>
             <td><a th:href="'/ruangan/'+ ${peminjaman.id}" th:text="${peminjaman.ruangan.nama}"></a></td>
             <td th:text="${#dates.format(peminjaman.tanggalMulai, 'dd-MMM-yyyy')}"></td>
             <td th:text="${#dates.format(peminjaman.tanggalSelesai, 'dd-MMM-yyyy')}"></td>
             <td th:text="${peminjaman.tujuan}"></td>
             <td th:switch="${peminjaman.disetujui}">
                 <span th:case="true" style="color: darkgreen">Disetujui</span>
-                <span th:case="false" style="color: darkred">Ditolak</span>
+                <span th:case="false" style="color: darkred">Belum Disetujui</span>
             </td>
-            <td> <button class="buttonLogin">Ubah status</button> </td>
+            <td><form method="POST" id="foms" th:action="@{/ruangan/peminjaman/ubah}">
+                <input hidden th:value="${peminjaman.id}" name="idPeminjaman">
+                <select selected="${peminjaman}" onchange="post()" class="input-field" name="status">
+                    <option value="" selected disabled hidden>Ubah</option>
+                    <option value="true">Disetujui</option>
+                    <option value="false">Belum Disetujui</option>
+                </select></form> </td>
         </tr>
         </tbody>
     </table>
 </div>
 
+
+<script>
+    function post(){
+        document.getElementById("foms").submit();
+    }
+    $(document).ready( function () {
+        $('#myTable').DataTable({
+            "ordering": false,
+            "info":     false,
+            "oLanguage": {
+                "sSearch": "<i class=\"fa fa-search\" aria-hidden=\"true\"></i>"
+            },
+            language: {
+                searchPlaceholder: "Cari Peminjaman"
+            }
+        });
+    } );
+</script>
 </body>
 </html>

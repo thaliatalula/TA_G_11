@@ -22,7 +22,7 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container text-center" style="animation: slide 2s forwards;">
     <h2>Daftar Peminjaman Ruangan</h2>
-    <table class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded">
+    <table id="myTable" class="table table-hover container-fluid shadow p-3 mb-5 bg-white rounded" style="text-align: center">
         <thead style="background-color: #ffb31f; color: white">
         <tr>
             <th>No</th>
@@ -44,12 +44,30 @@
             <td th:text="${peminjaman.tujuan}"></td>
             <td th:switch="${peminjaman.disetujui}">
                 <span th:case="true" style="color: darkgreen">Disetujui</span>
-                <span th:case="false" style="color: darkred">Ditolak</span>
+                <span th:case="false" style="color: darkred">Belum Disetujui</span>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<script>
+    function post(){
+        document.getElementById("foms").submit();
+    }
+    $(document).ready( function () {
+        $('#myTable').DataTable({
+            "ordering": false,
+            "info":     false,
+            "oLanguage": {
+                "sSearch": "<i class=\"fa fa-search\" aria-hidden=\"true\"></i>"
+            },
+            language: {
+                searchPlaceholder: "Cari Peminjaman"
+            }
+        });
+    } );
+</script>
 
 </body>
 </html>
