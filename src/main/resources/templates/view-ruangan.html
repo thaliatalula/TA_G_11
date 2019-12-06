@@ -37,7 +37,7 @@
 
             <tr>
             <td>
-                <form sec:authorize= "hasAnyAuthority('Guru', 'Siswa')" th:action="@{'/ruangan/peminjaman/tambah/' + ${ruangan.id} }" method="POST">
+                <form sec:authorize= "hasAnyAuthority('Guru', 'Siswa')" th:action="@{'/ruangan/peminjaman/tambah/' + ${ruangan.id} }" method="GET">
                     <button class="btn btn-dark" type="submit">
                         Pinjam
                     </button>
@@ -63,6 +63,7 @@
                 <td th:text="${fasilitas.jumlah}"></td>
 
                 <td>
+
                 <button class="btn btn-primary" sec:authorize= "hasAnyAuthority('Admin TU')">
                     <a style="color: white" th:href="@{'/fasilitas/ubah/' + ${fasilitas.id}}">
                         Ubah
@@ -72,7 +73,7 @@
 
 
                 <td>
-                <form sec:authorize= "hasAnyAuthority('Admin TU')" th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
+                <form sec:authorize= "hasAnyAuthority('Admin TU')"th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
                     <button class="btn btn-danger" type="submit">
                         Hapus
                     </button>

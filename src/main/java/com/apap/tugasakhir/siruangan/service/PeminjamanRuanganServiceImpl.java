@@ -17,9 +17,13 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
     @Autowired
     private PeminjamanRuanganDB peminjamanRuanganDB;
 
+
+
     public List<PeminjamanRuanganModel> getPeminjamanRuanganList(){
         return peminjamanRuanganDB.findAll();
     }
+
+
 
     @Override
     public PeminjamanRuanganModel addPeminjamanRuangan(PeminjamanRuanganModel peminjamanRuanganModel) {
@@ -33,10 +37,8 @@ public class PeminjamanRuanganServiceImpl implements PeminjamanRuanganService {
 
         for (PeminjamanRuanganModel peminjaman: ruangan.getPeminjamanRuanganList()
              ) {
-            if(peminjamanRuanganModel.getTanggalMulai().getTime()<=peminjaman.getTanggalSelesai().getTime() && peminjamanRuanganModel.getTanggalSelesai().getTime()>=peminjaman.getTanggalMulai().getTime() ){
-                if(formatWaktu.parse(peminjamanRuanganModel.getWaktuMulai()).getTime()<=formatWaktu.parse(peminjaman.getWaktuSelesai()).getTime() && formatWaktu.parse(peminjamanRuanganModel.getWaktuSelesai()).getTime()>=formatWaktu.parse(peminjaman.getWaktuMulai()).getTime()){
+            if(peminjamanRuanganModel.getTanggalMulai().getTime()+formatWaktu.parse(peminjamanRuanganModel.getWaktuMulai()).getTime()<=peminjaman.getTanggalSelesai().getTime()+formatWaktu.parse(peminjaman.getWaktuSelesai()).getTime() && peminjamanRuanganModel.getTanggalSelesai().getTime()+formatWaktu.parse(peminjamanRuanganModel.getWaktuSelesai()).getTime()>=peminjaman.getTanggalMulai().getTime()+formatWaktu.parse(peminjaman.getWaktuMulai()).getTime() ){
                    return false;
-                }
             }
         }
         return true;
