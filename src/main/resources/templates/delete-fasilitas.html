@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="/js/home.js"></script>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="col-md-12">
+    <h2 style="margin-top:20px;" th:text="'Fasilitas ' + ${fasilitas.nama} + ' di ruangan ' + ${fasilitas.getRuangan().nama} + ' berhasil dihapus'"></h2>
+</div>
+</body>
+</html>

@@ -1,59 +1,88 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Detail Ruangan</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
     <link rel="stylesheet" href="/css/home.css"/>
     <script src="/js/home.js"></script>
 </head>
+
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="detail mx-auto">
-    <table class="table">
+    <nav th:replace="fragments/fragment :: navbar"></nav>
 
-        <thead style="background-color:goldenrod">
-        <tr>
-            <th colspan="2" style="color:white">Detail Data Ruangan</th>
-        </tr>
-        </thead>
+        <table class="table">
 
-        <tr>
-            <th colspan="2">
-                <a th:href="@{/}">Kembali ke beranda</a>
-            </th>
-        </tr>
+            <thead style="background-color:goldenrod">
+            <tr>
+                <th colspan="5" style="color:white">Detail Data Ruangan</th>
+            </tr>
+            </thead>
 
-        <tr>
-            <td>Nama</td>
-            <td th:text="${ruangan.nama}"></td>
-        </tr>
+            <tr>
+                <th colspan="2">
+                    <a th:href="@{/}">Kembali ke beranda</a>
+                </th>
+            </tr>
 
-        <tr>
-            <td>Kapasitas</td>
-            <td th:text="${ruangan.kapasitas}"></td>
-        </tr>
+            <tr>
+                <td>Nama</td>
+                <td th:text="${ruangan.nama}"></td>
+            </tr>
 
-    </table>
-</div>
-<div class="fasilitas mx-auto">
-    <table class="table">
+            <tr>
+                <td>Kapasitas</td>
+                <td th:text="${ruangan.kapasitas}"></td>
+            </tr>
 
-        <thead style="background-color:goldenrod">
-        <tr>
-            <th colspan="4" style="color:white">Fasilitas Milik Ruangan</th>
-        </tr>
-        </thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-        <tr th:each="fasilitas, iterationStatus : ${listFasilitas}">
-            <td th:text="${iterationStatus.count}"></td>
-            <td th:text="${fasilitas.nama}"></td>
-            <td th:text="${fasilitas.jumlah}"></td>
-        </tr>
-    </table>
-</div>
+            <tr>
+            <td>
+                <form th:action="@{'/ruangan/peminjaman/tambah/' + ${ruangan.id} }" method="POST">
+                    <button class="btn btn-dark" type="submit">
+                        Pinjam
+                    </button>
+                </form>
+            </td>
+            </tr>
+
+        </table>
+
+
+        <table class="table">
+
+            <thead style="background-color:goldenrod">
+            <tr>
+                <th colspan="5" style="color:white">Fasilitas Milik Ruangan</th>
+            </tr>
+            </thead>
+
+            <tr th:each="fasilitas, iterationStatus: ${listFasilitas}">
+
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${fasilitas.nama}"></td>
+                <td th:text="${fasilitas.jumlah}"></td>
+
+                <td>
+                <button class="btn btn-primary">
+                    <a style="color: white" th:href="@{'/fasilitas/ubah/' + ${fasilitas.id}}">
+                        Ubah
+                    </a>
+                </button>
+                </td>
+
+                <!--<a sec:authorize= "hasAnyAuthority('Admin TU')" class="dropdown-item profile " th:href="@{/ruangan/peminjaman}">-->
+
+                <td>
+                <form sec:authorize= "hasAnyAuthority('Admin TU')"th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
+                    <button class="btn btn-danger" type="submit">
+                        Hapus
+                    </button>
+                </form>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
 </body>
 </html>
