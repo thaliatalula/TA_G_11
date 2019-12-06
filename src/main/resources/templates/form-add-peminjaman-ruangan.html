@@ -69,15 +69,25 @@
         document.getElementById("start").max=end;
     }
     function startWaktuChange() {
-        if($("#start").val()===$("#end").val()){
-            var start= $("#waktuStart").val();
-            document.getElementById("waktuEnd").min=start;
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+                var start = $("#waktuStart").val();
+                document.getElementById("waktuEnd").min = start;
+            }
+            else{
+                document.getElementById("waktuEnd").min = "00:00";
+            }
         }
     }
     function endWaktuChange() {
-        if($("#start").val()===$("#end").val()) {
-            var end = $("#waktuEnd").val();
-            document.getElementById("waktuStart").max = end;
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+                var end = $("#waktuEnd").val();
+                document.getElementById("waktuStart").max = end;
+            }
+            else{
+                document.getElementById("waktuStart").max = "23:59";
+            }
         }
     }
 </script>
