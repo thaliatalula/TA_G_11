@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface PeminjamanRuanganDB extends JpaRepository<PeminjamanRuanganModel, Long> {
-    PeminjamanRuanganModel findById(Integer id);
+    Optional<PeminjamanRuanganModel> findById(Integer id);
     Optional<PeminjamanRuanganModel> findByRuangan(RuanganModel ruanganModel);
 }

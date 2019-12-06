@@ -6,7 +6,6 @@ import com.apap.tugasakhir.siruangan.restService.PeminjamanRuanganRestService;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
 import com.apap.tugasakhir.siruangan.service.UserService;
-import net.bytebuddy.implementation.Implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -84,8 +83,7 @@ public class PeminjamanRuanganController {
             redirect.addFlashAttribute("gagal", "Jumlah peserta melebihi kapasitas ruangan");
         }
 
-        return "redirect:/ruangan/peminjaman/tambah/"+peminjamanRuangan.getRuangan().getId();
-
+        return "redirect:/ruangan/peminjaman";
     }
 
 }
