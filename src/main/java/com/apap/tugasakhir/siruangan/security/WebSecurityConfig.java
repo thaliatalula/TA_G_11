@@ -26,9 +26,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fasilitas/pengadaan/tambah").hasAnyAuthority("Admin TU", "Guru")
                 .antMatchers("/fasilitas/pengadaan/hapus").hasAnyAuthority("Admin TU", "Guru")
                 .antMatchers("/fasilitas/tambah").hasAuthority("Admin TU")
-                .antMatchers("/fasilitas/ubah/{\\\\d+}").hasAuthority("Admin TU")
-                .antMatchers("/fasilitas/hapus/{\\\\d+}").hasAuthority("Admin TU")
-                .antMatchers("/ruangan/peminjaman/tambah").hasAnyAuthority( "Siswa","Guru")
+                .antMatchers("/fasilitas/ubah/**").hasAuthority("Admin TU")
+                .antMatchers("/fasilitas/hapus/**").hasAuthority("Admin TU")
+                /*.antMatchers("/ruangan/peminjaman/tambah").hasAnyAuthority( "Siswa","Guru")*/
+                /*.antMatchers("/fasilitas/ubah/{\\\\d+}").hasAuthority("Admin TU")
+                .antMatchers("/fasilitas/hapus/{\\\\d+}").hasAuthority("Admin TU")*/
+                .antMatchers("/ruangan/peminjaman/tambah/**").hasAnyAuthority( "Siswa","Guru")
                 .antMatchers("/ruangan/peminjaman/ubah").hasAuthority("Admin TU")
                 .antMatchers("/fasilitas/pengadaan/buku").hasAuthority("Admin TU")
                 .antMatchers(HttpMethod.POST,"/api/ruangan/peminjaman/tambah").permitAll()

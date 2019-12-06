@@ -9,7 +9,7 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="containers">
+<div class="containers" style="margin-top: 75px">
     <br><h3> Pengajuan Peminjaman Ruangan </h3>
     <div th:if="${berhasil}" style="width:100%;text-align: center">
         <i style="color: mediumseagreen" class="fa fa-check"></i><span th:text="${berhasil}" style="color: mediumseagreen"></span>
@@ -21,44 +21,75 @@
         <form th:action="@{/ruangan/peminjaman/tambah}" th:object="${peminjamanRuangan}" method="POST">
             <div class="input-container" >
                 <p>Waktu Mulai</p>
-                <input type="time"  class="input-field" name="waktuMulai" placeholder="Waktu Mulai" title="Waktu Mulai">
+                <input type="time"  id="waktuStart" onchange="startWaktuChange()" required class="input-field" name="waktuMulai" placeholder="Waktu Mulai" title="Waktu Mulai">
             </div>
 
             <div class="input-container">
                 <p>Waktu Selesai</p>
-                <input type="time" class="input-field" name="waktuSelesai" placeholder="waktu_selesai" title="Waktu Selesai">
+                <input type="time"  id="waktuEnd" onchange="endWaktuChange()" class="input-field" name="waktuSelesai" required placeholder="waktu_selesai" title="Waktu Selesai">
             </div>
 
             <div class="input-container">
                 <p>Tanggal Mulai</p>
-                <input type="date" class="input-field" name="tanggalMulai" placeholder="Tanggal Mulai" title="Tanggal Mulai">
+                <input type="date" class="input-field" id="start" name="tanggalMulai"  required onchange="startChange()" placeholder="Tanggal Mulai" title="Tanggal Mulai">
             </div>
 
             <div class="input-container">
                 <p>Tanggal Selesai</p>
-                <input type="date"  class="input-field" name="tanggalSelesai" placeholder="Tanggal Selesai" title="Tanggal Selesai">
+                <input type="date"  class="input-field" id="end" name="tanggalSelesai" required onchange="endChange()" placeholder="Tanggal Selesai" title="Tanggal Selesai">
             </div>
 
             <div class="input-container">
-                <input type="text"  class="input-field" name="tujuan" placeholder="Tujuan" title="Tujuan">
+                <input type="text"  class="input-field" name="tujuan"  required placeholder="Tujuan" title="Tujuan">
             </div>
 
             <div class="input-container">
-                <input type="text"  class="input-field" name="keterangan" placeholder="Keterangan" title="Keterangan">
+                <input type="text"  class="input-field" name="keterangan" required placeholder="Keterangan" title="Keterangan">
             </div>
 
             <div class="input-container">
-                <input type="number"  class="input-field" name="jumlah_peserta" placeholder="Jumlah Peserta" title="Jumlah Peserta" min="1">
+                <input type="number"  class="input-field" name="jumlahPeserta" required placeholder="Jumlah Peserta" title="Jumlah Peserta" min="1">
             </div>
-
             <div class="input-container">
-                <input type="text"  class="input-field" name="keterangan" placeholder="Keterangan" title="Keterangan">
+                <input type="number"  class="input-field" name="nomorSurat"  placeholder="Nomor Surat" title="Nomor Surat">
             </div>
             <input hidden name="ruangan" th:value="${ruangan.id}">
-
             <button type="submit" class="buttonLogin">Submit</button>
         </form>
     </div>
 </div>
+
+<script>
+    function startChange(){
+        var start= $("#start").val();
+            document.getElementById("end").min=start;
+    }
+    function endChange() {
+        var end= $("#end").val();
+        document.getElementById("start").max=end;
+    }
+    function startWaktuChange() {
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+                var start = $("#waktuStart").val();
+                document.getElementById("waktuEnd").min = start;
+            }
+            else{
+                document.getElementById("waktuEnd").min = "00:00";
+            }
+        }
+    }
+    function endWaktuChange() {
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+                var end = $("#waktuEnd").val();
+                document.getElementById("waktuStart").max = end;
+            }
+            else{
+                document.getElementById("waktuStart").max = "23:59";
+            }
+        }
+    }
+</script>
 </body>
 </html>

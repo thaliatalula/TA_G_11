@@ -2,6 +2,7 @@ package com.apap.tugasakhir.siruangan.controller;
 import com.apap.tugasakhir.siruangan.model.PeminjamanRuanganModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.restService.PeminjamanRuanganRestService;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
 import com.apap.tugasakhir.siruangan.service.UserService;
@@ -21,6 +22,9 @@ public class PeminjamanRuanganController {
 
     @Autowired
     private PeminjamanRuanganService peminjamanRuanganService;
+
+    @Autowired
+    private PeminjamanRuanganRestService peminjamanRuanganRestService;
 
     @Autowired
     private UserService userService;
@@ -52,22 +56,25 @@ public class PeminjamanRuanganController {
         return "form-add-peminjaman-ruangan";
     }
 
-    @RequestMapping(value = "/ruangan/peminjaman/tambah/{idRuangan}", method = RequestMethod.POST)
-    public String addPeminjamanruanganSubmit (@PathVariable int idRuangan,
-                                              @ModelAttribute PeminjamanRuanganModel peminjamanRuangan,
+    @RequestMapping(value = "/ruangan/peminjaman/tambah", method = RequestMethod.POST)
+    public String addPeminjamanruanganSubmit (@ModelAttribute PeminjamanRuanganModel peminjamanRuangan,
+                                              @RequestParam("nomorSurat") String nomorSurat,
                                               Model model,
                                               RedirectAttributes redirect,
                                               Authentication authentication) throws ParseException {
-
-
+        System.out.println(nomorSurat);
         if (peminjamanRuanganService.canPinjamKapasitas(peminjamanRuangan)) {
             if ( peminjamanRuanganService.canPinjamWaktu(peminjamanRuangan)){
                 UserModel user = userService.findByUserName(authentication.getName());
                 peminjamanRuangan.setUserPeminjam(user);
                 peminjamanRuangan.setDisetujui(false);
-                peminjamanRuangan.setRuangan(ruanganService.getRuanganById(idRuangan));
+//                if(peminjamanRuanganRestService.getStatusSurat(nomorSurat).block().getJenisSurat())
+
+
                 peminjamanRuanganService.addPeminjamanRuangan(peminjamanRuangan);
                 redirect.addFlashAttribute("berhasil", "Ruangan Berhasil dipinjam");
+
+                return "redirect:/ruangan/peminjaman";
             }
             else {
                 redirect.addFlashAttribute("gagal", "Waktu peminjaman ruangan tidak tersedia");
@@ -77,28 +84,8 @@ public class PeminjamanRuanganController {
             redirect.addFlashAttribute("gagal", "Jumlah peserta melebihi kapasitas ruangan");
         }
 
-        return "redirect:/ruangan/peminjaman";
-    }
+        return "redirect:/ruangan/peminjaman/tambah/"+peminjamanRuangan.getRuangan().getId();
 
-
-    @RequestMapping(value = {"/ruangan/peminjaman/ubah"},
-            method = RequestMethod.POST)
-    public String UbahStatusPersetujuanPeminjamanSubmit(
-            @RequestParam("idPeminjaman") int idPeminjaman,
-            @RequestParam("status") boolean status,
-            @ModelAttribute PeminjamanRuanganModel peminjamanRuangan,
-            Model model,
-            Authentication authentication
-    ) {
-        PeminjamanRuanganModel newpeminjamanRuanganModel=peminjamanRuanganService.getPeminjamanByIdPeminjaman(idPeminjaman);
-        UserModel user = userService.findByUserName(authentication.getName());
-        newpeminjamanRuanganModel.setUserPenyetuju(user);
-        newpeminjamanRuanganModel.setDisetujui(peminjamanRuangan.isDisetujui());
-        model.addAttribute("peminjaman", newpeminjamanRuanganModel);
-
-        return "redirect:/ruangan/peminjaman";
     }
 
 }
-
-
