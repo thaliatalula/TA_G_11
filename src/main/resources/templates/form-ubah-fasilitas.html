@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/home.css"/>
     <script src="/js/home.js"></script>
 </head>
-<body>
+<body style="background: white !important;">
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="col-md-6">
@@ -29,7 +29,7 @@
             <input class="form-control" type="text" name="ruangan" th:field="*{ruangan.nama}" required = "true" th:disabled="ruangan"/>
         </div>
         <br>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="detail" type="submit">Submit</button>
     </form>
 </div>
 

@@ -95,15 +95,21 @@ public class PeminjamanRuanganController {
             }
             else {
                 redirect.addFlashAttribute("gagal", "Waktu peminjaman ruangan tidak tersedia");
+                return "redirect:/ruangan/peminjaman/tambah/"+ peminjamanRuangan.getRuangan().getId();
             }
         }
         else {
             redirect.addFlashAttribute("gagal", "Jumlah peserta melebihi kapasitas ruangan");
+            return "redirect:/ruangan/peminjaman/tambah/"+ peminjamanRuangan.getRuangan().getId();
         }
-
-        return "redirect:/ruangan/peminjaman";
     }
 
+    @RequestMapping(value = {"/ruangan/peminjaman/ubah/{idPeminjaman}"}, method = RequestMethod.GET)
+    public String ubahhh(@PathVariable int idPeminjaman, Model model){
+        PeminjamanRuanganModel peminjamanRuanganModel=peminjamanRuanganService.getPeminjamanByIdPeminjaman(idPeminjaman);
+        model.addAttribute("peminjaman", peminjamanRuanganModel);
+        return "ubah-peminjaman";
+    }
 
     @RequestMapping(value = {"/ruangan/peminjaman/ubah"},
             method = RequestMethod.POST)
