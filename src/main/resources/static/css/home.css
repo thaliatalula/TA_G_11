@@ -5,6 +5,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background: linear-gradient(353deg, rgba(255,248,135,1) 0%, rgba(255,179,0,1) 50%, rgba(255,176,40,1) 100%);
+    background-repeat: no-repeat;
 }
 nav{
     background-color: transparent;
@@ -24,6 +26,7 @@ nav{
 }
 .tulisan{
     margin: auto;
+    color: white;
     text-align: left;
     -webkit-animation: tracking-in-contract 1.5s forwards;
     animation: tracking-in-contract 1.5s forwards;

@@ -7,7 +7,7 @@
     <script src="/js/home.js"></script>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
+<nav th:replace="fragments/fragment :: navbar-home"></nav>
 
 
 <div class="containerss" style="text-align: center" >
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         <div sec:authorize="hasAnyAuthority('Guru','Siswa')"  class="col">
-            <a th:href="@{/ruangan/peminjaman}">
+            <a th:href="@{/ruangan}">
                 <button class="button">
                     Pinjam Ruangan
                 </button>
