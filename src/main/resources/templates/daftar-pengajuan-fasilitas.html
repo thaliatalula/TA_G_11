@@ -15,7 +15,7 @@
         <br>
 
         <a th:href="@{/fasilitas/pengadaan/tambah}">
-            <button class="btn btn-primary">
+            <button class="detail">
                 Tambah
             </button>
         </a><br>
@@ -46,7 +46,7 @@
                         <td>
                             <form th:action="@{/fasilitas/pengadaan/hapus(id=${fasilitas.id})}" th:object="${pengadaanFasilitas}" method="POST">
                                 <input type="hidden" th:value="${fasilitas.id}"/>
-                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                <button type="submit" class="detail">Hapus</button>
                             </form>
                         </td>
                     </tr>
