@@ -68,4 +68,12 @@ public class RuanganModel implements Serializable {
     public void setFasilitasList(List<FasilitasModel> fasilitasList) {
         this.fasilitasList = fasilitasList;
     }
+
+    public List<PeminjamanRuanganModel> getPeminjamanRuanganList() {
+        return peminjamanRuanganList;
+    }
+
+    public void setPeminjamanRuanganList(List<PeminjamanRuanganModel> peminjamanRuanganList) {
+        this.peminjamanRuanganList = peminjamanRuanganList;
+    }
 }

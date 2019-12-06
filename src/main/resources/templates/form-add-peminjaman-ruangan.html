@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <title> Form Pengajuan Peminjaman Ruangan </title>
+    <link rel="stylesheet" href="/css/add-pengajuan.css"/>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="containers" style="margin-top: 75px">
+    <br><h3> Pengajuan Peminjaman Ruangan </h3>
+    <div th:if="${berhasil}" style="width:100%;text-align: center">
+        <i style="color: mediumseagreen" class="fa fa-check"></i><span th:text="${berhasil}" style="color: mediumseagreen"></span>
+    </div>
+    <div th:if="${gagal}">
+        <i style="color: red" class="fa fa-times"></i><span th:text="${gagal}" style="color: red"></span>
+    </div>
+    <div>
+        <form th:action="@{/ruangan/peminjaman/tambah}" th:object="${peminjamanRuangan}" method="POST">
+            <div class="input-container" >
+                <p>Waktu Mulai</p>
+                <input type="time"  id="waktuStart" onchange="startWaktuChange()" required class="input-field" name="waktuMulai" placeholder="Waktu Mulai" title="Waktu Mulai">
+            </div>
+
+            <div class="input-container">
+                <p>Waktu Selesai</p>
+                <input type="time"  id="waktuEnd" onchange="endWaktuChange()" class="input-field" name="waktuSelesai" required placeholder="waktu_selesai" title="Waktu Selesai">
+            </div>
+
+            <div class="input-container">
+                <p>Tanggal Mulai</p>
+                <input type="date" class="input-field" id="start" name="tanggalMulai"  required onchange="startChange()" placeholder="Tanggal Mulai" title="Tanggal Mulai">
+            </div>
+
+            <div class="input-container">
+                <p>Tanggal Selesai</p>
+                <input type="date"  class="input-field" id="end" name="tanggalSelesai" required onchange="endChange()" placeholder="Tanggal Selesai" title="Tanggal Selesai">
+            </div>
+
+            <div class="input-container">
+                <input type="text"  class="input-field" name="tujuan"  required placeholder="Tujuan" title="Tujuan">
+            </div>
+
+            <div class="input-container">
+                <input type="text"  class="input-field" name="keterangan" required placeholder="Keterangan" title="Keterangan">
+            </div>
+
+            <div class="input-container">
+                <input type="number"  class="input-field" name="jumlahPeserta" required placeholder="Jumlah Peserta" title="Jumlah Peserta" min="1">
+            </div>
+            <div class="input-container">
+                <input type="number"  class="input-field" name="nomorSurat"  placeholder="Nomor Surat" title="Nomor Surat">
+            </div>
+            <input hidden name="ruangan" th:value="${ruangan.id}">
+            <button type="submit" class="buttonLogin">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function startChange(){
+
+            document.getElementById("end").min=start;
+    }
+    function endChange() {
+
+        document.getElementById("start").max=end;
+    }
+    function startWaktuChange() {
+
+        document.getElementById("waktuEnd").min=start;
+    }
+    function endWaktuChange() {
+
+        document.getElementById("waktuStart").max=end;
+    }
+</script>
+</body>
+</html>
