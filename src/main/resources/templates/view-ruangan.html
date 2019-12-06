@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Detail Ruangan</title>
@@ -70,8 +70,10 @@
                 </button>
                 </td>
 
+                <!--<a sec:authorize= "hasAnyAuthority('Admin TU')" class="dropdown-item profile " th:href="@{/ruangan/peminjaman}">-->
+
                 <td>
-                <form th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
+                <form sec:authorize= "hasAnyAuthority('Admin TU')"th:action="@{'/fasilitas/delete/' + ${fasilitas.id} }" method="POST">
                     <button class="btn btn-danger" type="submit">
                         Hapus
                     </button>
