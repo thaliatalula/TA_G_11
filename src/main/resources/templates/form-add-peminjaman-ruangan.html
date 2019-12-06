@@ -61,14 +61,37 @@
 
 <script>
     function startChange(){
-        var start= $("#start").val();
-            document.getElementById("end").min=start;
+        var start = $("#start").val();
+        document.getElementById("end").min = start;
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+                var start = $("#waktuStart").val();
+                document.getElementById("waktuEnd").min = start;
+                 }
+            else{
+                document.getElementById("waktuEnd").min = "00:00";
+                document.getElementById("waktuStart").max = "23:59";
+            }
+        }
     }
     function endChange() {
-        var end= $("#end").val();
-        document.getElementById("start").max=end;
+
+        var end = $("#end").val();
+        document.getElementById("start").max = end;
+        if($("#start").val() && $("#end").val()) {
+            if ($("#start").val() === $("#end").val()) {
+
+                var end = $("#waktuEnd").val();
+                document.getElementById("waktuStart").max = end;
+            }
+            else{
+                document.getElementById("waktuEnd").min = "00:00";
+                document.getElementById("waktuStart").max = "23:59";
+            }
+        }
     }
     function startWaktuChange() {
+
         if($("#start").val() && $("#end").val()) {
             if ($("#start").val() === $("#end").val()) {
                 var start = $("#waktuStart").val();
@@ -76,6 +99,7 @@
             }
             else{
                 document.getElementById("waktuEnd").min = "00:00";
+                document.getElementById("waktuStart").max = "23:59";
             }
         }
     }
@@ -86,6 +110,7 @@
                 document.getElementById("waktuStart").max = end;
             }
             else{
+                document.getElementById("waktuEnd").min = "00:00";
                 document.getElementById("waktuStart").max = "23:59";
             }
         }

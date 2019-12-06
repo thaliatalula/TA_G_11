@@ -59,13 +59,88 @@
 
                 opacity: 1;
             }
+
+            .shadow {
+                -webkit-box-shadow: 10px 10px 13px 0px rgba(168,168,168,1);
+                -moz-box-shadow: 10px 10px 13px 0px rgba(168,168,168,1);
+                box-shadow: 10px 10px 13px 0px rgba(168,168,168,1);
+            }
+
+            .gradient {
+                color: white !important;
+                background: linear-gradient(353deg, rgba(191,134,0,1) 0%, rgba(218,150,33,1) 50%, rgba(214,208,116,1) 100%);
+                background-repeat: no-repeat;
+            }
+
+            .navbar-text{
+                color: white !important;
+            }
+
+            .navbar-logo{
+                font-weight: 700;
+            }
         </style>
     </head>
 </head>
 <body>
 
-<nav th:fragment="navbar" class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/}" th:text="SiRuangan"></a>
+<nav th:fragment="navbar" class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow gradient">
+    <a class="navbar-brand navbar-text navbar-logo" th:href="@{/}" th:text="SiRuangan"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle navbar-text" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ruangan
+                </a>
+                <div class="dropdown-menu profile navbar-text" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item profile "  th:href="@{/ruangan}">
+                        Daftar Ruangan
+                    </a>
+                    <a sec:authorize= "hasAnyAuthority('Admin TU', 'Siswa', 'Guru')" class="dropdown-item profile" th:href="@{/ruangan/peminjaman}">
+                            Daftar Peminjaman Ruangan
+                    </a>
+                </div>
+            </li>
+            <li sec:authorize="hasAnyAuthority('Admin TU','Guru')" class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle navbar-text" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Fasilitas
+                </a>
+                <div  class="dropdown-menu profile" aria-labelledby="navbarDropdown1">
+                    <a  sec:authorize="hasAuthority('Admin TU')"  class="dropdown-item profile " th:href="@{/fasilitas/tambah}">Tambah Fasilitas</a>
+                    <a sec:authorize="hasAnyAuthority('Admin TU','Guru')" class="dropdown-item profile " th:href="@{/fasilitas/pengadaan}">
+                        Daftar Pengajuan Fasilitas
+                    </a>
+                </div>
+            </li>
+            <li sec:authorize="isAuthenticated()"  class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle navbar-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <span th:text=" ${#httpServletRequest.remoteUser}"></span>
+
+                </a>
+                <div class="dropdown-menu profile navbar-text" aria-labelledby="navbarDropdown">
+                    <a  sec:authorize="isAuthenticated()"  class="dropdown-item profile" th:href="@{/user/profil}"><i class="fa fa-user-o" aria-hidden="true"></i>  Profile</a>
+                    <a  sec:authorize="hasAuthority('Admin TU')"  class="dropdown-item profile " th:href="@{/user/tambah}"><i class="fa fa-user-plus" aria-hidden="true"></i> Tambah User</a>
+                    <a  sec:authorize="isAuthenticated()"  class="dropdown-item profile" th:href="@{/user/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i>  Logout</a>
+                </div>
+            </li>
+            <a  sec:authorize="!isAuthenticated()" class="nav-item nav-link navbar-text" th:href="@{/user/login}">
+                Login
+                <span class="sr-only">(current)</span>
+            </a>
+            </div>
+    </div>
+</nav>
+
+<nav th:fragment="navbar-home" class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow">
+    <a class="navbar-brand navbar-logo" th:href="@{/}" th:text="SiRuangan"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -79,10 +154,10 @@
                 </a>
                 <div class="dropdown-menu profile" aria-labelledby="navbarDropdown2">
                     <a class="dropdown-item profile "  th:href="@{/ruangan}">
-                        Cari Ruangan
+                        Daftar Ruangan
                     </a>
                     <a sec:authorize= "hasAnyAuthority('Admin TU', 'Siswa', 'Guru')" class="dropdown-item profile " th:href="@{/ruangan/peminjaman}">
-                            Daftar Peminjaman Ruangan
+                        Daftar Peminjaman Ruangan
                     </a>
                 </div>
             </li>
@@ -115,7 +190,7 @@
                 Login
                 <span class="sr-only">(current)</span>
             </a>
-            </div>
+        </div>
     </div>
 </nav>
 

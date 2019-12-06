@@ -2,10 +2,13 @@ package com.apap.tugasakhir.siruangan.controller;
 import com.apap.tugasakhir.siruangan.model.PeminjamanRuanganModel;
 import com.apap.tugasakhir.siruangan.model.RuanganModel;
 import com.apap.tugasakhir.siruangan.model.UserModel;
+import com.apap.tugasakhir.siruangan.rest.SuratDetail;
 import com.apap.tugasakhir.siruangan.restService.PeminjamanRuanganRestService;
 import com.apap.tugasakhir.siruangan.service.PeminjamanRuanganService;
+import com.apap.tugasakhir.siruangan.service.RoleService;
 import com.apap.tugasakhir.siruangan.service.RuanganService;
 import com.apap.tugasakhir.siruangan.service.UserService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,7 +30,8 @@ public class PeminjamanRuanganController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private RuanganService ruanganService;
 
@@ -67,9 +71,23 @@ public class PeminjamanRuanganController {
                 UserModel user = userService.findByUserName(authentication.getName());
                 peminjamanRuangan.setUserPeminjam(user);
                 peminjamanRuangan.setDisetujui(false);
-//                if(peminjamanRuanganRestService.getStatusSurat(nomorSurat).block().getJenisSurat())
+                try{
+                    SuratDetail suratDetail=peminjamanRuanganRestService.getStatusSurat(nomorSurat).block();
+                    if(suratDetail.getJenisSurat().equalsIgnoreCase("Surat Peminjaman Ruangan") && suratDetail.getStatus().equalsIgnoreCase("disetujui")
+                        || suratDetail.getStatus().equalsIgnoreCase("diproses") || suratDetail.getStatus().equalsIgnoreCase("selesai") ){
+                        peminjamanRuangan.setDisetujui(true);
+                        UserModel users=new UserModel();
+                        users.setUuid(suratDetail.getIdUser());
+                        users.setUsername("SITU - "+ RandomString.make(5));
+                        users.setRole(roleService.findByName("Admin TU"));
+                        users.setPassword(RandomString.make(20));
+                        userService.addUser(users);
+                        peminjamanRuangan.setUserPenyetuju(users);
+                    }
+                }
+                catch (Exception e){
 
-
+                }
                 peminjamanRuanganService.addPeminjamanRuangan(peminjamanRuangan);
                 redirect.addFlashAttribute("berhasil", "Ruangan Berhasil dipinjam");
 
