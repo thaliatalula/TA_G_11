@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detail Ruangan</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="/js/home.js"></script>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="col-md-6">
+    <h3 style="margin-top: 60px">Ubah Jumlah Fasilitas</h3>
+    <hr>
+    <form th:action="@{'/fasilitas/ubah/' + ${fasilitas.id}}" method="POST" th:object="${fasilitas}">
+        <!--<input name="id" hidden th:value="*{id}"/>-->
+        <div class="form-group">
+            <label>Nama</label>
+            <input class="form-control" type="text" name="nama" th:field="*{nama}" required = "true" th:disabled="*{nama}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah</label>
+            <input class="form-control" type="number" name="jumlah" min="1" th:field="*{jumlah}" required = "true"/>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Ruangan</label>
+            <input class="form-control" type="text" name="ruangan" th:field="*{ruangan.nama}" required = "true" th:disabled="ruangan"/>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
